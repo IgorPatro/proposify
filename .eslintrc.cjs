@@ -1,42 +1,71 @@
-/** @type {import("eslint").Linter.Config} */
 const config = {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": true
-  },
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
+  extends: [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:@typescript-eslint/stylistic-type-checked"
+    "plugin:@typescript-eslint/stylistic-type-checked",
   ],
-  "rules": {
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: true,
+  },
+  plugins: [
+    "@typescript-eslint",
+    "import",
+    "sort-destructure-keys",
+    "sort-keys-fix",
+  ],
+  rules: {
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
-        "prefer": "type-imports",
-        "fixStyle": "inline-type-imports"
-      }
+        fixStyle: "inline-type-imports",
+        prefer: "type-imports",
+      },
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        checksVoidReturn: {
+          attributes: false,
+        },
+      },
     ],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
-        "argsIgnorePattern": "^_"
-      }
+        argsIgnorePattern: "^_",
+      },
     ],
     "@typescript-eslint/require-await": "off",
-    "@typescript-eslint/no-misused-promises": [
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      { js: "never", jsx: "never", ts: "never", tsx: "never" },
+    ],
+    "import/no-cycle": "warn",
+    "import/no-duplicates": ["error"],
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "error",
+    "import/order": [
       "error",
       {
-        "checksVoidReturn": {
-          "attributes": false
-        }
-      }
-    ]
-  }
-}
+        alphabetize: { order: "asc" },
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "type",
+        ],
+        "newlines-between": "always",
+      },
+    ],
+    "sort-destructure-keys/sort-destructure-keys": "error",
+    "sort-keys-fix/sort-keys-fix": "error",
+  },
+};
 module.exports = config;
