@@ -10,7 +10,7 @@ import { DASHBOARD_NAVIGATION } from "./constants";
 export const DashboardNavigation = () => {
   return (
     <nav className="flex items-center justify-between border-b border-gray-300 px-4 py-2">
-      <Image src="/logo.jpg" alt="Logo" width={100} height={100} />
+      <Image src="/logo.jpg" alt="Logo" width={100} height={50} />
       <ul className="flex gap-4 text-sm text-gray-700">
         {DASHBOARD_NAVIGATION.map((item) => (
           <li key={item.name}>
