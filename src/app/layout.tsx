@@ -3,7 +3,6 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Poppins } from "next/font/google";
 
-import { getServerAuthSession } from "@/server/auth";
 import { TRPCReactProvider } from "@/trpc/react";
 
 export const metadata: Metadata = {
@@ -17,10 +16,6 @@ const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: "400" });
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const session = await getServerAuthSession();
-
-  console.log(session);
-
   return (
     <html lang="en" className={poppins.className}>
       <body>
