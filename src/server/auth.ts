@@ -1,85 +1,110 @@
+import bcrypt from "bcryptjs";
 import {
-  getServerSession,
   type DefaultSession,
+  type DefaultUser,
+  getServerSession,
   type NextAuthOptions,
+  type User,
 } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { env } from "@/env";
 import { db } from "@/server/db";
 
 declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
+  interface User extends DefaultUser {
+    id: number;
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface Session extends DefaultSession {
+    token: string;
+    user: {
+      id: number;
+      uuid: string;
+      email: string;
+    } & User;
+  }
 }
 
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    async jwt({ account, profile, token, user }) {
-      console.log("jwt");
-      console.log(user);
-      console.log(token);
-
-      if (profile) {
-        const user = await db.user.findUnique({
-          where: {
-            email: profile.email,
-          },
-        });
-
-        if (!user) {
-          throw new Error("No user found");
-        }
-
-        token.id = user.id;
+    jwt: async ({ token, user }) => {
+      if (user) {
+        return {
+          ...token,
+          ...user,
+        };
       }
 
       return token;
     },
-    async signIn({ account, credentials, email, profile, user }) {
-      console.log("signIn");
-      console.log(account);
-      console.log(profile);
-      console.log(user);
-      // console.log(credentials);
-      // console.log(email);
+    // Note: it runs on every session fetch
+    session: async ({ session, token }) => {
+      const user = token.user as User;
 
-      if (!profile?.email) {
-        throw new Error("No profile");
-      }
-
-      await db.user.upsert({
-        create: {
-          email: profile.email,
-          name: profile.name,
+      return {
+        ...token,
+        ...session,
+        user: {
+          ...session.user,
+          ...user,
         },
-        update: {
-          name: profile.name,
-        },
-        where: {
-          email: profile.email,
-        },
-      });
-
-      return true;
+      };
     },
   },
+  pages: {
+    error: "/error",
+    signIn: "/auth/login",
+  },
   providers: [
-    GoogleProvider({
-      clientId: env.NEXTAUTH_GOOGLE_CLIENT_ID,
-      clientSecret: env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
+    // TODO: Add Google in the future
+    // GoogleProvider({
+    //   clientId: env.NEXTAUTH_GOOGLE_CLIENT_ID,
+    //   clientSecret: env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
+    // }),
+    CredentialsProvider({
+      authorize: async (credentials) => {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        const user = await db.user.findFirst({
+          where: { email: credentials.email },
+        });
+
+        if (!user) {
+          return null;
+        }
+
+        const isValidPassword = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
+
+        if (!isValidPassword) {
+          return null;
+        }
+
+        return {
+          email: user.email,
+          id: user.id,
+          user: {
+            email: user.email,
+            firstName: user.firstName,
+            id: user.uuid,
+            lastName: user.lastName,
+          },
+        };
+      },
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      id: "credentials",
+      name: "Credentials",
     }),
   ],
+  secret: env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },

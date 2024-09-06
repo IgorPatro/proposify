@@ -8,11 +8,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
+  id            Int       @id @default(autoincrement())
+  uuid          String    @unique @default(uuid())
   emailVerified DateTime?
+  firstName     String
+  lastName      String
   image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  email         String    @unique
+  password      String
   company       Company?  @relation(fields: [companyId], references: [id])
   companyId     Int?
 }

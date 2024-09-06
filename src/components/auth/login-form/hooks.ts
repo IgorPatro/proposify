@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 import { type LoginFormType } from "./type";
 import { LoginValidationSchema } from "./utils";
 
 export const useLoginFormik = () => {
-  const { push } = useRouter();
+  const router = useRouter();
 
   return useFormik<LoginFormType>({
     initialValues: {
@@ -21,9 +21,7 @@ export const useLoginFormik = () => {
           redirect: false,
         });
         if (result?.ok) {
-          await push({
-            pathname: "/home",
-          });
+          router.push("/dashboard");
         }
         if (result?.error) {
           //   toast.error(result.error);

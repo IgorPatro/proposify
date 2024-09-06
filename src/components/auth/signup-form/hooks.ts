@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 
 import { type RegisterFormType } from "@/server/api/routers/auth/type";
-import { api } from "@/utils/api";
+import { api } from "@/trpc/react";
 
 import { RegisterValidationSchema } from "./utils";
 
-export const useRegisterFormik = () => {
+export const useSignupFormik = () => {
   const { mutateAsync: registerUser } = api.auth.register.useMutation();
 
   return useFormik<RegisterFormType>({

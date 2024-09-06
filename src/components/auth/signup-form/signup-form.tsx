@@ -1,13 +1,15 @@
+"use client";
+
 import { FormikProvider, Form } from "formik";
 import React from "react";
 
 import { Button } from "@/components/base/button";
-import { TextInputFormField } from "@/components/base/select";
+import { TextInputFormField } from "@/components/base/text-input";
 
-import { useRegisterFormik } from "./hooks";
+import { useSignupFormik } from "./hooks";
 
-export const RegisterForm = () => {
-  const formik = useRegisterFormik();
+export const SignupForm = () => {
+  const formik = useSignupFormik();
   const { setFieldValue, submitForm, values } = formik;
 
   return (
