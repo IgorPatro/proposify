@@ -1,10 +1,8 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import { type Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "@/env";
@@ -26,30 +24,65 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(db) as Adapter,
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    async jwt({ account, profile, token, user }) {
+      console.log("jwt");
+      console.log(user);
+      console.log(token);
+
+      if (profile) {
+        const user = await db.user.findUnique({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        if (!user) {
+          throw new Error("No user found");
+        }
+
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    async signIn({ account, credentials, email, profile, user }) {
+      console.log("signIn");
+      console.log(account);
+      console.log(profile);
+      console.log(user);
+      // console.log(credentials);
+      // console.log(email);
+
+      if (!profile?.email) {
+        throw new Error("No profile");
+      }
+
+      await db.user.upsert({
+        create: {
+          email: profile.email,
+          name: profile.name,
+        },
+        update: {
+          name: profile.name,
+        },
+        where: {
+          email: profile.email,
+        },
+      });
+
+      return true;
+    },
   },
   providers: [
     GoogleProvider({
       clientId: env.NEXTAUTH_GOOGLE_CLIENT_ID,
       clientSecret: env.NEXTAUTH_GOOGLE_CLIENT_SECRET,
-      // TODO: Come back here, it's in NextAuth docs
-      // authorization: {
-      //   params: {
-      //     prompt: "consent",
-      //     access_type: "offline",
-      //     response_type: "code",
-      //   },
-      // },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
 };
 
 export const getServerAuthSession = () => getServerSession(authOptions);
