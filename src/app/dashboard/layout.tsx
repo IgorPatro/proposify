@@ -1,22 +1,15 @@
 import React, { type ReactNode } from "react";
 
+import { DashboardNavigation } from "@/components/navigation/dashboard-navigation";
+
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div className="p-8">
-      <nav>
-        <ul className="flex gap-2">
-          <li>
-            <a href="/dashboard">Dashboard</a>
-          </li>
-          <li>
-            <a href="/dashboard/templates">Templates</a>
-          </li>
-        </ul>
-      </nav>
+    <div>
+      <DashboardNavigation />
       <div className="pt-8">{children}</div>
     </div>
   );

@@ -14,7 +14,20 @@ export const CreateTemplateInputSchema = TemplateSchema.pick({
 export const createEmpty = protectedProcedure
   .input(CreateTemplateInputSchema)
   .mutation(async ({ ctx, input }) => {
-    if (!ctx.session.user.company) {
+    if (!ctx.session.user) {
+      throw new Error("User does not have a company");
+    }
+
+    const company = await ctx.db.user.findUnique({
+      select: {
+        companyId: true,
+      },
+      where: {
+        id: ctx.session.user.id,
+      },
+    });
+
+    if (!company?.companyId) {
       throw new Error("User does not have a company");
     }
 
@@ -23,7 +36,7 @@ export const createEmpty = protectedProcedure
         ...DEFAULT_EMPTY_TEMPLATE,
         company: {
           connect: {
-            id: ctx.session.user.company.id,
+            id: company.companyId,
           },
         },
       },

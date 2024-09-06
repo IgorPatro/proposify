@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { signIn } from "next-auth/react";
+
+import { getDashboardHref } from "@/utils/hrefs/dashboard";
 
 import { type LoginFormType } from "./type";
 import { LoginValidationSchema } from "./utils";
 
 export const useLoginFormik = () => {
-  const router = useRouter();
-
   return useFormik<LoginFormType>({
     initialValues: {
       email: "",
@@ -21,7 +21,7 @@ export const useLoginFormik = () => {
           redirect: false,
         });
         if (result?.ok) {
-          router.push("/dashboard");
+          redirect(getDashboardHref());
         }
         if (result?.error) {
           //   toast.error(result.error);

@@ -13,8 +13,6 @@ const EditorTemplatePage = async ({ params }: EditorTemplatePageProps) => {
 
   const template = await getTemplate(templateUuid);
 
-  console.log(template);
-
   return <div>Edit template - {templateUuid}</div>;
 };
 
