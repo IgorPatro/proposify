@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "@/components/base/button";
 import { useEditorStore } from "@/components/editor/template-editor/store";
-import { api } from "@/utils/api";
+import { api } from "@/trpc/react";
 
 import { EditorSidebarBlockSettings } from "./editor-sidebar-block-settings";
 import { EditorSidebarBlocks } from "./editor-sidebar-blocks";

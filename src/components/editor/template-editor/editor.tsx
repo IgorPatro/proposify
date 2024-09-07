@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DndContext,
   PointerSensor,
@@ -7,7 +9,8 @@ import {
 import React from "react";
 
 import { EditorSidebar } from "@/components/sidebar/editor-sidebar";
-import { api } from "@/utils/api";
+import { type Template } from "@/server/api/routers/template/types";
+import { api } from "@/trpc/react";
 
 import { POINTER_SENSOR_CONSTRAINTS_DISTANCE } from "./constants";
 import { EditorBlocksRenderer } from "./editor-blocks-renderer";
@@ -18,12 +21,10 @@ import { fixCursorSnapOffset } from "./utils";
 
 interface EditorProps {
   templateUuid: string;
+  template: Template;
 }
 
-export const Editor = ({ templateUuid }: EditorProps) => {
-  const { data: template, isLoading } = api.template.getOne.useQuery({
-    templateUuid,
-  });
+export const Editor = ({ template, templateUuid }: EditorProps) => {
   const updateTemplate = useEditorStore((store) => store.updateEditorState);
 
   React.useEffect(() => {
@@ -45,10 +46,6 @@ export const Editor = ({ templateUuid }: EditorProps) => {
       },
     }),
   );
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <DndContext
