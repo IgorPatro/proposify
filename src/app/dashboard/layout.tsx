@@ -10,7 +10,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <div>
       <DashboardNavigation />
-      <div className="pt-8">{children}</div>
+      <div className="p-10">{children}</div>
     </div>
   );
 };
