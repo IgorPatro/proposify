@@ -1,8 +1,9 @@
+"use client";
+
 import React from "react";
 
+import { getBlockByName } from "@/_blocks/utils";
 import { type Template } from "@/server/api/routers/template/types";
-
-import { getBlockByName } from "../_blocks/utils";
 
 interface OfferProps {
   offer: Template;
