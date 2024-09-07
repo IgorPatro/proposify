@@ -2,11 +2,11 @@ import bcrypt from "bcryptjs";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 
-import { RegisterRequestBodySchema } from "./type";
+import { SignupRequestBodySchema } from "./type";
 
 export const authRouter = createTRPCRouter({
   register: publicProcedure
-    .input(RegisterRequestBodySchema)
+    .input(SignupRequestBodySchema)
     .mutation(async ({ ctx, input }) => {
       const hashedPassword = await bcrypt.hash(input.password, 12);
 

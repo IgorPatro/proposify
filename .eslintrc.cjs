@@ -24,6 +24,7 @@ const config = {
         prefer: "type-imports",
       },
     ],
+    "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
       {

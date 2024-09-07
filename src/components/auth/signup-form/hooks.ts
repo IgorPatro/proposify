@@ -1,26 +1,18 @@
-import { useFormik } from "formik";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import { type RegisterFormType } from "@/server/api/routers/auth/type";
+import { type SignupFormType } from "@/server/api/routers/auth/type";
 import { api } from "@/trpc/react";
+import { SignupFormValidationResolver } from "./utils";
 
-import { RegisterValidationSchema } from "./utils";
-
-export const useSignupFormik = () => {
+export const useSignupForm = () => {
   const { mutateAsync: registerUser } = api.auth.register.useMutation();
 
-  return useFormik<RegisterFormType>({
-    initialValues: {
-      confirmPassword: "",
-      email: "",
-      firstName: "",
-      lastName: "",
-      password: "",
-      privacyChecked: false,
-    },
-    onSubmit: async (values) => {
-      const newUser = await registerUser(values);
-    },
-    validateOnChange: false,
-    validationSchema: RegisterValidationSchema,
+  const form = useForm<SignupFormType>({
+    // resolver: yupResolver(SignupFormValidationResolver),
   });
+
+  const onSubmit: SubmitHandler<SignupFormType> = (data) => console.log(data);
+
+  return { ...form, onSubmit: form.handleSubmit(onSubmit) };
 };

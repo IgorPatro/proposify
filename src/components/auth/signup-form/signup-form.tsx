@@ -1,62 +1,65 @@
 "use client";
 
-import { FormikProvider, Form } from "formik";
 import React from "react";
+import { Controller } from "react-hook-form";
 
-import { Button } from "@/components/base/button";
-import { TextInputFormField } from "@/components/base/text-input";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import { useSignupFormik } from "./hooks";
+import { useSignupForm } from "./hooks";
 
 export const SignupForm = () => {
-  const formik = useSignupFormik();
-  const { setFieldValue, submitForm, values } = formik;
+  const {
+    control,
+    formState: { errors },
+    onSubmit,
+    register,
+  } = useSignupForm();
+
+  console.log(errors);
 
   return (
-    <FormikProvider value={formik}>
-      <Form className="flex w-80 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl">
-        <div className="flex gap-4">
-          <TextInputFormField
-            name="firstName"
-            label="Name"
-            placeholder="Name"
-          />
-          <TextInputFormField
-            name="lastName"
-            label="Last name"
-            placeholder="Last name"
-          />
-        </div>
-        <TextInputFormField
-          name="email"
-          placeholder="john.doe@gmail.com"
-          label="Email"
+    <form
+      onSubmit={onSubmit}
+      className="flex w-96 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl"
+    >
+      <div className="flex gap-4">
+        <Input
+          // error={errors.firstName?.message}
+          {...register("firstName")}
+          placeholder="John"
+          // label="First name"
         />
-        <TextInputFormField
-          name="password"
-          label="Password"
-          placeholder="Password"
-          type="password"
+        <Input
+          error={errors.lastName?.message}
+          {...register("lastName")}
+          placeholder="Doe"
+          label={"Last name"}
         />
-        <TextInputFormField
-          name="confirmPassword"
-          label="Confirm password"
-          placeholder="Confirm password"
-          type="password"
-        />
-        <div className="flex items-center gap-4">
-          <input
-            type="checkbox"
-            onChange={(e) => setFieldValue("privacyChecked", e.target.checked)}
-            checked={values.privacyChecked}
-          />
-          <p className="text-xs">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam,
-            fugiat.
-          </p>
-        </div>
-        <Button onClick={submitForm}>Register</Button>
-      </Form>
-    </FormikProvider>
+      </div>
+      <Input {...register("email")} placeholder="john.doe@gmail.com" />
+      <Input {...register("password")} placeholder="Password" type="password" />
+      <Input
+        {...register("confirmPassword")}
+        placeholder="Confirm password"
+        type="password"
+      />
+      <div className="flex items-center space-x-2">
+        {/* <Controller
+          name="termsAccepted"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              checked={field.value}
+              onCheckedChange={(checked) => field.onChange(checked)}
+            />
+          )}
+        /> */}
+        <Label htmlFor="terms">Accept terms and conditions</Label>
+      </div>
+      <Button type="submit">Sign up</Button>
+    </form>
   );
 };

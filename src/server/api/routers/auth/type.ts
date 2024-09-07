@@ -1,21 +1,21 @@
 import { z } from "zod";
 
-export const RegisterFormSchema = z.object({
+export const SignupFormSchema = z.object({
   confirmPassword: z.string(),
   email: z.string().email(),
   firstName: z.string(),
   lastName: z.string(),
   password: z.string(),
-  privacyChecked: z.boolean(),
+  termsAccepted: z.boolean(),
 });
 
-export type RegisterFormType = z.infer<typeof RegisterFormSchema>;
+export type SignupFormType = z.infer<typeof SignupFormSchema>;
 
-export const RegisterRequestBodySchema = RegisterFormSchema.pick({
+export const SignupRequestBodySchema = SignupFormSchema.pick({
   email: true,
   firstName: true,
   lastName: true,
   password: true,
 });
 
-export type RegisterRequestBodyType = z.infer<typeof RegisterRequestBodySchema>;
+export type RegisterRequestBodyType = z.infer<typeof SignupRequestBodySchema>;

@@ -1,32 +1,58 @@
 "use client";
-import { FormikProvider, Form } from "formik";
+
 import React from "react";
 
-import { Button } from "@/components/base/button";
-import { TextInputFormField } from "@/components/base/text-input";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
-import { useLoginFormik } from "./hooks";
+import { useLoginForm } from "./hooks";
 
 export const LoginForm = () => {
-  const formik = useLoginFormik();
-  const { submitForm } = formik;
+  const { form, onSubmit } = useLoginForm();
+  const { control, register } = form;
 
   return (
-    <FormikProvider value={formik}>
-      <Form className="flex w-80 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl">
-        <TextInputFormField
+    <Form {...form}>
+      <form
+        onSubmit={onSubmit}
+        className="flex w-80 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl"
+      >
+        <FormField
+          control={control}
           name="email"
-          placeholder="john.doe@gmail.com"
-          label="Email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="john.doe@user.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <TextInputFormField
+        <FormField
+          control={control}
           name="password"
-          label="Password"
-          placeholder="Password"
-          type="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        <Button onClick={submitForm}>Login</Button>
-      </Form>
-    </FormikProvider>
+        <Button type="submit">Login</Button>
+      </form>
+    </Form>
   );
 };
