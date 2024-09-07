@@ -13,10 +13,6 @@ export type CreateOfferInput = z.infer<typeof CreateOfferInputSchema>;
 export const createOffer = protectedProcedure
   .input(CreateOfferInputSchema)
   .mutation(async ({ ctx, input }) => {
-    if (!ctx.session) {
-      throw new Error("User does not have a company");
-    }
-
     const company = await ctx.db.user.findUnique({
       select: {
         companyId: true,
@@ -40,6 +36,10 @@ export const createOffer = protectedProcedure
       throw new Error("Template not found");
     }
 
+    // Tworzymy ofertę na podstawie szablonu,
+    // Podmieniamy jednak dynamiczne dane na tym etapie
+    // Na przykład dane klienta w miejscach w ofercie, gdzie są zmiennymi
+    // Te dane mogą zostać potem manualnie zmienione przez użytkownika
     const newOffer = await ctx.db.offer.create({
       data: {
         blocks: template.blocks,
