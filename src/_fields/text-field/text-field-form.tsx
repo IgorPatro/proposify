@@ -1,6 +1,6 @@
-import React from "react";
+import React, { type ChangeEvent } from "react";
 
-import { TextInput } from "@/components/base/text-input";
+import { Input } from "@/components/ui/input";
 
 import { type TextFieldConfig } from "./type";
 
@@ -17,18 +17,18 @@ export const TextFieldForm = ({
   fieldName,
   updateBlockProperty,
 }: TextFieldFormProps) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    updateBlockProperty(blockUuid, `${fieldName}.content`, event.target.value);
+  };
+
   return (
-    <div>
-      <span>{fieldName}</span>
-      <TextInput
-        key={fieldName}
-        name={fieldName}
-        placeholder="Type text here"
-        value={config.content}
-        onChange={(value) =>
-          updateBlockProperty(blockUuid, `${fieldName}.content`, value)
-        }
-      />
-    </div>
+    <Input
+      key={fieldName}
+      name={fieldName}
+      label={fieldName}
+      placeholder="Type text here"
+      value={config.content}
+      onChange={onChange}
+    />
   );
 };

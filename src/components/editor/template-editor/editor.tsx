@@ -10,7 +10,6 @@ import React from "react";
 
 import { EditorSidebar } from "@/components/sidebar/editor-sidebar";
 import { type Template } from "@/server/api/routers/template/types";
-import { api } from "@/trpc/react";
 
 import { POINTER_SENSOR_CONSTRAINTS_DISTANCE } from "./constants";
 import { EditorBlocksRenderer } from "./editor-blocks-renderer";
