@@ -1,6 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
 
-import { type Template } from "@/server/api/routers/template/types";
+import { type Template } from "@/server/api/template/types";
 
 export const OfferDefaultState: Template = {
   blocks: [],

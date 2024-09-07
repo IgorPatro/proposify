@@ -1,8 +1,8 @@
-import { type Template } from "@/server/api/routers/template/types";
+import { type Template } from "@/server/api/template/types";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 
-export const getTemplate = async (templateUuid: string) => {
+export const getEditorTemplateSsr = async (templateUuid: string) => {
   const session = await getServerAuthSession();
 
   if (!session) {

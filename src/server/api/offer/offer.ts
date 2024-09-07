@@ -1,5 +1,4 @@
-import { createTRPCRouter } from "@/server/api/trpc";
-
+import { createTRPCRouter } from "../procedures";
 import { createOffer } from "./create-offer";
 
 export const offerRouter = createTRPCRouter({

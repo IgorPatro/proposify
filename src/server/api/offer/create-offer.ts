@@ -1,6 +1,5 @@
 import { z } from "zod";
-
-import { protectedProcedure } from "../../trpc";
+import { protectedProcedure } from "../procedures";
 
 export const CreateOfferInputSchema = z.object({
   customerUuid: z.string().optional(),

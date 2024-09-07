@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Offer } from "@/components/offer";
-import { getTemplate } from "@/query/get-template";
+import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
 
 interface OfferPreviewPageProps {
   params: {
@@ -11,7 +11,7 @@ interface OfferPreviewPageProps {
 
 const OfferPreviewPage = async ({ params }: OfferPreviewPageProps) => {
   const { "offer-uuid": offerUuid } = params;
-  const offer = await getTemplate(offerUuid);
+  const offer = await getEditorTemplateSsr(offerUuid);
 
   return <Offer offer={offer} />;
 };

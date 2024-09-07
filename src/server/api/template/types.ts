@@ -18,3 +18,12 @@ export const TemplateSchema = z.object({
 });
 
 export type Template = z.infer<typeof TemplateSchema>;
+
+export const MinifiedTemplateSchema = z.object({
+  createdAt: z.date(),
+  name: z.string(),
+  updatedAt: z.date(),
+  uuid: z.string(),
+});
+
+export type MinifiedTemplate = z.infer<typeof MinifiedTemplateSchema>;

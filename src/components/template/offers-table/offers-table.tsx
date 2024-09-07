@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MinifiedOffer } from "@/query/get-all-offers-minified";
 
 import { COLUMNS } from "./utils";
+import { MinifiedOffer } from "@/server/api/offer/types";
 
 interface OffersTableProps {
   offers: MinifiedOffer[];

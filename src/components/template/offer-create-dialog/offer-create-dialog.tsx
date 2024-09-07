@@ -13,9 +13,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { api } from "@/trpc/react";
 
 import { useOfferCreateForm } from "./hooks";
+import { api } from "@/server/trpc";
 
 interface OfferCreateDialogProps {
   isOpen: boolean;

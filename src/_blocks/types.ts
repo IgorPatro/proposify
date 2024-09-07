@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { type Theme } from "@/server/api/routers/template/types";
+import { type Theme } from "@/server/api/template/types";
 
 import { FieldConfigSchema } from "../_fields/types";
 

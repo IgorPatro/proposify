@@ -1,10 +1,10 @@
 import React from "react";
 
 import { PageTemplates } from "@/components/template/page-templates";
-import { getAllTemplatesMinified } from "@/query/get-all-templates-minified";
+import { getAllTemplatesMinifiedSsr } from "@/server/api/template/get-all-templates-minified-ssr";
 
 const TemplatePage = async () => {
-  const templates = await getAllTemplatesMinified();
+  const templates = await getAllTemplatesMinifiedSsr();
 
   return <PageTemplates templates={templates} />;
 };

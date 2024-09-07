@@ -4,10 +4,10 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { type MinifiedTemplate } from "@/query/get-all-templates-minified";
 
 import { TemplateCreateDialog } from "../template-create-dialog";
 import { TemplatesTable } from "../templates-table/templates-table";
+import { MinifiedTemplate } from "@/server/api/template/types";
 
 interface PageTemplatesProps {
   templates: MinifiedTemplate[];

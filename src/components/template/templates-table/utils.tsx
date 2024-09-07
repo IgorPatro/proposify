@@ -1,4 +1,4 @@
-import { MinifiedTemplate } from "@/query/get-all-templates";
+import { MinifiedTemplate } from "@/server/api/template/types";
 import { formatDateToDayMonthYear } from "@/utils/date";
 import { getEditorTemplateHref } from "@/utils/hrefs/editor";
 import { ColumnDef } from "@tanstack/react-table";

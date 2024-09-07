@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    // Note: it runs on every session fetch
+    // Note: It runs on every session fetch
     session: async ({ session, token }) => {
       const user = token.user as User;
 

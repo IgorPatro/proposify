@@ -1,8 +1,8 @@
-import { type Offer } from "@/server/api/routers/offer/types";
+import { type Offer } from "@/server/api/offer/types";
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 
-export const getOffer = async (offerUuid: string) => {
+export const getEditorOfferSsr = async (offerUuid: string) => {
   const session = await getServerAuthSession();
 
   if (!session) {
