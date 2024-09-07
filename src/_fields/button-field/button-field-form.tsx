@@ -1,8 +1,8 @@
-import React from "react";
+import React, { type ChangeEvent } from "react";
 
-import { Checkbox } from "@/components/base/checkbox";
 import { Select } from "@/components/base/select";
-import { TextInput } from "@/components/base/text-input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 
 import { type ButtonFieldConfig } from "./type";
 import { isButtonActionDownload, isButtonActionLink } from "./utils";
@@ -24,28 +24,32 @@ export const ButtonFieldForm = ({
   fieldName,
   updateBlockProperty,
 }: ButtonFieldFormProps) => {
+  const onChangeInput = (
+    field: string,
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    updateBlockProperty(blockUuid, field, event.target.value);
+  };
+
   const renderActionForm = () => {
     switch (true) {
       case isButtonActionLink(config.action):
         return (
           <>
-            <TextInput
+            <Input
               key="link"
               name="link"
+              label="Link URL"
               placeholder="Type link here"
               value={config.action.href}
-              onChange={(value) =>
-                updateBlockProperty(
-                  blockUuid,
-                  `${fieldName}.action.href`,
-                  value,
-                )
+              onChange={(event) =>
+                onChangeInput(`${fieldName}.action.href`, event)
               }
             />
             <Checkbox
               label="Open in new tab"
               checked={config.action.newTab}
-              onChange={(isChecked) =>
+              onCheckedChange={(isChecked) =>
                 updateBlockProperty(
                   blockUuid,
                   `${fieldName}.action.newTab`,
@@ -59,17 +63,14 @@ export const ButtonFieldForm = ({
       case isButtonActionDownload(config.action):
         // TODO: Add variables, like: PDF_URL etc
         return (
-          <TextInput
+          <Input
             key="download"
             name="download"
+            label="Download URL"
             placeholder="Type download link here"
             value={config.action.downloadUrl}
-            onChange={(value) =>
-              updateBlockProperty(
-                blockUuid,
-                `${fieldName}.action.downloadUrl`,
-                value,
-              )
+            onChange={(event) =>
+              onChangeInput(`${fieldName}.action.downloadUrl`, event)
             }
           />
         );
@@ -78,15 +79,13 @@ export const ButtonFieldForm = ({
 
   return (
     <div>
-      <span>{fieldName}</span>
-      <TextInput
+      <Input
         key={fieldName}
         name={fieldName}
+        label={fieldName}
         placeholder="Type text here"
         value={config.content}
-        onChange={(value) =>
-          updateBlockProperty(blockUuid, `${fieldName}.content`, value)
-        }
+        onChange={(event) => onChangeInput(`${fieldName}.content`, event)}
       />
       <Select
         name="action"
