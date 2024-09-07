@@ -1,8 +1,14 @@
 import React, { type ChangeEvent } from "react";
 
-import { Select } from "@/components/base/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { type ButtonFieldConfig } from "./type";
 import { isButtonActionDownload, isButtonActionLink } from "./utils";
@@ -35,7 +41,7 @@ export const ButtonFieldForm = ({
     switch (true) {
       case isButtonActionLink(config.action):
         return (
-          <>
+          <div className="flex flex-col gap-2">
             <Input
               key="link"
               name="link"
@@ -58,7 +64,7 @@ export const ButtonFieldForm = ({
               }
               name="newTab"
             />
-          </>
+          </div>
         );
       case isButtonActionDownload(config.action):
         // TODO: Add variables, like: PDF_URL etc
@@ -78,26 +84,32 @@ export const ButtonFieldForm = ({
   };
 
   return (
-    <div>
-      <Input
-        key={fieldName}
-        name={fieldName}
-        label={fieldName}
-        placeholder="Type text here"
-        value={config.content}
-        onChange={(event) => onChangeInput(`${fieldName}.content`, event)}
-      />
-      <Select
-        name="action"
-        onChange={(newType) =>
-          updateBlockProperty(blockUuid, `${fieldName}.action.type`, newType)
-        }
-        value={config.action.type}
-        options={[
-          { label: "Link", value: "link" },
-          { label: "Download", value: "download" },
-        ]}
-      />
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <Input
+          key={fieldName}
+          name={fieldName}
+          label={fieldName}
+          placeholder="Type text here"
+          value={config.content}
+          onChange={(event) => onChangeInput(`${fieldName}.content`, event)}
+        />
+        <Select
+          name="action"
+          value={config.action.type}
+          onValueChange={(newType) =>
+            updateBlockProperty(blockUuid, `${fieldName}.action.type`, newType)
+          }
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Theme" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="link">Link</SelectItem>
+            <SelectItem value="download">Download</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       {renderActionForm()}
     </div>
   );

@@ -18,8 +18,7 @@ export const ImageFieldForm = ({
   updateBlockProperty,
 }: ImageFieldFormProps) => {
   return (
-    <div>
-      <span>{fieldName}</span>
+    <div className="flex flex-col gap-4">
       <TextInput
         key={fieldName}
         name={fieldName}
