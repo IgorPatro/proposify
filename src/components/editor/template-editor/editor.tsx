@@ -19,17 +19,17 @@ import { useEditorStore } from "./store";
 import { fixCursorSnapOffset } from "./utils";
 
 interface EditorProps {
-  templateUuid: string;
-  template: Template;
+  resourceUuid: string;
+  resource: Template;
 }
 
-export const Editor = ({ template, templateUuid }: EditorProps) => {
+export const Editor = ({ resource, resourceUuid }: EditorProps) => {
   const updateTemplate = useEditorStore((store) => store.updateEditorState);
 
   React.useEffect(() => {
-    if (!template) return;
-    updateTemplate(template);
-  }, [template, updateTemplate]);
+    if (!resource) return;
+    updateTemplate(resource);
+  }, [resource, updateTemplate]);
 
   const [selectedBlockUuid, setSelectedBlockUuid] = React.useState<string>("");
   const { draggedBlock, handleDragEnd, handleDragStart } = useManageBlocks();
@@ -56,7 +56,7 @@ export const Editor = ({ template, templateUuid }: EditorProps) => {
       <div className="flex w-full">
         <EditorSidebar
           selectedBlockUuid={selectedBlockUuid}
-          templateUuid={templateUuid}
+          resourceUuid={resourceUuid}
         />
         <EditorBlocksRenderer
           selectedBlockUuid={selectedBlockUuid}

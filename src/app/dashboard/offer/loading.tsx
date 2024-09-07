@@ -1,7 +1,7 @@
 import React from "react";
 
-const TemplatesLoadingPage = () => {
+const OfferLoadingPage = () => {
   return <div>Loading...</div>;
 };
 
-export default TemplatesLoadingPage;
+export default OfferLoadingPage;

@@ -19,7 +19,7 @@ interface DialogProps {
 export const Dialog = ({ children, header, isOpen, onClose }: DialogProps) => {
   return (
     <DialogPrimitive open={isOpen}>
-      <DialogContent>
+      <DialogContent onClose={onClose}>
         <DialogHeader>
           <DialogTitle>{header}</DialogTitle>
           {children}

@@ -18,8 +18,8 @@ export const useOfferCreateForm = () => {
 
   const onSubmit: SubmitHandler<CreateOfferInput> = async (data) => {
     try {
-      const newTemplate = await createOffer(data);
-      router.push(getEditorOfferHref(newTemplate.uuid));
+      const newOffer = await createOffer(data);
+      router.push(getEditorOfferHref(newOffer.uuid));
     } catch (error) {
       console.log(error);
     }

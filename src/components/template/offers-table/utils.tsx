@@ -1,6 +1,6 @@
 import { MinifiedOffer } from "@/query/get-all-offers-minified";
 import { formatDateToDayMonthYear } from "@/utils/date";
-import { getEditorTemplateHref } from "@/utils/hrefs/editor";
+import { getEditorOfferHref } from "@/utils/hrefs/editor";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -44,7 +44,7 @@ export const COLUMNS: ColumnDef<MinifiedOffer>[] = [
         <div className="flex justify-end">
           <Link
             className="w-fit"
-            href={getEditorTemplateHref(row.getValue("uuid"))}
+            href={getEditorOfferHref(row.getValue("uuid"))}
           >
             Edit
           </Link>

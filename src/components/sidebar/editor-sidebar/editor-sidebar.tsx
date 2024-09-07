@@ -17,12 +17,12 @@ import { EditorSidebarThemeSettings } from "./editor-sidebar-theme-settings";
 
 interface EditorSidebarProps {
   selectedBlockUuid: string | undefined;
-  templateUuid: string;
+  resourceUuid: string;
 }
 
 export const EditorSidebar = ({
+  resourceUuid,
   selectedBlockUuid,
-  templateUuid,
 }: EditorSidebarProps) => {
   const { isPending: isSaveTemplatePending, mutateAsync: saveTemplate } =
     api.template.save.useMutation();
@@ -32,11 +32,11 @@ export const EditorSidebar = ({
 
   const onSaveTemplate = async () => {
     // TODO: Add error handling and toast message
-    await saveTemplate({ blocks, name, templateUuid, theme });
+    await saveTemplate({ blocks, name, templateUuid: resourceUuid, theme });
   };
 
   return (
-    <div className="scrollbar-hide fixed bottom-0 left-0 h-[calc(100vh-56px)] w-80 overflow-scroll border-r border-gray-500 bg-white p-4">
+    <div className="fixed bottom-0 left-0 h-[calc(100vh-56px)] w-80 overflow-scroll border-r border-gray-500 bg-white p-4 scrollbar-hide">
       <Accordion type="single" collapsible>
         <AccordionItem value="template-settings">
           <AccordionTrigger>Template settings</AccordionTrigger>

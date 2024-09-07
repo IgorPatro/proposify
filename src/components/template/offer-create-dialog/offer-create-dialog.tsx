@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { db } from "@/server/db";
 import { api } from "@/trpc/react";
 
 import { useOfferCreateForm } from "./hooks";
@@ -23,7 +22,7 @@ interface OfferCreateDialogProps {
   onClose: () => void;
 }
 
-export const OfferCreateDialog = async ({
+export const OfferCreateDialog = ({
   isOpen,
   onClose,
 }: OfferCreateDialogProps) => {

@@ -48,11 +48,13 @@ export const createOffer = protectedProcedure
             id: company.companyId,
           },
         },
-        customer: {
-          connect: {
-            uuid: input.customerUuid,
-          },
-        },
+        customer: input.customerUuid
+          ? {
+              connect: {
+                uuid: input.customerUuid,
+              },
+            }
+          : undefined,
         name: input.name,
         theme: template.theme,
       },
