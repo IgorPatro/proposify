@@ -13,7 +13,7 @@ export interface InputProps
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, error, label, name, type, ...props }, ref) => (
-    <div className="relative flex flex-col gap-1">
+    <div className="relative flex flex-col gap-2">
       {label ? <Label htmlFor={name}>{label}</Label> : null}
       <input
         id={name}

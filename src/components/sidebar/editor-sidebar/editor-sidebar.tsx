@@ -1,7 +1,13 @@
 import React from "react";
 
-import { Button } from "@/components/base/button";
 import { useEditorStore } from "@/components/editor/template-editor/store";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { api } from "@/trpc/react";
 
 import { EditorSidebarBlockSettings } from "./editor-sidebar-block-settings";
@@ -30,14 +36,46 @@ export const EditorSidebar = ({
   };
 
   return (
-    <div className="fixed left-0 top-0 h-full w-80 overflow-scroll bg-gray-200 p-4">
-      <EditorSidebarTemplateSettings />
-      <EditorSidebarBlocks />
-      <EditorSidebarThemeSettings />
-      {selectedBlockUuid ? (
-        <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
-      ) : null}
-      <Button isLoading={isSaveTemplatePending} onClick={onSaveTemplate}>
+    <div className="scrollbar-hide fixed bottom-0 left-0 h-[calc(100vh-56px)] w-80 overflow-scroll border-r border-gray-500 bg-white p-4">
+      <Accordion type="single" collapsible>
+        <AccordionItem value="template-settings">
+          <AccordionTrigger>Template settings</AccordionTrigger>
+          <AccordionContent>
+            <EditorSidebarTemplateSettings />
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="blocks">
+          <AccordionTrigger>Blocks</AccordionTrigger>
+          <AccordionContent>
+            <EditorSidebarBlocks />
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="theme-settings">
+          <AccordionTrigger>Theme settings</AccordionTrigger>
+          <AccordionContent>
+            <EditorSidebarThemeSettings />
+          </AccordionContent>
+        </AccordionItem>
+
+        {selectedBlockUuid ? (
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Block settings</AccordionTrigger>
+            <AccordionContent>
+              <EditorSidebarBlockSettings
+                selectedBlockUuid={selectedBlockUuid}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        ) : null}
+      </Accordion>
+
+      <Button
+        className="mt-4 w-full"
+        isLoading={isSaveTemplatePending}
+        onClick={onSaveTemplate}
+      >
         Save
       </Button>
     </div>

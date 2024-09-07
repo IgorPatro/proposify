@@ -8,16 +8,13 @@ export const EditorSidebarTemplateSettings = () => {
   const templateName = useEditorStore((store) => store.name);
 
   return (
-    <div className="">
-      <h3>Template</h3>
-      <div className="flex flex-col gap-3">
-        <TextInput
-          value={templateName}
-          onChange={(value) => updateTemplateName(value)}
-          name="templateName"
-          label="Template Name"
-        />
-      </div>
+    <div className="flex flex-col gap-3">
+      <TextInput
+        value={templateName}
+        onChange={(value) => updateTemplateName(value)}
+        name="templateName"
+        label="Name"
+      />
     </div>
   );
 };

@@ -31,47 +31,44 @@ export const EditorSidebarBlockSettings = ({
   }
 
   return (
-    <div className="">
-      <h3>Block</h3>
-      <div className="flex flex-col gap-3">
-        {Object.keys(block.fields).map((fieldName) => {
-          const fieldConfig = block.fields[fieldName];
+    <div className="flex flex-col gap-3">
+      {Object.keys(block.fields).map((fieldName) => {
+        const fieldConfig = block.fields[fieldName];
 
-          switch (true) {
-            case isFieldConfigText(fieldConfig):
-              return (
-                <TextFieldForm
-                  key={fieldName}
-                  blockUuid={selectedBlockUuid}
-                  config={fieldConfig}
-                  fieldName={fieldName}
-                  updateBlockProperty={updateBlockProperty}
-                />
-              );
-            case isFieldConfigButton(fieldConfig):
-              return (
-                <ButtonFieldForm
-                  key={fieldName}
-                  blockUuid={selectedBlockUuid}
-                  config={fieldConfig}
-                  fieldName={fieldName}
-                  updateBlockProperty={updateBlockProperty}
-                />
-              );
-            case isFieldConfigImage(fieldConfig):
-              return (
-                <ImageFieldForm
-                  blockUuid={selectedBlockUuid}
-                  fieldName={fieldName}
-                  updateBlockProperty={updateBlockProperty}
-                  config={fieldConfig}
-                />
-              );
-            default:
-              return "This field is not yet supported";
-          }
-        })}
-      </div>
+        switch (true) {
+          case isFieldConfigText(fieldConfig):
+            return (
+              <TextFieldForm
+                key={fieldName}
+                blockUuid={selectedBlockUuid}
+                config={fieldConfig}
+                fieldName={fieldName}
+                updateBlockProperty={updateBlockProperty}
+              />
+            );
+          case isFieldConfigButton(fieldConfig):
+            return (
+              <ButtonFieldForm
+                key={fieldName}
+                blockUuid={selectedBlockUuid}
+                config={fieldConfig}
+                fieldName={fieldName}
+                updateBlockProperty={updateBlockProperty}
+              />
+            );
+          case isFieldConfigImage(fieldConfig):
+            return (
+              <ImageFieldForm
+                blockUuid={selectedBlockUuid}
+                fieldName={fieldName}
+                updateBlockProperty={updateBlockProperty}
+                config={fieldConfig}
+              />
+            );
+          default:
+            return "This field is not yet supported";
+        }
+      })}
     </div>
   );
 };
