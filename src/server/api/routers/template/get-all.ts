@@ -6,7 +6,7 @@ export const getAll = protectedProcedure.query(async ({ ctx }) => {
       companyId: true,
     },
     where: {
-      id: ctx.session.user.id,
+      email: ctx.session.user.email,
     },
   });
 

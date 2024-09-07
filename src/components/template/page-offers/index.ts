@@ -1,1 +1,1 @@
-export { PageTemplates } from "./page-templates";
+export { PageOffers } from "./page-offers";

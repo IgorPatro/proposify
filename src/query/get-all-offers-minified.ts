@@ -2,18 +2,18 @@ import { z } from "zod";
 
 import { db } from "@/server/db";
 
-const MinifiedOfferSchema = z.object({
-  name: z.string(),
-  uuid: z.string(),
+export const MinifiedOfferSchema = z.object({
   createdAt: z.date(),
-  updatedAt: z.date(),
   customer: z.object({
+    email: z.string(),
     firstName: z.string(),
     lastName: z.string(),
-    email: z.string(),
     phone: z.string(),
     uuid: z.string(),
   }),
+  name: z.string(),
+  updatedAt: z.date(),
+  uuid: z.string(),
 });
 
 export type MinifiedOffer = z.infer<typeof MinifiedOfferSchema>;
@@ -26,16 +26,16 @@ export const getAllOffersMinified = async () => {
   });
 
   return offers.map((offer) => ({
-    name: offer.name,
-    uuid: offer.uuid,
     createdAt: offer.createdAt,
-    updatedAt: offer.updatedAt,
     customer: {
-      firstName: offer.customer.firstName,
-      lastName: offer.customer.lastName,
-      email: offer.customer.email,
-      phone: offer.customer.phone,
-      uuid: offer.customer.uuid,
+      email: offer.customer?.email,
+      firstName: offer.customer?.firstName,
+      lastName: offer.customer?.lastName,
+      phone: offer.customer?.phone,
+      uuid: offer.customer?.uuid,
     },
+    name: offer.name,
+    updatedAt: offer.updatedAt,
+    uuid: offer.uuid,
   })) as MinifiedOffer[];
 };

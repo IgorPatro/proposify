@@ -5,8 +5,6 @@ import { db } from "@/server/db";
 export const getTemplate = async (templateUuid: string) => {
   const session = await getServerAuthSession();
 
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   if (!session) {
     throw new Error("Unauthorized");
   }
