@@ -6,19 +6,15 @@ import { Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import { useSignupForm } from "./hooks";
 
 export const SignupForm = () => {
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     onSubmit,
-    register,
   } = useSignupForm();
-
-  console.log(errors);
 
   return (
     <form
@@ -26,40 +22,85 @@ export const SignupForm = () => {
       className="flex w-96 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl"
     >
       <div className="flex gap-4">
-        <Input
-          // error={errors.firstName?.message}
-          {...register("firstName")}
-          placeholder="John"
-          // label="First name"
-        />
-        <Input
-          error={errors.lastName?.message}
-          {...register("lastName")}
-          placeholder="Doe"
-          label={"Last name"}
-        />
-      </div>
-      <Input {...register("email")} placeholder="john.doe@gmail.com" />
-      <Input {...register("password")} placeholder="Password" type="password" />
-      <Input
-        {...register("confirmPassword")}
-        placeholder="Confirm password"
-        type="password"
-      />
-      <div className="flex items-center space-x-2">
-        {/* <Controller
-          name="termsAccepted"
+        <Controller
+          name="firstName"
           control={control}
           render={({ field }) => (
-            <Checkbox
-              checked={field.value}
-              onCheckedChange={(checked) => field.onChange(checked)}
+            <Input
+              label="First name"
+              placeholder="John"
+              error={errors.firstName?.message}
+              {...field}
             />
           )}
-        /> */}
-        <Label htmlFor="terms">Accept terms and conditions</Label>
+        />
+        <Controller
+          name="lastName"
+          control={control}
+          render={({ field }) => (
+            <Input
+              label="Last name"
+              placeholder="Doe"
+              error={errors.lastName?.message}
+              {...field}
+            />
+          )}
+        />
       </div>
-      <Button type="submit">Sign up</Button>
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <Input
+            label="Email"
+            placeholder="john.doe@gmail.com"
+            error={errors.email?.message}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <Input
+            label="Password"
+            placeholder="Password"
+            type="password"
+            error={errors.password?.message}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name="confirmPassword"
+        control={control}
+        render={({ field }) => (
+          <Input
+            label="Confirm password"
+            placeholder="Password"
+            type="password"
+            error={errors.confirmPassword?.message}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name="termsAccepted"
+        control={control}
+        render={({ field }) => (
+          <Checkbox
+            name="termsAccepted"
+            label="Accept terms and conditions"
+            error={errors.termsAccepted?.message}
+            checked={field.value}
+            onCheckedChange={(checked) => field.onChange(checked)}
+          />
+        )}
+      />
+      <Button isLoading={isSubmitting} type="submit">
+        Sign up
+      </Button>
     </form>
   );
 };

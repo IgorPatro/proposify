@@ -5,7 +5,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative",
   {
     defaultVariants: {
       size: "default",
@@ -37,17 +37,33 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ asChild = false, className, size, variant, ...props }, ref) => {
+  (
+    {
+      asChild = false,
+      children,
+      className,
+      isLoading,
+      size,
+      variant,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(buttonVariants({ className, size, variant }))}
         ref={ref}
         {...props}
-      />
+        disabled={isLoading ?? props.disabled}
+      >
+        {/* TODO: Don't remove child -> it will jump */}
+        {isLoading ? <div>Loading...</div> : children}
+      </Comp>
     );
   },
 );
