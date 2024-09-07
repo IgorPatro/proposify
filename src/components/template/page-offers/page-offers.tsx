@@ -5,29 +5,29 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { type MinifiedTemplate } from "@/query/get-all-templates-minified";
+import { type MinifiedOffer } from "@/query/get-all-offers-minified";
 
 import { TemplateCreateDialog } from "../template-create-dialog";
-import { TemplatesTable } from "../templates-table/templates-table";
+import { OffersTable } from "../offers-table";
 
-interface PageTemplatesProps {
-  templates: MinifiedTemplate[];
+interface PageOffersProps {
+  offers: MinifiedOffer[];
 }
 
-export const PageTemplates = ({ templates }: PageTemplatesProps) => {
+export const PageOffers = ({ offers }: PageOffersProps) => {
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Templates</h1>
-      <TemplateCreateDialog
+      <h1 className="text-2xl font-bold">Offers</h1>
+      {/* <TemplateCreateDialog
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}
-      />
-      <TemplatesTable templates={templates} />
+      /> */}
+      <OffersTable offers={offers} />
       <div className="flex w-full justify-end">
         <Button className="w-fit" onClick={toggleCreateDialog}>
-          Create template
+          Create offer
         </Button>
       </div>
     </div>

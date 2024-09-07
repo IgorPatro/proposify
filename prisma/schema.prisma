@@ -30,6 +30,7 @@ model Company {
   name      String
   User      User[]
   Template  Template[]
+  Offer     Offer[]
 }
 
 model Template {
@@ -42,4 +43,35 @@ model Template {
   companyId Int
   theme     Json?
   blocks    Json?
+}
+
+model Offer {
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  name       String
+  company    Company  @relation(fields: [companyId], references: [id])
+  companyId  Int
+  theme      Json?
+  blocks     Json?
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+}
+
+model Customer {
+  id          Int      @id @default(autoincrement())
+  uuid        String   @unique @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  firstName   String
+  lastName    String
+  email       String?
+  phone       String?
+  city        String?
+  country     String?
+  zipCode     String?
+  street      String?
+  houseNumber String?
+  Offer       Offer[]
 }

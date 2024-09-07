@@ -1,8 +1,8 @@
 export const getDashboardHref = () => `/dashboard`;
 
-export const getDashboardOffersHref = () => "/dashboard/offers";
+export const getDashboardOffersHref = () => "/dashboard/offer";
 
-export const getDashboardTemplatesHref = () => "/dashboard/templates";
+export const getDashboardTemplatesHref = () => "/dashboard/template";
 
 export const getDashboardTemplateHref = (templateUuid: string) =>
-  `/dashboard/templates/${templateUuid}`;
+  `/dashboard/template/${templateUuid}`;

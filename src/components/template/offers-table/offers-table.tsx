@@ -15,22 +15,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MinifiedTemplate } from "@/query/get-all-templates-minified";
+import { MinifiedOffer } from "@/query/get-all-offers-minified";
 
 import { COLUMNS } from "./utils";
 
-interface TemplatesTableProps {
-  templates: MinifiedTemplate[];
+interface OffersTableProps {
+  offers: MinifiedOffer[];
 }
 
-export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
+export const OffersTable = ({ offers }: OffersTableProps) => {
   const table = useReactTable({
-    data: templates,
+    data: offers,
     columns: COLUMNS,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  console.log(templates);
 
   return (
     <div className="rounded-md border">

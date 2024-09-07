@@ -1,12 +1,12 @@
 import React from "react";
 
 import { PageTemplates } from "@/components/template/page-templates";
-import { getAllTemplatesMinified } from "@/query/get-all-templates";
+import { getAllTemplatesMinified } from "@/query/get-all-templates-minified";
 
-const TemplatesPage = async () => {
+const TemplatePage = async () => {
   const templates = await getAllTemplatesMinified();
 
   return <PageTemplates templates={templates} />;
 };
 
-export default TemplatesPage;
+export default TemplatePage;
