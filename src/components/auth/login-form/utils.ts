@@ -1,8 +1,6 @@
-import * as Yup from "yup";
+import { z } from "zod";
 
-export const LoginValidationSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Required"),
+export const LoginFormValidationResolver = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });

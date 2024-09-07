@@ -12,7 +12,7 @@ export const LoginForm = () => {
   const { form, onSubmit } = useLoginForm();
   const {
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = form;
 
   return (
@@ -45,7 +45,9 @@ export const LoginForm = () => {
           />
         )}
       />
-      <Button type="submit">Login</Button>
+      <Button isLoading={isSubmitting} type="submit">
+        Login
+      </Button>
     </form>
   );
 };

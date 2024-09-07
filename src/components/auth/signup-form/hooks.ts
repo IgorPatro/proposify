@@ -1,4 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
@@ -9,18 +9,18 @@ import { getLoginHref } from "@/utils/hrefs/auth";
 import { SignupFormValidationResolver } from "./utils";
 
 export const useSignupForm = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const { mutateAsync: registerUser } = api.auth.register.useMutation();
 
   const form = useForm<SignupFormType>({
-    resolver: yupResolver(SignupFormValidationResolver),
+    resolver: zodResolver(SignupFormValidationResolver),
   });
 
   const onSubmit: SubmitHandler<SignupFormType> = async (data) => {
     try {
       const user = await registerUser(data);
-      router.push(getLoginHref())
+      router.push(getLoginHref());
     } catch (error) {
       console.log(error);
     }

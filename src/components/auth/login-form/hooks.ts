@@ -1,4 +1,4 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -7,13 +7,13 @@ import { useToast } from "@/hooks/use-toast";
 import { getDashboardHref } from "@/utils/hrefs/dashboard";
 
 import { type LoginFormType } from "./type";
-import { LoginValidationSchema } from "./utils";
+import { LoginFormValidationResolver } from "./utils";
 
 export const useLoginForm = () => {
   const router = useRouter();
 
   const form = useForm<LoginFormType>({
-    resolver: yupResolver(LoginValidationSchema),
+    resolver: zodResolver(LoginFormValidationResolver),
   });
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {

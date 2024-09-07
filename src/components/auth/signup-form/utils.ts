@@ -1,15 +1,17 @@
-import * as Yup from "yup";
+import { z } from "zod";
 
-export const SignupFormValidationResolver = Yup.object().shape({
-  confirmPassword: Yup.string()
-    .min(6)
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  firstName: Yup.string().trim().required("Required"),
-  lastName: Yup.string().trim().required("Required"),
-  password: Yup.string().min(6).required("Required"),
-  termsAccepted: Yup.boolean()
-    .oneOf([true], "You must accept the privacy policy")
-    .required("Required"),
-});
+export const SignupFormValidationResolver = z
+  .object({
+    confirmPassword: z
+      .string()
+      .min(6, "Password must be at least 6 characters"),
+    email: z.string().email("Invalid email"),
+    firstName: z.string().min(2, "First name must be at least 2 characters"),
+    lastName: z.string().min(2, "Last name must be at least 2 characters"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    termsAccepted: z.literal(true),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
