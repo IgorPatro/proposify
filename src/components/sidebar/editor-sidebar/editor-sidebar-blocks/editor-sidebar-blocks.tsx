@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BlockNameEnum } from "@/components/_blocks/types";
+import { BlockNameEnum } from "@/_blocks/types";
 
 import { EditorDraggableBlock } from "./editor-draggable-block";
 

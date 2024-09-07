@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { ButtonFieldConfigSchema } from "@/components/_fields/button-field/type";
-import { ImageFieldConfigSchema } from "@/components/_fields/image-field/type";
-import { TextFieldConfigSchema } from "@/components/_fields/text-field/type";
+import { ButtonFieldConfigSchema } from "@/_fields/button-field/type";
+import { ImageFieldConfigSchema } from "@/_fields/image-field/type";
+import { TextFieldConfigSchema } from "@/_fields/text-field/type";
 
 export const HeroOneFieldsConfigSchema = z.object({
   buttonOne: ButtonFieldConfigSchema,

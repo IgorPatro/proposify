@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getBlockByName } from "@/components/_blocks/utils";
+import { getBlockByName } from "@/_blocks/utils";
 
 import { EditorBlock } from "../../editor-block";
 import { EditorDroppableArea } from "../editor-droppable-area";

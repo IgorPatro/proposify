@@ -1,8 +1,8 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-import { ButtonField } from "@/components/_fields/button-field";
-import { ImageField } from "@/components/_fields/image-field";
+import { ButtonField } from "@/_fields/button-field";
+import { ImageField } from "@/_fields/image-field";
 
 import { type BlockProps } from "../../types";
 
@@ -14,7 +14,7 @@ export const HeroOne = ({ fields, theme }: BlockProps) => {
 
   return (
     <div
-      className="flex h-full min-h-180 w-full flex-col items-center justify-center gap-4"
+      className="min-h-180 flex h-full w-full flex-col items-center justify-center gap-4"
       style={{
         backgroundColor: theme.bgPrimary,
       }}

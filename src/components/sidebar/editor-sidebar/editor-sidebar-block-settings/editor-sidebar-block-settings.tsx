@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 
-import { ButtonFieldForm } from "@/components/_fields/button-field";
-import { ImageFieldForm } from "@/components/_fields/image-field";
-import { TextFieldForm } from "@/components/_fields/text-field";
+import { ButtonFieldForm } from "@/_fields/button-field";
+import { ImageFieldForm } from "@/_fields/image-field";
+import { TextFieldForm } from "@/_fields/text-field";
 import {
   isFieldConfigButton,
   isFieldConfigImage,
   isFieldConfigText,
-} from "@/components/_fields/utils";
+} from "@/_fields/utils";
 import { useEditorStore } from "@/components/editor/template-editor/store";
 
 interface EditorSidebarBlockSettingsProps {

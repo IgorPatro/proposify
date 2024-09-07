@@ -1,7 +1,7 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-import { ButtonField } from "@/components/_fields/button-field";
+import { ButtonField } from "@/_fields/button-field";
 
 import { type BlockProps } from "../../types";
 
@@ -13,7 +13,7 @@ export const HeroSimpleCentered = ({ fields, theme }: BlockProps) => {
 
   return (
     <div
-      className="flex h-full min-h-180 w-full flex-col items-center justify-center gap-4"
+      className="min-h-180 flex h-full w-full flex-col items-center justify-center gap-4"
       style={{
         backgroundColor: theme.bgPrimary,
       }}

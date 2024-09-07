@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { BlockSchema } from "@/components/_blocks/types";
+import { BlockSchema } from "@/_blocks/types";
 
 import { protectedProcedure } from "../../trpc";
 

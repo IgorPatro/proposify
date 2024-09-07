@@ -1,7 +1,7 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-import { TextField } from "@/components/_fields/text-field";
+import { TextField } from "@/_fields/text-field";
 
 import { type BlockProps } from "../../types";
 

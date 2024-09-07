@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { TextFieldConfigSchema } from "@/components/_fields/text-field/type";
+import { TextFieldConfigSchema } from "@/_fields/text-field/type";
 
 export const FooterOneFieldsConfigSchema = z.object({
   description: TextFieldConfigSchema,

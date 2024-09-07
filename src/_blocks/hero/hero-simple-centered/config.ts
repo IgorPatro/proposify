@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { ButtonFieldConfigSchema } from "@/components/_fields/button-field/type";
-import { TextFieldConfigSchema } from "@/components/_fields/text-field/type";
+import { ButtonFieldConfigSchema } from "@/_fields/button-field/type";
+import { TextFieldConfigSchema } from "@/_fields/text-field/type";
 
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const HeroSimpleCenteredFieldsConfigSchema = z.object({

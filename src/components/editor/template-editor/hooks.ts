@@ -5,8 +5,8 @@ import {
 } from "@dnd-kit/core";
 import { useCallback, useState } from "react";
 
-import { type Block, type BlockName } from "@/components/_blocks/types";
-import { getBlockDefaultFieldsByName } from "@/components/_blocks/utils";
+import { type Block, type BlockName } from "@/_blocks/types";
+import { getBlockDefaultFieldsByName } from "@/_blocks/utils";
 
 import { useEditorStore } from "./store";
 import { type DraggedBlock } from "./types";

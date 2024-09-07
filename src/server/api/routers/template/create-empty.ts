@@ -1,6 +1,8 @@
-import { DEFAULT_THEME } from "@/components/_blocks/config";
-import { HERO_ONE_FIELDS_CONFIG } from "@/components/_blocks/hero/hero-one/config";
-import { BlockNameEnum } from "@/components/_blocks/types";
+import { type z } from "zod";
+
+import { DEFAULT_THEME } from "@/_blocks/config";
+import { HERO_ONE_FIELDS_CONFIG } from "@/_blocks/hero/hero-one/config";
+import { BlockNameEnum } from "@/_blocks/types";
 
 import { protectedProcedure } from "../../trpc";
 
@@ -10,11 +12,13 @@ export const CreateTemplateInputSchema = TemplateSchema.pick({
   name: true,
 });
 
+export type CreateTemplateInput = z.infer<typeof CreateTemplateInputSchema>;
+
 // TODO: Make sure to delete unused templates after some time
 export const createEmpty = protectedProcedure
   .input(CreateTemplateInputSchema)
   .mutation(async ({ ctx, input }) => {
-    if (!ctx.session.user) {
+    if (!ctx.session) {
       throw new Error("User does not have a company");
     }
 
@@ -23,7 +27,7 @@ export const createEmpty = protectedProcedure
         companyId: true,
       },
       where: {
-        id: ctx.session.user.id,
+        email: ctx.session.user.email,
       },
     });
 
@@ -39,6 +43,7 @@ export const createEmpty = protectedProcedure
             id: company.companyId,
           },
         },
+        name: input.name,
       },
     });
 
@@ -56,6 +61,6 @@ export const DEFAULT_EMPTY_TEMPLATE: Template = {
       uuid: "dummy-uuid-hero-one",
     },
   ],
-  name: "Dummy name",
+  name: "dummy-name-to-replace",
   theme: DEFAULT_THEME,
 };

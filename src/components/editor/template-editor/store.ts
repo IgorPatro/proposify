@@ -2,7 +2,7 @@ import lodashSet from "lodash/set";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-import { type Block } from "@/components/_blocks/types";
+import { type Block } from "@/_blocks/types";
 import { type Theme, type Template } from "@/server/api/routers/template/types";
 
 export type EditorState = {
