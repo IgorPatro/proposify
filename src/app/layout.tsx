@@ -1,8 +1,10 @@
-import { TRPCReactProvider } from "@/server/trpc";
 import "@/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Poppins } from "next/font/google";
+
+import { Toaster } from "@/components/ui/toaster";
+import { TRPCReactProvider } from "@/server/trpc";
 
 export const metadata: Metadata = {
   description: "Create a dream offer for your client",
@@ -10,7 +12,10 @@ export const metadata: Metadata = {
   title: "Proposify",
 };
 
-const poppins = Poppins({ subsets: ["latin", "latin-ext"], weight: "400" });
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "700", "600"],
+});
 
 export default async function RootLayout({
   children,
@@ -18,7 +23,10 @@ export default async function RootLayout({
   return (
     <TRPCReactProvider>
       <html lang="en" className={poppins.className}>
-        <body>{children}</body>
+        <body>
+          {children}
+          <Toaster />
+        </body>
       </html>
     </TRPCReactProvider>
   );

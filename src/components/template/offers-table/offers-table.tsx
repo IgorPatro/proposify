@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 import {
   Table,
@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { type MinifiedOffer } from "@/server/api/offer/types";
 
-import { COLUMNS } from "./utils";
-import { MinifiedOffer } from "@/server/api/offer/types";
+import { OFFER_COLUMNS } from "./utils";
 
 interface OffersTableProps {
   offers: MinifiedOffer[];
@@ -25,8 +25,8 @@ interface OffersTableProps {
 
 export const OffersTable = ({ offers }: OffersTableProps) => {
   const table = useReactTable({
+    columns: OFFER_COLUMNS,
     data: offers,
-    columns: COLUMNS,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -67,7 +67,10 @@ export const OffersTable = ({ offers }: OffersTableProps) => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={COLUMNS.length} className="h-24 text-center">
+              <TableCell
+                colSpan={OFFER_COLUMNS.length}
+                className="h-24 text-center"
+              >
                 No results.
               </TableCell>
             </TableRow>

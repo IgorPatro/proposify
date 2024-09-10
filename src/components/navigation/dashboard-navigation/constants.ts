@@ -1,4 +1,5 @@
 import {
+  getDashboardSettingsHref,
   getDashboardHref,
   getDashboardOffersHref,
   getDashboardTemplatesHref,
@@ -16,8 +17,13 @@ export const DASHBOARD_NAVIGATION = [
     name: "offers",
   },
   {
-    content: "Templatki",
+    content: "Szablony",
     href: getDashboardTemplatesHref(),
     name: "templates",
+  },
+  {
+    content: "Ustawienia",
+    href: getDashboardSettingsHref(),
+    name: "settings",
   },
 ];

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { protectedProcedure } from "../procedures";
 
 export const CreateOfferInputSchema = z.object({
-  customerUuid: z.string().optional(),
+  customerUuid: z.string(),
   name: z.string(),
   templateUuid: z.string(),
 });
@@ -48,13 +48,11 @@ export const createOffer = protectedProcedure
             id: company.companyId,
           },
         },
-        customer: input.customerUuid
-          ? {
-              connect: {
-                uuid: input.customerUuid,
-              },
-            }
-          : undefined,
+        customer: {
+          connect: {
+            uuid: input.customerUuid,
+          },
+        },
         name: input.name,
         theme: template.theme,
       },

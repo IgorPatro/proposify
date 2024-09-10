@@ -56,8 +56,8 @@ model Offer {
   companyId  Int
   theme      Json?
   blocks     Json?
-  customer   Customer? @relation(fields: [customerId], references: [id])
-  customerId Int?
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
 }
 
 model Customer {

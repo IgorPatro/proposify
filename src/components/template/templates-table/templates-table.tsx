@@ -1,11 +1,11 @@
 "use client";
 
-import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import * as React from "react";
 
 import {
   Table,
@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { type MinifiedTemplate } from "@/server/api/template/types";
 
-import { COLUMNS } from "./utils";
-import { MinifiedTemplate } from "@/server/api/template/types";
+import { TEMPLATE_COLUMNS } from "./utils";
 
 interface TemplatesTableProps {
   templates: MinifiedTemplate[];
@@ -25,12 +25,10 @@ interface TemplatesTableProps {
 
 export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
   const table = useReactTable({
+    columns: TEMPLATE_COLUMNS,
     data: templates,
-    columns: COLUMNS,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  console.log(templates);
 
   return (
     <div className="rounded-md border">
@@ -69,7 +67,10 @@ export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={COLUMNS.length} className="h-24 text-center">
+              <TableCell
+                colSpan={TEMPLATE_COLUMNS.length}
+                className="h-24 text-center"
+              >
                 No results.
               </TableCell>
             </TableRow>

@@ -1,32 +1,32 @@
-import { MinifiedTemplate } from "@/server/api/template/types";
-import { formatDateToDayMonthYear } from "@/utils/date";
-import { getEditorTemplateHref } from "@/utils/hrefs/editor";
-import { ColumnDef } from "@tanstack/react-table";
+import { type ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
-export const COLUMNS: ColumnDef<MinifiedTemplate>[] = [
+import { type MinifiedTemplate } from "@/server/api/template/types";
+import { formatDateToDayMonthYear } from "@/utils/date";
+import { getEditorTemplateHref } from "@/utils/hrefs/editor";
+
+export const TEMPLATE_COLUMNS: ColumnDef<MinifiedTemplate>[] = [
   {
     accessorKey: "name",
-    header: "Name",
     cell: ({ row }) => <span>{row.getValue("name")}</span>,
+    header: "Name",
   },
   {
     accessorKey: "createdAt",
-    header: "Created at",
     cell: ({ row }) => (
       <span>{formatDateToDayMonthYear(row.getValue("createdAt"))}</span>
     ),
+    header: "Created at",
   },
   {
     accessorKey: "updatedAt",
-    header: "Last update",
     cell: ({ row }) => (
       <span>{formatDateToDayMonthYear(row.getValue("updatedAt"))}</span>
     ),
+    header: "Last update",
   },
   {
     accessorKey: "uuid",
-    header: () => <div className="text-right">Actions</div>,
     cell: ({ row }) => {
       return (
         <div className="flex justify-end">
@@ -39,5 +39,6 @@ export const COLUMNS: ColumnDef<MinifiedTemplate>[] = [
         </div>
       );
     },
+    header: () => <div className="text-right">Actions</div>,
   },
 ];
