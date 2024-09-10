@@ -2,8 +2,9 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-import { ThemeSchema } from "./types";
 import { protectedProcedure } from "../procedures";
+
+import { ThemeSchema } from "./types";
 
 const SaveTemplateInputSchema = z.object({
   blocks: z.array(BlockSchema),

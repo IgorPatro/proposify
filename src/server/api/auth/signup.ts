@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 
 import { publicProcedure } from "../procedures";
+
 import { SignupRequestBodySchema } from "./type";
 
 export const signUp = publicProcedure

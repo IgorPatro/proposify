@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { type MinifiedTemplate } from "@/server/api/template/types";
 import { db } from "@/server/db";
 

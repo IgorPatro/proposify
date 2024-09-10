@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Input } from "@/components/base/input";
 import { useEditorStore } from "@/components/editor/template-editor/store";
 
 export const EditorSidebarThemeSettings = () => {
@@ -10,31 +11,38 @@ export const EditorSidebarThemeSettings = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      TODO
-      {/* <TextInput
+      <Input
         value={theme.bgPrimary}
-        onChange={(value) => updateThemeProperty("bgPrimary", value)}
+        onChange={(event) =>
+          updateThemeProperty("bgPrimary", event.target.value)
+        }
         name="theme.bgPrimary"
         label="Background primary color"
       />
-      <TextInput
+      <Input
         value={theme.bgSecondary}
-        onChange={(value) => updateThemeProperty("bgSecondary", value)}
+        onChange={(event) =>
+          updateThemeProperty("bgSecondary", event.target.value)
+        }
         name="theme.bgSecondary"
         label="Background secondary color"
       />
-      <TextInput
+      <Input
         value={theme.textPrimary}
-        onChange={(value) => updateThemeProperty("textPrimary", value)}
+        onChange={(event) =>
+          updateThemeProperty("textPrimary", event.target.value)
+        }
         name="theme.textPrimary"
         label="Text primary color"
       />
-      <TextInput
+      <Input
         value={theme.textSecondary}
-        onChange={(value) => updateThemeProperty("textSecondary", value)}
+        onChange={(event) =>
+          updateThemeProperty("textSecondary", event.target.value)
+        }
         name="theme.textSecondary"
         label="Text secondary color"
-      /> */}
+      />
     </div>
   );
 };

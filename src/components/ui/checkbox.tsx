@@ -6,8 +6,6 @@ import * as React from "react";
 
 import { cn } from "@/utils/ui";
 
-import { Label } from "./label";
-
 export interface CheckboxProps
   extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {}
 

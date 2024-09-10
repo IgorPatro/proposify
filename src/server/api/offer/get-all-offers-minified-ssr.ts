@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 import { db } from "@/server/db";
 
 import { type MinifiedOffer } from "./types";
