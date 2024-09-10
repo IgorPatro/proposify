@@ -3,10 +3,10 @@ import { useRouter } from "next/navigation";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { type SignupFormType } from "@/server/api/auth/type";
+import { api } from "@/server/trpc";
 import { getLoginHref } from "@/utils/hrefs/auth";
 
 import { SignupFormValidationResolver } from "./utils";
-import { api } from "@/server/trpc";
 
 export const useSignupForm = () => {
   const router = useRouter();
@@ -14,6 +14,14 @@ export const useSignupForm = () => {
   const { mutateAsync: signUp } = api.auth.signUp.useMutation();
 
   const form = useForm<SignupFormType>({
+    defaultValues: {
+      confirmPassword: "",
+      email: "",
+      firstName: "",
+      lastName: "",
+      password: "",
+      termsAccepted: false,
+    },
     resolver: zodResolver(SignupFormValidationResolver),
   });
 

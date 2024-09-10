@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
-import { useToast } from "@/hooks/use-toast";
 import { getDashboardHref } from "@/utils/hrefs/dashboard";
 
 import { type LoginFormType } from "./type";
@@ -13,6 +12,10 @@ export const useLoginForm = () => {
   const router = useRouter();
 
   const form = useForm<LoginFormType>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
     resolver: zodResolver(LoginFormValidationResolver),
   });
 
@@ -28,10 +31,6 @@ export const useLoginForm = () => {
         router.push(getDashboardHref());
       }
       if (result?.error) {
-        // toast({
-        //   description: result.error,
-        //   variant: "destructive",
-        // });
         console.log(result.error);
       }
     } catch (error) {

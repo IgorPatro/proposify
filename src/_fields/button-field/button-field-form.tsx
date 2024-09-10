@@ -1,7 +1,7 @@
 import React, { type ChangeEvent } from "react";
 
+import { Input } from "@/components/base/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,

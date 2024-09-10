@@ -1,7 +1,7 @@
 import { z } from "zod";
 
+import { type MinifiedTemplate } from "@/server/api/template/types";
 import { db } from "@/server/db";
-import { MinifiedTemplate } from "@/server/api/template/types";
 
 export const getAllTemplatesMinifiedSsr = async () => {
   const templates = await db.template.findMany();

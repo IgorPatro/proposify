@@ -1,60 +1,45 @@
-import React, { type ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import React from "react";
+
+import {
+  Select as SelectPrimitive,
+  SelectContent,
+  SelectTrigger,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface Option {
   value: string;
   label: string;
 }
 
-export interface SelectProps {
+interface SelectProps {
   name: string;
+  value?: string;
   onChange: (value: string) => void;
   options: Option[];
-  value: string | undefined;
-  error?: string;
-  label?: ReactNode;
+  placeholder?: string;
 }
 
 export const Select = ({
-  error,
-  label,
   name,
   onChange,
   options,
+  placeholder,
   value,
 }: SelectProps) => {
   return (
-    <div className={twMerge("relative w-full")}>
-      {label ? (
-        <label
-          className="mb-1 block text-sm font-medium text-gray-900"
-          htmlFor={`text-input-${name}`}
-        >
-          {label}
-        </label>
-      ) : null}
-      <select
-        value={value}
-        id={`text-input-${name}`}
-        onChange={(e) => onChange(e.target.value)}
-        className={twMerge(
-          "w-full rounded-md border border-gray-900 bg-gray-50 px-3 py-2 text-sm",
-          error
-            ? "border-red-500 ring-red-500 focus:border-red-500 focus:ring-red-500"
-            : "",
-        )}
-      >
+    <SelectPrimitive name={name} value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder={placeholder} />
+      </SelectTrigger>
+      <SelectContent>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <SelectItem key={option.value} value={option.value}>
             {option.label}
-          </option>
+          </SelectItem>
         ))}
-      </select>
-      {error ? (
-        <div className="absolute inset-x-0 mx-1 mt-0.5 truncate text-xs text-red-500">
-          {error}
-        </div>
-      ) : null}
-    </div>
+      </SelectContent>
+    </SelectPrimitive>
   );
 };

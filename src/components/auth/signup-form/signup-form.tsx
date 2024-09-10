@@ -3,9 +3,9 @@
 import React from "react";
 import { Controller } from "react-hook-form";
 
+import { Input } from "@/components/base/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 
 import { useSignupForm } from "./hooks";
 

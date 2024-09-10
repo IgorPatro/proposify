@@ -1,6 +1,5 @@
 import React from "react";
 
-import { TextInput } from "@/components/base/text-input";
 import { useEditorStore } from "@/components/editor/template-editor/store";
 
 export const EditorSidebarThemeSettings = () => {
@@ -11,7 +10,8 @@ export const EditorSidebarThemeSettings = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      <TextInput
+      TODO
+      {/* <TextInput
         value={theme.bgPrimary}
         onChange={(value) => updateThemeProperty("bgPrimary", value)}
         name="theme.bgPrimary"
@@ -34,7 +34,7 @@ export const EditorSidebarThemeSettings = () => {
         onChange={(value) => updateThemeProperty("textSecondary", value)}
         name="theme.textSecondary"
         label="Text secondary color"
-      />
+      /> */}
     </div>
   );
 };

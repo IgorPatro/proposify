@@ -1,17 +1,21 @@
-import React from "react";
+import React, { type ChangeEvent } from "react";
 
-import { TextInput } from "@/components/base/text-input";
+import { Input } from "@/components/base/input";
 import { useEditorStore } from "@/components/editor/template-editor/store";
 
 export const EditorSidebarTemplateSettings = () => {
   const updateTemplateName = useEditorStore((store) => store.updateName);
   const templateName = useEditorStore((store) => store.name);
 
+  const handleTemplateNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    updateTemplateName(e.target.value);
+  };
+
   return (
     <div className="flex flex-col gap-3">
-      <TextInput
+      <Input
         value={templateName}
-        onChange={(value) => updateTemplateName(value)}
+        onChange={handleTemplateNameChange}
         name="templateName"
         label="Name"
       />
