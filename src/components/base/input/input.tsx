@@ -14,7 +14,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative flex flex-col gap-2">
         {label ? <Label htmlFor={name}>{label}</Label> : null}
-        <InputPrimitive ref={ref} {...props} />
+        <InputPrimitive id={name} ref={ref} {...props} />
         {error ? (
           <div className="absolute top-full max-w-full truncate text-xs text-destructive">
             {error}
