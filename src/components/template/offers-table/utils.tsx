@@ -1,4 +1,4 @@
-import { MinifiedOffer } from "@/query/get-all-offers-minified";
+import { MinifiedOffer } from "@/server/api/offer/types";
 import { formatDateToDayMonthYear } from "@/utils/date";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
 import { ColumnDef } from "@tanstack/react-table";

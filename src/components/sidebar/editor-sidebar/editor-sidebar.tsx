@@ -8,12 +8,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { api } from "@/trpc/react";
 
 import { EditorSidebarBlockSettings } from "./editor-sidebar-block-settings";
 import { EditorSidebarBlocks } from "./editor-sidebar-blocks";
 import { EditorSidebarTemplateSettings } from "./editor-sidebar-template-settings";
 import { EditorSidebarThemeSettings } from "./editor-sidebar-theme-settings";
+import { api } from "@/server/trpc";
 
 interface EditorSidebarProps {
   selectedBlockUuid: string | undefined;

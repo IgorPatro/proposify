@@ -3,7 +3,7 @@
 import React from "react";
 
 import { getBlockByName } from "@/_blocks/utils";
-import { type Template } from "@/server/api/routers/template/types";
+import { type Template } from "@/server/api/template/types";
 
 interface OfferProps {
   offer: Template;

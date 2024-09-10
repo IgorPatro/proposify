@@ -2,11 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
-import { type CreateTemplateInput } from "@/server/api/routers/template/create-empty";
-import { api } from "@/trpc/react";
+import { type CreateTemplateInput } from "@/server/api/template/create-empty";
 import { getEditorTemplateHref } from "@/utils/hrefs/editor";
 
 import { TemplateCreateFormValidationResolver } from "./utils";
+import { api } from "@/server/trpc";
 
 export const useTemplateCreateForm = () => {
   const router = useRouter();

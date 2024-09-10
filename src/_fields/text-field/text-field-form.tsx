@@ -1,6 +1,6 @@
 import React, { type ChangeEvent } from "react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/base/input";
 
 import { type TextFieldConfig } from "./type";
 

@@ -1,10 +1,10 @@
 import React from "react";
 
 import { PageOffers } from "@/components/template/page-offers";
-import { getAllOffersMinified } from "@/query/get-all-offers-minified";
+import { getAllOffersMinifiedSsr } from "@/server/api/offer/get-all-offers-minified-ssr";
 
 const OfferPage = async () => {
-  const offers = await getAllOffersMinified();
+  const offers = await getAllOffersMinifiedSsr();
 
   return <PageOffers offers={offers} />;
 };

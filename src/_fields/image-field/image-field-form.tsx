@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TextInput } from "@/components/base/text-input";
+import { Input } from "@/components/base/input";
 
 import { type ImageFieldConfig } from "./type";
 
@@ -19,22 +19,22 @@ export const ImageFieldForm = ({
 }: ImageFieldFormProps) => {
   return (
     <div className="flex flex-col gap-4">
-      <TextInput
+      <Input
         key={fieldName}
         name={fieldName}
         placeholder="Image src"
         value={config.url}
-        onChange={(value) =>
-          updateBlockProperty(blockUuid, `${fieldName}.url`, value)
+        onChange={(event) =>
+          updateBlockProperty(blockUuid, `${fieldName}.url`, event.target.value)
         }
       />
-      <TextInput
+      <Input
         key={fieldName}
         name={fieldName}
         placeholder="Alt"
         value={config.alt}
-        onChange={(value) =>
-          updateBlockProperty(blockUuid, `${fieldName}.alt`, value)
+        onChange={(event) =>
+          updateBlockProperty(blockUuid, `${fieldName}.url`, event.target.value)
         }
       />
     </div>

@@ -4,10 +4,10 @@ import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { type MinifiedOffer } from "@/query/get-all-offers-minified";
 
 import { OfferCreateDialog } from "../offer-create-dialog";
 import { OffersTable } from "../offers-table";
+import { MinifiedOffer } from "@/server/api/offer/types";
 
 interface PageOffersProps {
   offers: MinifiedOffer[];

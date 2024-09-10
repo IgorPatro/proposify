@@ -4,8 +4,8 @@ import React from "react";
 import { Controller } from "react-hook-form";
 
 import { Dialog } from "@/components/base/dialog";
+import { Input } from "@/components/base/input";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { api } from "@/trpc/react";
+import { api } from "@/server/trpc";
 
 import { useOfferCreateForm } from "./hooks";
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Editor } from "@/components/editor/template-editor/editor";
-import { getTemplate } from "@/query/get-template";
+import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
 
 interface EditorTemplatePageProps {
   params: {
@@ -11,7 +11,7 @@ interface EditorTemplatePageProps {
 
 const EditorTemplatePage = async ({ params }: EditorTemplatePageProps) => {
   const { "template-uuid": templateUuid } = params;
-  const template = await getTemplate(templateUuid);
+  const template = await getEditorTemplateSsr(templateUuid);
 
   return <Editor resource={template} resourceUuid={templateUuid} />;
 };

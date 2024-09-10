@@ -2,11 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
-import { type CreateOfferInput } from "@/server/api/routers/offer/create-offer";
-import { api } from "@/trpc/react";
+import { type CreateOfferInput } from "@/server/api/offer/create-offer";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
 
 import { OfferCreateFormValidationResolver } from "./utils";
+import { api } from "@/server/trpc";
 
 export const useOfferCreateForm = () => {
   const router = useRouter();

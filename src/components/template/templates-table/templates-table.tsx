@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MinifiedTemplate } from "@/query/get-all-templates-minified";
 
 import { COLUMNS } from "./utils";
+import { MinifiedTemplate } from "@/server/api/template/types";
 
 interface TemplatesTableProps {
   templates: MinifiedTemplate[];
