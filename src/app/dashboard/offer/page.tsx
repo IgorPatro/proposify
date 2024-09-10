@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageOffers } from "@/components/template/page-offers";
+import { PageOffers } from "@/components/offer/page-offers";
 import { getAllOffersMinifiedSsr } from "@/server/api/offer/get-all-offers-minified-ssr";
 
 const OfferPage = async () => {

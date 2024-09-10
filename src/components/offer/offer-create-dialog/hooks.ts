@@ -3,16 +3,21 @@ import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 import { type CreateOfferInput } from "@/server/api/offer/create-offer";
+import { api } from "@/server/trpc";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
 
 import { OfferCreateFormValidationResolver } from "./utils";
-import { api } from "@/server/trpc";
 
 export const useOfferCreateForm = () => {
   const router = useRouter();
   const { mutateAsync: createOffer } = api.offer.createOffer.useMutation();
 
   const form = useForm<CreateOfferInput>({
+    defaultValues: {
+      customerUuid: "",
+      name: "",
+      templateUuid: "",
+    },
     resolver: zodResolver(OfferCreateFormValidationResolver),
   });
 

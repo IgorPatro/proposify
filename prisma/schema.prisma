@@ -75,6 +75,7 @@ model Customer {
   street      String?
   houseNumber String?
   Offer       Offer[]
+  // Note: Owner of the customer
   company     Company  @relation(fields: [companyId], references: [id])
   companyId   Int
 }
