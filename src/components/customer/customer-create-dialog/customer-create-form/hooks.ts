@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 import { useToast } from "@/hooks/use-toast";
@@ -16,7 +15,6 @@ export const useCustomerCreateForm = (
   const utils = api.useUtils();
 
   const { toast } = useToast();
-  const router = useRouter();
   const { mutateAsync: createCustomer } =
     api.customer.createCustomer.useMutation({
       onSuccess: async () => {

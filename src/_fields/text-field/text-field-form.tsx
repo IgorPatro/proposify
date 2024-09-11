@@ -1,6 +1,6 @@
 import React, { type ChangeEvent } from "react";
 
-import { Input } from "@/components/base/input";
+import { Textarea } from "@/components/base/textarea";
 
 import { type TextFieldConfig } from "./type";
 
@@ -17,18 +17,19 @@ export const TextFieldForm = ({
   fieldName,
   updateBlockProperty,
 }: TextFieldFormProps) => {
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     updateBlockProperty(blockUuid, `${fieldName}.content`, event.target.value);
   };
 
   return (
-    <Input
+    <Textarea
       key={fieldName}
       name={fieldName}
       label={fieldName}
       placeholder="Type text here"
       value={config.content}
       onChange={onChange}
+      rows={5}
     />
   );
 };

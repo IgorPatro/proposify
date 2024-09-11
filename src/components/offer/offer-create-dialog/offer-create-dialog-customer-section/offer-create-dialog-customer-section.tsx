@@ -1,10 +1,5 @@
 import React, { useMemo } from "react";
-import {
-  type Control,
-  Controller,
-  useController,
-  useFormContext,
-} from "react-hook-form";
+import { type Control, Controller } from "react-hook-form";
 
 import { Select } from "@/components/base/select";
 import { CustomerCreateForm } from "@/components/customer/customer-create-dialog/customer-create-form";
