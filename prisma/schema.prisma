@@ -61,21 +61,20 @@ model Offer {
 }
 
 model Customer {
-  id          Int      @id @default(autoincrement())
-  uuid        String   @unique @default(uuid())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  firstName   String
-  lastName    String
-  email       String?
-  phone       String?
-  city        String?
-  country     String?
-  zipCode     String?
-  street      String?
-  houseNumber String?
-  Offer       Offer[]
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  firstName String
+  lastName  String
+  email     String?
+  phone     String?
+  city      String?
+  country   String?
+  zipCode   String?
+  street    String?
+  Offer     Offer[]
   // Note: Owner of the customer
-  company     Company  @relation(fields: [companyId], references: [id])
-  companyId   Int
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId Int
 }

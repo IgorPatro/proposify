@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Controller, FormProvider } from "react-hook-form";
 
 import { Dialog } from "@/components/base/dialog";
 import { Input } from "@/components/base/input";
@@ -16,6 +16,7 @@ import {
 import { api } from "@/server/trpc";
 
 import { useOfferCreateForm } from "./hooks";
+import { OfferCreateDialogCustomerSection } from "./offer-create-dialog-customer-section";
 
 interface OfferCreateDialogProps {
   isOpen: boolean;
@@ -31,72 +32,58 @@ export const OfferCreateDialog = ({
     control,
     formState: { errors, isSubmitting },
   } = form;
-  const { data: customers } = api.customer.getAllCustomersMinified.useQuery();
+
   const { data: templates } = api.template.getAll.useQuery();
 
   return (
     <Dialog header="Create offer" isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4">
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <Input
-              label="Name"
-              placeholder="My awesome offer"
-              error={errors.name?.message}
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          name="customerUuid"
-          control={control}
-          render={({ field }) => (
-            <Select
-              name="customerUuid"
-              value={field.value}
-              onValueChange={(value) => field.onChange(value)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select customer" />
-              </SelectTrigger>
-              <SelectContent>
-                {customers?.map((customer) => (
-                  <SelectItem key={customer.uuid} value={customer.uuid}>
-                    {customer.email}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-        <Controller
-          name="templateUuid"
-          control={control}
-          render={({ field }) => (
-            <Select
-              name="templateUuid"
-              value={field.value}
-              onValueChange={(value) => field.onChange(value)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select template" />
-              </SelectTrigger>
-              <SelectContent>
-                {templates?.map((template) => (
-                  <SelectItem key={template.uuid} value={template.uuid}>
-                    {template.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-        <Button isLoading={isSubmitting} className="self-end" type="submit">
-          Create
-        </Button>
-      </form>
+      <FormProvider {...form}>
+        <div className="flex flex-col gap-4">
+          <Controller
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <Input
+                label="Name"
+                placeholder="My awesome offer"
+                error={errors.name?.message}
+                {...field}
+              />
+            )}
+          />
+          <OfferCreateDialogCustomerSection />
+          <Controller
+            name="templateUuid"
+            control={control}
+            render={({ field }) => (
+              <Select
+                name="templateUuid"
+                value={field.value}
+                onValueChange={(value) => field.onChange(value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select template" />
+                </SelectTrigger>
+                <SelectContent>
+                  {templates?.map((template) => (
+                    <SelectItem key={template.uuid} value={template.uuid}>
+                      {template.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+          <Button
+            isLoading={isSubmitting}
+            className="self-end"
+            type="button"
+            onClick={onSubmit}
+          >
+            Create
+          </Button>
+        </div>
+      </FormProvider>
     </Dialog>
   );
 };

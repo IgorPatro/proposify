@@ -7,34 +7,24 @@ import { getEditorOfferHref } from "@/utils/hrefs/editor";
 
 export const OFFER_COLUMNS: ColumnDef<MinifiedOffer>[] = [
   {
-    accessorKey: "name",
-    cell: ({ row }) => <span>{row.getValue("name")}</span>,
+    accessorFn: (data) => data.name,
     header: "Name",
   },
   {
-    accessorKey: "customer",
-    cell: ({ row }) => (
-      <span>{`${row.getValue("customer.firstName")} ${row.getValue("customer.lastName")}`}</span>
-    ),
+    accessorFn: (data) =>
+      `${data.customer.firstName} ${data.customer.lastName}`,
     header: "Customer",
   },
   {
-    accessorKey: "customer",
-    cell: ({ row }) => <span>{row.getValue("customer.email")}</span>,
-    header: "Email",
+    accessorFn: (data) => data.customer.email ?? data.customer.phone,
+    header: "Email / Phone",
   },
   {
-    accessorKey: "createdAt",
-    cell: ({ row }) => (
-      <span>{formatDateToDayMonthYear(row.getValue("createdAt"))}</span>
-    ),
+    accessorFn: (data) => formatDateToDayMonthYear(data.createdAt),
     header: "Created at",
   },
   {
-    accessorKey: "updatedAt",
-    cell: ({ row }) => (
-      <span>{formatDateToDayMonthYear(row.getValue("updatedAt"))}</span>
-    ),
+    accessorFn: (data) => formatDateToDayMonthYear(data.updatedAt),
     header: "Last update",
   },
   {

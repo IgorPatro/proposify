@@ -4,15 +4,25 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 
 import { useToast } from "@/hooks/use-toast";
 import { type CreateCustomerInput } from "@/server/api/customer/create-customer";
+import { type Customer } from "@/server/api/customer/types";
 import { api } from "@/server/trpc";
+import { isAPIError } from "@/utils/error";
 
 import { CustomerCreateFormValidationResolver } from "./utils";
 
-export const useCustomerCreateForm = () => {
+export const useCustomerCreateForm = (
+  onCallback?: (customer: Customer) => void,
+) => {
+  const utils = api.useUtils();
+
   const { toast } = useToast();
   const router = useRouter();
   const { mutateAsync: createCustomer } =
-    api.customer.createCustomer.useMutation();
+    api.customer.createCustomer.useMutation({
+      onSuccess: async () => {
+        await utils.customer.getAllCustomersMinified.invalidate();
+      },
+    });
 
   const form = useForm<CreateCustomerInput>({
     defaultValues: {
@@ -31,11 +41,14 @@ export const useCustomerCreateForm = () => {
   const onSubmit: SubmitHandler<CreateCustomerInput> = async (data) => {
     try {
       const newCustomer = await createCustomer(data);
+      onCallback?.(newCustomer);
     } catch (error) {
-      toast({
-        description: error.message,
-        variant: "destructive",
-      });
+      if (isAPIError(error)) {
+        toast({
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     }
   };
 

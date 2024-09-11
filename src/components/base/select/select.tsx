@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Label } from "@/components/ui/label";
 import {
   Select as SelectPrimitive,
   SelectContent,
@@ -16,12 +17,16 @@ interface Option {
 interface SelectProps {
   name: string;
   value?: string;
+  label?: string;
   onChange: (value: string) => void;
   options: Option[];
   placeholder?: string;
+  error?: string;
 }
 
 export const Select = ({
+  error,
+  label,
   name,
   onChange,
   options,
@@ -29,17 +34,25 @@ export const Select = ({
   value,
 }: SelectProps) => {
   return (
-    <SelectPrimitive name={name} value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
-            {option.label}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </SelectPrimitive>
+    <div className="relative flex flex-col gap-2">
+      {label ? <Label htmlFor={name}>{label}</Label> : null}
+      <SelectPrimitive name={name} value={value} onValueChange={onChange}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectPrimitive>
+      {error ? (
+        <div className="absolute top-full max-w-full truncate text-xs text-destructive">
+          {error}
+        </div>
+      ) : null}
+    </div>
   );
 };
