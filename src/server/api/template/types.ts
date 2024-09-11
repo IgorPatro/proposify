@@ -2,19 +2,14 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-export const ThemeSchema = z.object({
-  bgPrimary: z.string(),
-  bgSecondary: z.string(),
-  textPrimary: z.string(),
-  textSecondary: z.string(),
-});
+export const ThemeEnum = z.enum(["light", "dark"]);
 
-export type Theme = z.infer<typeof ThemeSchema>;
+export type ThemeEnum = z.infer<typeof ThemeEnum>;
 
 export const TemplateSchema = z.object({
   blocks: z.array(BlockSchema),
   name: z.string(),
-  theme: ThemeSchema,
+  theme: ThemeEnum,
 });
 
 export type Template = z.infer<typeof TemplateSchema>;

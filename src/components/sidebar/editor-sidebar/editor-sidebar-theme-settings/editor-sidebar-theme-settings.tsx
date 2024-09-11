@@ -1,47 +1,29 @@
 import React from "react";
 
-import { Input } from "@/components/base/input";
+import { Select } from "@/components/base/select";
 import { useEditorStore } from "@/components/editor/template-editor/store";
+import { type ThemeEnum } from "@/server/api/template/types";
 
 export const EditorSidebarThemeSettings = () => {
-  const updateThemeProperty = useEditorStore(
-    (store) => store.updateThemeProperty,
-  );
+  const updateTheme = useEditorStore((store) => store.updateTheme);
   const theme = useEditorStore((store) => store.theme);
+
+  const onSelectTheme = (theme: string) => {
+    updateTheme(theme as ThemeEnum);
+  };
 
   return (
     <div className="flex flex-col gap-3">
-      <Input
-        value={theme.bgPrimary}
-        onChange={(event) =>
-          updateThemeProperty("bgPrimary", event.target.value)
-        }
-        name="theme.bgPrimary"
-        label="Background primary color"
-      />
-      <Input
-        value={theme.bgSecondary}
-        onChange={(event) =>
-          updateThemeProperty("bgSecondary", event.target.value)
-        }
-        name="theme.bgSecondary"
-        label="Background secondary color"
-      />
-      <Input
-        value={theme.textPrimary}
-        onChange={(event) =>
-          updateThemeProperty("textPrimary", event.target.value)
-        }
-        name="theme.textPrimary"
-        label="Text primary color"
-      />
-      <Input
-        value={theme.textSecondary}
-        onChange={(event) =>
-          updateThemeProperty("textSecondary", event.target.value)
-        }
-        name="theme.textSecondary"
-        label="Text secondary color"
+      <Select
+        name="theme"
+        label="Theme"
+        value={theme}
+        onChange={onSelectTheme}
+        // TODO: Add const options
+        options={[
+          { label: "Light", value: "light" },
+          { label: "Dark", value: "dark" },
+        ]}
       />
     </div>
   );

@@ -42,7 +42,7 @@ model Template {
   name      String
   company   Company  @relation(fields: [companyId], references: [id])
   companyId Int
-  theme     Json?
+  theme     String
   blocks    Json?
 }
 
@@ -54,7 +54,7 @@ model Offer {
   name       String
   company    Company  @relation(fields: [companyId], references: [id])
   companyId  Int
-  theme      Json?
+  theme      String
   blocks     Json?
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId Int

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { type Theme } from "@/server/api/template/types";
+import { type ThemeEnum } from "@/server/api/template/types";
 
 import { FieldConfigSchema } from "../_fields/types";
 
@@ -25,13 +25,13 @@ export type Block = z.infer<typeof BlockSchema>;
 
 export type BlockComponent = ({
   fields,
-  theme,
+  themeEnum,
 }: {
-  theme: Theme;
+  themeEnum: ThemeEnum;
   fields: BlockFields;
 }) => JSX.Element;
 
 export interface BlockProps {
   fields: BlockFields;
-  theme: Theme;
+  themeEnum: ThemeEnum;
 }

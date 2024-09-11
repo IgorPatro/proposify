@@ -2,19 +2,21 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 import { TextField } from "@/_fields/text-field";
+import { getTheme } from "@/_hooks/use-theme";
 
 import { type BlockProps } from "../../types";
 
 import { type FooterOneFields } from "./config";
 
-export const FooterOne = ({ fields, theme }: BlockProps) => {
+export const FooterOne = ({ fields, themeEnum }: BlockProps) => {
   const { description, heading } = fields as FooterOneFields;
+  const theme = getTheme(themeEnum);
 
   return (
     <footer
       className="p-4"
       style={{
-        backgroundColor: theme.bgSecondary,
+        backgroundColor: theme.background,
       }}
     >
       <TextField
@@ -22,7 +24,7 @@ export const FooterOne = ({ fields, theme }: BlockProps) => {
         as="h1"
         className={twMerge("text-5xl")}
         style={{
-          color: theme.textPrimary,
+          color: theme.text,
         }}
       />
       <TextField
@@ -30,7 +32,7 @@ export const FooterOne = ({ fields, theme }: BlockProps) => {
         as="p"
         className={twMerge("text-2xl")}
         style={{
-          color: theme.textPrimary,
+          color: theme.text,
         }}
       />
       <div>

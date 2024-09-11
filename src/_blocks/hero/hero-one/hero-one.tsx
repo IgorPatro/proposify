@@ -3,27 +3,29 @@ import { twMerge } from "tailwind-merge";
 
 import { ButtonField } from "@/_fields/button-field";
 import { ImageField } from "@/_fields/image-field";
+import { getTheme } from "@/_hooks/use-theme";
 
 import { type BlockProps } from "../../types";
 
 import { type HeroOneFields } from "./config";
 
-export const HeroOne = ({ fields, theme }: BlockProps) => {
+export const HeroOne = ({ fields, themeEnum }: BlockProps) => {
   const { buttonOne, buttonTwo, description, heading, image } =
     fields as HeroOneFields;
+  const theme = getTheme(themeEnum);
 
   return (
     <div
-      className="min-h-180 flex h-full w-full flex-col items-center justify-center gap-4"
+      className="flex h-full min-h-180 w-full flex-col items-center justify-center gap-4"
       style={{
-        backgroundColor: theme.bgPrimary,
+        backgroundColor: theme.background,
       }}
     >
       <div className="flex flex-col gap-2">
         <h1
           className={twMerge("text-5xl")}
           style={{
-            color: theme.textPrimary,
+            color: theme.text,
           }}
         >
           {heading.content}
@@ -31,7 +33,7 @@ export const HeroOne = ({ fields, theme }: BlockProps) => {
         <p
           className={twMerge("text-xl")}
           style={{
-            color: theme.textPrimary,
+            color: theme.text,
           }}
         >
           {description.content}
@@ -41,7 +43,7 @@ export const HeroOne = ({ fields, theme }: BlockProps) => {
             config={buttonOne}
             className={twMerge("border border-blue-500 bg-blue-500 px-4 py-2")}
             style={{
-              color: theme.textSecondary,
+              color: theme.text,
             }}
           />
           <ButtonField
@@ -50,7 +52,7 @@ export const HeroOne = ({ fields, theme }: BlockProps) => {
               "border border-green-500 bg-green-500 px-4 py-2",
             )}
             style={{
-              color: theme.textSecondary,
+              color: theme.text,
             }}
           />
         </div>

@@ -3,17 +3,17 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import { type Block } from "@/_blocks/types";
-import { type Theme, type Template } from "@/server/api/template/types";
+import { type ThemeEnum, type Template } from "@/server/api/template/types";
 
 export type EditorState = {
   blocks: Block[];
   name: string;
-  theme: Theme;
+  theme: ThemeEnum;
 };
 
 type EditorStoreActions = {
   updateBlocks: (blocks: Block[]) => void;
-  updateThemeProperty: (property: keyof Theme, value: string) => void;
+  updateTheme: (newTheme: ThemeEnum) => void;
   updateEditorState: (template: Template) => void;
   updateBlockProperty: (
     blockUuid: string,
@@ -29,12 +29,7 @@ type EditorStore = EditorState & EditorStoreActions;
 const initialState: EditorState = {
   blocks: [],
   name: "",
-  theme: {
-    bgPrimary: "",
-    bgSecondary: "",
-    textPrimary: "",
-    textSecondary: "",
-  },
+  theme: "light",
 };
 
 export const useEditorStore = create<EditorStore>()(
@@ -66,9 +61,9 @@ export const useEditorStore = create<EditorStore>()(
       set((state) => {
         state.name = name;
       }),
-    updateThemeProperty: (property, value) =>
+    updateTheme: (newTheme) =>
       set((state) => {
-        state.theme[property] = value;
+        state.theme = newTheme;
       }),
   })),
 );

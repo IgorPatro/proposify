@@ -1,6 +1,5 @@
 import { type z } from "zod";
 
-import { DEFAULT_THEME } from "@/_blocks/config";
 import { HERO_ONE_FIELDS_CONFIG } from "@/_blocks/hero/hero-one/config";
 import { BlockNameEnum } from "@/_blocks/types";
 
@@ -62,5 +61,5 @@ export const DEFAULT_EMPTY_TEMPLATE: Template = {
     },
   ],
   name: "dummy-name-to-replace",
-  theme: DEFAULT_THEME,
+  theme: "light",
 };
