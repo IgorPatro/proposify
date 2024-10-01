@@ -30,8 +30,6 @@ export const OffersTable = ({ offers }: OffersTableProps) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  console.log(offers);
-
   return (
     <div className="rounded-md border">
       <Table>

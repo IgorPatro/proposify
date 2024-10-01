@@ -83,6 +83,7 @@ export default {
         "4/5": "80%",
       },
       maxWidth: {
+        360: "1440px",
         "4/5": "80%",
       },
       minHeight: {

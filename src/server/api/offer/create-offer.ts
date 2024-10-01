@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { getFullyDataPropagatedBlocks } from "@/utils/offer";
+
 import { protectedProcedure } from "../procedures";
 
 export const CreateOfferInputSchema = z.object({
@@ -36,13 +38,28 @@ export const createOffer = protectedProcedure
       throw new Error("Template not found");
     }
 
-    // Tworzymy ofertę na podstawie szablonu,
-    // Podmieniamy jednak dynamiczne dane na tym etapie
-    // Na przykład dane klienta w miejscach w ofercie, gdzie są zmiennymi
-    // Te dane mogą zostać potem manualnie zmienione przez użytkownika
+    const customer = await ctx.db.customer.findUnique({
+      where: {
+        uuid: input.customerUuid,
+      },
+    });
+
+    if (!customer) {
+      throw new Error("Customer not found");
+    }
+
+    // We create an offer based on a template
+    // However, at this stage we replace dynamic data
+    // For example, customer data in the offer where there are variables
+    // This data can then be manually changed by the user later
     const newOffer = await ctx.db.offer.create({
       data: {
-        blocks: template.blocks,
+        blocks: await getFullyDataPropagatedBlocks(
+          JSON.stringify(template.blocks),
+          {
+            customer,
+          },
+        ),
         company: {
           connect: {
             id: company.companyId,

@@ -16,16 +16,19 @@ export const PropagationDataSchema = z.object({
 
 export type PropagationData = z.infer<typeof PropagationDataSchema>;
 
-// Note: blocks will be strigified JSON
-export const getFullyDataPropagatedResource = async (
+// Note: Blocks are stringified JSON
+export const getFullyDataPropagatedBlocks = async (
   blocks: string,
   data: PropagationData,
 ) => {
-  let result = "";
+  CUSTOMER_PROPAGATION_KEYS.forEach((key) => {
+    const value = get(data, key);
 
-  for (const key of CUSTOMER_PROPAGATION_KEYS) {
-    result = blocks.replace(new RegExp(`{{${key}}}`, "g"), get(data, key));
-  }
+    if (!value) return;
 
-  return result;
+    const placeholder = `{{${key}}}`;
+    blocks = blocks.replace(new RegExp(placeholder, "g"), value);
+  });
+
+  return (await JSON.parse(blocks)) as string;
 };

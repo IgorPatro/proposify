@@ -33,7 +33,7 @@ export const EditorBlocksRenderer = ({
               key={block.uuid}
               renderBlock={getBlockByName(block.name)({
                 fields: block.fields,
-                theme: theme,
+                themeEnum: theme,
               })}
             />
           );
