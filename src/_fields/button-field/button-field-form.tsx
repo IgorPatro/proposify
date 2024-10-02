@@ -12,6 +12,7 @@ import {
 
 import { type ButtonFieldConfig } from "./type";
 import { isButtonActionDownload, isButtonActionLink } from "./utils";
+import { Textarea } from "@/components/base/textarea";
 
 interface ButtonFieldFormProps {
   blockUuid: string;
@@ -30,10 +31,7 @@ export const ButtonFieldForm = ({
   fieldName,
   updateBlockProperty,
 }: ButtonFieldFormProps) => {
-  const onChangeInput = (
-    field: string,
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
+  const onChange = (field: string, event: ChangeEvent<HTMLTextAreaElement>) => {
     updateBlockProperty(blockUuid, field, event.target.value);
   };
 
@@ -42,15 +40,14 @@ export const ButtonFieldForm = ({
       case isButtonActionLink(config.action):
         return (
           <div className="flex flex-col gap-2">
-            <Input
+            <Textarea
               key="link"
               name="link"
               label="Link URL"
               placeholder="Type link here"
               value={config.action.href}
-              onChange={(event) =>
-                onChangeInput(`${fieldName}.action.href`, event)
-              }
+              onChange={(event) => onChange(`${fieldName}.action.href`, event)}
+              rows={2}
             />
             <Checkbox
               label="Open in new tab"
@@ -69,15 +66,16 @@ export const ButtonFieldForm = ({
       case isButtonActionDownload(config.action):
         // TODO: Add variables, like: PDF_URL etc
         return (
-          <Input
+          <Textarea
             key="download"
             name="download"
             label="Download URL"
             placeholder="Type download link here"
             value={config.action.downloadUrl}
             onChange={(event) =>
-              onChangeInput(`${fieldName}.action.downloadUrl`, event)
+              onChange(`${fieldName}.action.downloadUrl`, event)
             }
+            rows={2}
           />
         );
     }
@@ -86,13 +84,14 @@ export const ButtonFieldForm = ({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <Input
+        <Textarea
           key={fieldName}
           name={fieldName}
           label={fieldName}
           placeholder="Type text here"
           value={config.content}
-          onChange={(event) => onChangeInput(`${fieldName}.content`, event)}
+          onChange={(event) => onChange(`${fieldName}.content`, event)}
+          rows={3}
         />
         <Select
           name="action"

@@ -1,6 +1,7 @@
 import React, { type ReactNode } from "react";
 
 import { DashboardNavigation } from "@/components/navigation/dashboard-navigation";
+import { DashboardSidebar } from "@/components/sidebar/dashboard-sidebar";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -8,10 +9,13 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
-    <div>
-      <DashboardNavigation />
-      <div className="p-10">{children}</div>
-    </div>
+    <main>
+      <DashboardSidebar />
+      <div className="ml-64">
+        <DashboardNavigation />
+        <div className="p-10">{children}</div>
+      </div>
+    </main>
   );
 };
 

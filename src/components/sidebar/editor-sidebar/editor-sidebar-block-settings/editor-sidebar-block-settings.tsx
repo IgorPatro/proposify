@@ -27,11 +27,15 @@ export const EditorSidebarBlockSettings = ({
   }, [selectedBlockUuid, blocks]);
 
   if (!block) {
-    return "No block selected";
+    return (
+      <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed border-gray-500">
+        <span>Select block to start editing</span>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="my-6 flex flex-col gap-3">
       {Object.keys(block.fields).map((fieldName) => {
         const fieldConfig = block.fields[fieldName];
 

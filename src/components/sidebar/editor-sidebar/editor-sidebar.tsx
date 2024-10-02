@@ -39,7 +39,7 @@ export const EditorSidebar = ({
       ) : null}
 
       <Button
-        className="mt-4 w-full"
+        className="w-full"
         isLoading={isSaveTemplatePending}
         onClick={onSaveTemplate}
       >

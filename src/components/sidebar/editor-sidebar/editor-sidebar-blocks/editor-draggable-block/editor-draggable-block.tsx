@@ -12,11 +12,11 @@ export const EditorDraggableBlock = ({ blockName }: { blockName: string }) => {
 
   return (
     <div
-      className="flex h-10 w-24 cursor-pointer items-center justify-center bg-black text-white"
+      className="flex aspect-video w-full cursor-pointer items-center justify-center truncate rounded-lg bg-white text-black shadow-lg"
       ref={setDraggableRef}
       {...listeners}
     >
-      {blockName}
+      {blockName.slice(0, 6)}
     </div>
   );
 };
