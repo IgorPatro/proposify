@@ -8,7 +8,7 @@ import {
   isFieldConfigImage,
   isFieldConfigText,
 } from "@/_fields/utils";
-import { useEditorStore } from "@/components/editor/template-editor/store";
+import { useEditorStore } from "@/components/editor/store";
 
 interface EditorSidebarBlockSettingsProps {
   selectedBlockUuid?: string;

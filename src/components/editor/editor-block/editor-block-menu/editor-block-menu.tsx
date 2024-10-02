@@ -1,7 +1,7 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
-import { useEditorStore } from "../../template-editor/store";
+import { useEditorStore } from "../../store";
 
 interface EditorBlockMenuProps {
   isSelected: boolean;

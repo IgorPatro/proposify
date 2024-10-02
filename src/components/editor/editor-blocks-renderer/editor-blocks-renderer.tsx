@@ -2,7 +2,7 @@ import React from "react";
 
 import { getBlockByName } from "@/_blocks/utils";
 
-import { EditorBlock } from "../../editor-block";
+import { EditorBlock } from "../editor-block";
 import { EditorDroppableArea } from "../editor-droppable-area";
 import { useEditorStore } from "../store";
 import { type DraggedBlock } from "../types";
@@ -24,7 +24,7 @@ export const EditorBlocksRenderer = ({
   return (
     <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pl-80 pt-14">
       <div className="flex w-full justify-center overflow-y-scroll p-10">
-        <div className="max-w-360 flex w-full flex-col gap-4">
+        <div className="flex w-full max-w-360 flex-col gap-4">
           {blocks.map((block) => {
             return (
               <EditorBlock

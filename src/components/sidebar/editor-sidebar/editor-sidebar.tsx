@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEditorStore } from "@/components/editor/template-editor/store";
+import { useEditorStore } from "@/components/editor/store";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { api } from "@/server/trpc";

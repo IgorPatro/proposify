@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Editor } from "@/components/editor/template-editor/editor";
+import { Editor } from "@/components/editor";
 import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
 
 interface EditorTemplatePageProps {

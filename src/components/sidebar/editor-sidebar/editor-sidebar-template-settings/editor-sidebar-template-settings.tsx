@@ -1,7 +1,7 @@
 import React, { type ChangeEvent } from "react";
 
 import { Input } from "@/components/base/input";
-import { useEditorStore } from "@/components/editor/template-editor/store";
+import { useEditorStore } from "@/components/editor/store";
 
 export const EditorSidebarTemplateSettings = () => {
   const updateTemplateName = useEditorStore((store) => store.updateName);
