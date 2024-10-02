@@ -40,6 +40,7 @@ export const EditorBlocksRenderer = ({
             );
           })}
           <EditorDroppableArea draggedBlock={draggedBlock} />
+          <div className="pb-4" />
         </div>
       </div>
     </div>

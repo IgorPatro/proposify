@@ -2,11 +2,11 @@
 
 import React from "react";
 import { HiOutlineMenuAlt2, HiOutlineX } from "react-icons/hi";
+import { twMerge } from "tailwind-merge";
 
 import { getBlockByName } from "@/_blocks/utils";
-import { type Template } from "@/server/api/template/types";
 import { useToggle } from "@/hooks/use-toggle";
-import { twMerge } from "tailwind-merge";
+import { type Template } from "@/server/api/template/types";
 
 interface OfferProps {
   offer: Template;
@@ -54,7 +54,7 @@ export const Offer = ({ offer }: OfferProps) => {
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
         <div className="flex w-full justify-center overflow-y-scroll px-10 py-4">
-          <div className="max-w-360 flex w-full flex-col gap-4">
+          <div className="flex w-full max-w-360 flex-col gap-4">
             {offer.blocks.map((block) => {
               return (
                 <section key={block.uuid} id={block.uuid}>
@@ -65,6 +65,7 @@ export const Offer = ({ offer }: OfferProps) => {
                 </section>
               );
             })}
+            <div className="pb-4" />
           </div>
         </div>
       </div>
