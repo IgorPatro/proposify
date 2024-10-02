@@ -8,17 +8,17 @@ import { getBlockByName } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
 import { type Template } from "@/server/api/template/types";
 
-interface OfferProps {
-  offer: Template;
+interface ResourceProps {
+  resource: Template;
 }
 
-export const Offer = ({ offer }: OfferProps) => {
+export const Resource = ({ resource }: ResourceProps) => {
   const [isOpen, toggleOpen] = useToggle(false);
 
   return (
     <main className="max-w-screen max-h-screen overflow-hidden bg-gray-500">
       <header className="fixed left-0 top-0 flex h-14 w-full items-center justify-between bg-gray-800 p-4 text-white drop-shadow-2xl">
-        <div>{offer.name}</div>
+        <div>{resource.name}</div>
         <button className="lg:hidden" onClick={toggleOpen}>
           {isOpen ? (
             <HiOutlineX className="h-7 w-7" />
@@ -37,7 +37,7 @@ export const Offer = ({ offer }: OfferProps) => {
           "lg:translate-x-0",
         )}
       >
-        {offer.blocks.map((block, index) => (
+        {resource.blocks.map((block, index) => (
           <a
             key={block.uuid}
             href={`#${block.uuid}`}
@@ -55,12 +55,12 @@ export const Offer = ({ offer }: OfferProps) => {
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
         <div className="flex w-full justify-center overflow-y-scroll px-10 py-4">
           <div className="flex w-full max-w-360 flex-col gap-4">
-            {offer.blocks.map((block) => {
+            {resource.blocks.map((block) => {
               return (
                 <section key={block.uuid} id={block.uuid}>
                   {getBlockByName(block.name)({
                     fields: block.fields,
-                    themeEnum: offer.theme,
+                    themeEnum: resource.theme,
                   })}
                 </section>
               );
