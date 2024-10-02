@@ -46,7 +46,7 @@ export const EditorBlock = ({
       ref={setDraggableRef}
       {...listeners}
       className={twMerge(
-        "relative w-full border border-dashed",
+        "relative w-full",
         isDragged ? "invisible" : "visible",
       )}
       onClick={() => onSelectBlock(blockUuid)}

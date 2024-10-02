@@ -23,22 +23,24 @@ export const EditorBlocksRenderer = ({
 
   return (
     <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pl-80 pt-14">
-      <div className="w-full overflow-y-scroll p-10">
-        {blocks.map((block) => {
-          return (
-            <EditorBlock
-              blockUuid={block.uuid}
-              onSelectBlock={onSelectBlock}
-              isSelected={selectedBlockUuid === block.uuid}
-              key={block.uuid}
-              renderBlock={getBlockByName(block.name)({
-                fields: block.fields,
-                themeEnum: theme,
-              })}
-            />
-          );
-        })}
-        <EditorDroppableArea draggedBlock={draggedBlock} />
+      <div className="flex w-full justify-center overflow-y-scroll p-10">
+        <div className="max-w-360 flex w-full flex-col gap-4">
+          {blocks.map((block) => {
+            return (
+              <EditorBlock
+                blockUuid={block.uuid}
+                onSelectBlock={onSelectBlock}
+                isSelected={selectedBlockUuid === block.uuid}
+                key={block.uuid}
+                renderBlock={getBlockByName(block.name)({
+                  fields: block.fields,
+                  themeEnum: theme,
+                })}
+              />
+            );
+          })}
+          <EditorDroppableArea draggedBlock={draggedBlock} />
+        </div>
       </div>
     </div>
   );

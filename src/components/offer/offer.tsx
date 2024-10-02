@@ -17,17 +17,20 @@ export const Offer = ({ offer }: OfferProps) => {
       </header>
 
       {/* TODO: Display slides covers */}
+      {/* TODO: Add current slide indicator */}
       <aside className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-64 flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4">
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
-        <div className="aspect-video w-44 bg-black">Img 1</div>
+        {offer.blocks.map((block, index) => (
+          <a
+            key={block.uuid}
+            href={`#${block.uuid}`}
+            className="flex flex-col gap-2"
+          >
+            <div className="aspect-video w-44 bg-black" />
+            <div className="block w-full text-center font-medium text-gray-300">
+              {index + 1}
+            </div>
+          </a>
+        ))}
       </aside>
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pl-64 pt-14">
@@ -35,7 +38,7 @@ export const Offer = ({ offer }: OfferProps) => {
           <div className="max-w-360 flex w-full flex-col gap-4">
             {offer.blocks.map((block) => {
               return (
-                <section key={block.uuid}>
+                <section key={block.uuid} id={block.uuid}>
                   {getBlockByName(block.name)({
                     fields: block.fields,
                     themeEnum: offer.theme,
