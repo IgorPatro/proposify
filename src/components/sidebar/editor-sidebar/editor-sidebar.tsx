@@ -2,6 +2,7 @@ import React from "react";
 
 import { useEditorStore } from "@/components/editor/template-editor/store";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { api } from "@/server/trpc";
 
 import { EditorSidebarBlockSettings } from "./editor-sidebar-block-settings";
@@ -30,14 +31,13 @@ export const EditorSidebar = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-gray-200 p-4 scrollbar-hide">
+    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-gray-100 p-4 scrollbar-hide">
       <EditorSidebarTemplateSettings />
       <EditorSidebarThemeSettings />
       <EditorSidebarBlocks />
-      {selectedBlockUuid ? (
-        <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
-      ) : null}
-
+      <Separator />
+      <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
+      <Separator />
       <Button
         className="w-full"
         isLoading={isSaveTemplatePending}

@@ -11,7 +11,7 @@ import {
 import { useEditorStore } from "@/components/editor/template-editor/store";
 
 interface EditorSidebarBlockSettingsProps {
-  selectedBlockUuid: string;
+  selectedBlockUuid?: string;
 }
 
 export const EditorSidebarBlockSettings = ({
@@ -26,7 +26,7 @@ export const EditorSidebarBlockSettings = ({
     return blocks.find((block) => block.uuid === selectedBlockUuid);
   }, [selectedBlockUuid, blocks]);
 
-  if (!block) {
+  if (!block || !selectedBlockUuid) {
     return (
       <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed border-gray-500">
         <span>Select block to start editing</span>
@@ -35,7 +35,7 @@ export const EditorSidebarBlockSettings = ({
   }
 
   return (
-    <div className="my-6 flex flex-col gap-3">
+    <div className="flex flex-col gap-3">
       {Object.keys(block.fields).map((fieldName) => {
         const fieldConfig = block.fields[fieldName];
 

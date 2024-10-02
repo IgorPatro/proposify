@@ -12,10 +12,12 @@ export type FooterOneFields = z.infer<typeof FooterOneFieldsConfigSchema>;
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const FOOTER_ONE_FIELDS_CONFIG: FooterOneFields = {
   heading: {
+    label: "Header",
     type: "text",
     content: "Thanks for visiting",
   },
   description: {
+    label: "Opis",
     type: "text",
     content: "It was an amazing experience",
   },

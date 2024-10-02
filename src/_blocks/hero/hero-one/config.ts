@@ -17,14 +17,17 @@ export type HeroOneFields = z.infer<typeof HeroOneFieldsConfigSchema>;
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const HERO_ONE_FIELDS_CONFIG: HeroOneFields = {
   heading: {
+    label: "Header",
     type: "text",
     content: "This is initial heading",
   },
   description: {
+    label: "Opis",
     type: "text",
     content: "This is initial description",
   },
   buttonOne: {
+    label: "Przycisk pierwszy",
     type: "button",
     content: "Initial value",
     action: {
@@ -34,6 +37,7 @@ export const HERO_ONE_FIELDS_CONFIG: HeroOneFields = {
     },
   },
   buttonTwo: {
+    label: "Przycisk drugi",
     type: "button",
     content: "Call: 555 555 555",
     action: {
@@ -42,6 +46,7 @@ export const HERO_ONE_FIELDS_CONFIG: HeroOneFields = {
     },
   },
   image: {
+    label: "Zdjęcie",
     type: "image",
     url: "https://patrocreations.com/static/e490cf178a4f2adf590e4690f765328c/31987/hero.png",
     alt: "This is an image",

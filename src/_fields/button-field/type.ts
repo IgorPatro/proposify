@@ -23,6 +23,7 @@ export const ButtonActionSchema = ButtonActionLinkSchema.or(
 export type ButtonAction = z.infer<typeof ButtonActionSchema>;
 
 export const ButtonFieldConfigSchema = z.object({
+  label: z.string(),
   action: ButtonActionSchema,
   content: z.string(),
   type: z.literal("button"),

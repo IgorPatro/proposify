@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const DashboardNavigation = () => {
   return (
-    <nav className="flex items-center justify-between border-b border-gray-300 px-4 py-2">
+    <nav className="flex items-center justify-between border-b border-gray-300 px-10 py-4">
       <Input placeholder="Search" />
       <div className="flex items-center justify-center gap-4">
         <HiBellAlert className="h-5 w-5 cursor-pointer text-gray-500" />
@@ -30,12 +30,12 @@ export const DashboardNavigation = () => {
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <span>John Cook</span>
+              <span>Jan Kowalski</span>
               <HiChevronDown className="h-4 w-4" />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-52">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>Konto</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="cursor-pointer"

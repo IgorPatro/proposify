@@ -1,7 +1,7 @@
 import React, { type ChangeEvent } from "react";
 
-import { Checkbox } from "@/components/base/checkbox";
-import { Input } from "@/components/base/input";
+import { Switch } from "@/components/base/switch";
+import { Textarea } from "@/components/base/textarea";
 import {
   Select,
   SelectContent,
@@ -12,7 +12,6 @@ import {
 
 import { type ButtonFieldConfig } from "./type";
 import { isButtonActionDownload, isButtonActionLink } from "./utils";
-import { Textarea } from "@/components/base/textarea";
 
 interface ButtonFieldFormProps {
   blockUuid: string;
@@ -49,7 +48,7 @@ export const ButtonFieldForm = ({
               onChange={(event) => onChange(`${fieldName}.action.href`, event)}
               rows={2}
             />
-            <Checkbox
+            <Switch
               label="Open in new tab"
               checked={config.action.newTab}
               onCheckedChange={(isChecked) =>
@@ -87,7 +86,7 @@ export const ButtonFieldForm = ({
         <Textarea
           key={fieldName}
           name={fieldName}
-          label={fieldName}
+          label={config.label}
           placeholder="Type text here"
           value={config.content}
           onChange={(event) => onChange(`${fieldName}.content`, event)}

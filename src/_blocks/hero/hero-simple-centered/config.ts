@@ -20,6 +20,7 @@ export type HeroSimpleCenteredFields = z.infer<
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const HERO_SIMPLE_CENTERED_FIELDS_CONFIG: HeroSimpleCenteredFields = {
   banner: {
+    label: "Baner",
     type: "button",
     content: "Announcing your next huge stuff. Read more",
     action: {
@@ -29,15 +30,18 @@ export const HERO_SIMPLE_CENTERED_FIELDS_CONFIG: HeroSimpleCenteredFields = {
     },
   },
   heading: {
+    label: "Header",
     type: "text",
     content: "Data to enrich your online business",
   },
   subHeading: {
+    label: "Subheader",
     type: "text",
     content:
       "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.",
   },
   ctaButtonLeft: {
+    label: "Lewy przycisk",
     type: "button",
     content: "Call agent",
     action: {
@@ -47,6 +51,7 @@ export const HERO_SIMPLE_CENTERED_FIELDS_CONFIG: HeroSimpleCenteredFields = {
     },
   },
   ctaButtonRight: {
+    label: "Prawy przycisk",
     type: "button",
     content: "Download",
     action: {

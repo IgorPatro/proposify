@@ -25,7 +25,7 @@ export const TextFieldForm = ({
     <Textarea
       key={fieldName}
       name={fieldName}
-      label={fieldName}
+      label={config.label}
       placeholder="Type text here"
       value={config.content}
       onChange={onChange}
