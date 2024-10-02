@@ -32,7 +32,6 @@ export const OfferEditorSidebar = ({
 
   return (
     <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-gray-100 p-4 scrollbar-hide">
-      This is offer
       <EditorSidebarResourceSettings />
       <EditorSidebarThemeSettings />
       <EditorSidebarBlocks />
