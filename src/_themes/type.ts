@@ -5,7 +5,6 @@ export const ThemeSchema = z.object({
   error: z.string(),
   primary: z.string(),
   secondary: z.string(),
-  surface: z.string(),
   text: z.string(),
 });
 

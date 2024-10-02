@@ -35,6 +35,7 @@ export const Resource = ({ resource }: ResourceProps) => {
           "fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-full flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4 transition-transform lg:w-64",
           isOpen ? "translate-x-0" : "-translate-x-full",
           "lg:translate-x-0",
+          "max-w-96 shadow-2xl shadow-black scrollbar-hide lg:shadow-none lg:scrollbar-default",
         )}
       >
         {resource.blocks.map((block, index) => (

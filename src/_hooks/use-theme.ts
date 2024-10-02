@@ -1,6 +1,7 @@
-import { DARK_THEME } from "@/_themes/dark";
-import { LIGHT_THEME } from "@/_themes/light";
 import { type ThemeEnum } from "@/server/api/template/types";
+
+import { DARK_THEME } from "../_themes/dark";
+import { LIGHT_THEME } from "../_themes/light";
 
 export const getTheme = (theme: ThemeEnum) => {
   switch (theme) {

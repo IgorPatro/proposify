@@ -1,10 +1,13 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
+import { generateTailwindSafelist } from "./src/_themes/utils";
+
 export default {
   content: ["./src/**/*.tsx"],
   darkMode: ["class"],
   plugins: [require("tailwind-scrollbar-hide"), require("tailwindcss-animate")],
+  safelist: generateTailwindSafelist(),
   theme: {
     extend: {
       animation: {

@@ -1,10 +1,9 @@
 import { type ThemeSchema } from "./type";
 
 export const DARK_THEME: ThemeSchema = {
-  background: "#333333",
-  error: "#ff0000",
-  primary: "#007bff",
-  secondary: "#6c757d",
-  surface: "#424242",
-  text: "#ffffff",
+  background: "gray-900",
+  error: "red-500",
+  primary: "orange-300",
+  secondary: "orange-500",
+  text: "gray-300",
 };

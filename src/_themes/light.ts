@@ -1,10 +1,9 @@
 import { type ThemeSchema } from "./type";
 
 export const LIGHT_THEME: ThemeSchema = {
-  background: "#f5f5f5",
-  error: "#ff0000",
-  primary: "#007bff",
-  secondary: "#6c757d",
-  surface: "#ffffff",
-  text: "#000000",
+  background: "gray-50",
+  error: "red-500",
+  primary: "orange-300",
+  secondary: "orange-500",
+  text: "gray-700",
 };
