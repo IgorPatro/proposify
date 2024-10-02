@@ -13,7 +13,7 @@ const EditorTemplatePage = async ({ params }: EditorTemplatePageProps) => {
   const { "offer-uuid": offerUuid } = params;
   const offer = await getEditorOfferSsr(offerUuid);
 
-  return <Editor resource={offer} resourceUuid={offerUuid} />;
+  return <Editor isOffer resource={offer} resourceUuid={offerUuid} />;
 };
 
 export default EditorTemplatePage;

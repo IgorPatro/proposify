@@ -5,34 +5,35 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { api } from "@/server/trpc";
 
-import { EditorSidebarBlockSettings } from "./editor-sidebar-block-settings";
-import { EditorSidebarBlocks } from "./editor-sidebar-blocks";
-import { EditorSidebarTemplateSettings } from "./editor-sidebar-template-settings";
-import { EditorSidebarThemeSettings } from "./editor-sidebar-theme-settings";
+import { EditorSidebarBlockSettings } from "../editor-sidebar-block-settings";
+import { EditorSidebarBlocks } from "../editor-sidebar-blocks";
+import { EditorSidebarResourceSettings } from "../editor-sidebar-resource-settings";
+import { EditorSidebarThemeSettings } from "../editor-sidebar-theme-settings";
 
-interface EditorSidebarProps {
+interface OfferEditorSidebarProps {
   selectedBlockUuid: string | undefined;
   resourceUuid: string;
 }
 
-export const EditorSidebar = ({
+export const OfferEditorSidebar = ({
   resourceUuid,
   selectedBlockUuid,
-}: EditorSidebarProps) => {
-  const { isPending: isSaveTemplatePending, mutateAsync: saveTemplate } =
-    api.template.save.useMutation();
+}: OfferEditorSidebarProps) => {
+  const { isPending: isSaveOfferPending, mutateAsync: saveOffer } =
+    api.offer.save.useMutation();
   const blocks = useEditorStore((store) => store.blocks);
   const theme = useEditorStore((store) => store.theme);
   const name = useEditorStore((store) => store.name);
 
-  const onSaveTemplate = async () => {
+  const onSaveOffer = async () => {
     // TODO: Add error handling and toast message
-    await saveTemplate({ blocks, name, templateUuid: resourceUuid, theme });
+    await saveOffer({ blocks, name, offerUuid: resourceUuid, theme });
   };
 
   return (
     <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-gray-100 p-4 scrollbar-hide">
-      <EditorSidebarTemplateSettings />
+      This is offer
+      <EditorSidebarResourceSettings />
       <EditorSidebarThemeSettings />
       <EditorSidebarBlocks />
       <Separator />
@@ -40,10 +41,10 @@ export const EditorSidebar = ({
       <Separator />
       <Button
         className="w-full"
-        isLoading={isSaveTemplatePending}
-        onClick={onSaveTemplate}
+        isLoading={isSaveOfferPending}
+        onClick={onSaveOffer}
       >
-        Save
+        Save & Publish
       </Button>
     </div>
   );
