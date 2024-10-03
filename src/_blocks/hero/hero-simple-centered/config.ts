@@ -22,7 +22,7 @@ export const HERO_SIMPLE_CENTERED_FIELDS_CONFIG: HeroSimpleCenteredFields = {
   banner: {
     label: "Baner",
     type: "button",
-    content: "Announcing your next huge stuff. Read more",
+    content: "Announcing your next huge stuff - read more",
     action: {
       type: "link",
       href: "https://example.com",

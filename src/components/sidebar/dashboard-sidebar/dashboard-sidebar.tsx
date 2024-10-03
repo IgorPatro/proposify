@@ -1,8 +1,8 @@
-import React from "react";
-import { DASHBOARD_NAVIGATION } from "./constants";
-import Link from "next/link";
 import Image from "next/image";
-import { FaHome } from "react-icons/fa";
+import Link from "next/link";
+import React from "react";
+
+import { DASHBOARD_NAVIGATION } from "./constants";
 
 export const DashboardSidebar = () => {
   return (

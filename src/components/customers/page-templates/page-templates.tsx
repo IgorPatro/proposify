@@ -7,7 +7,7 @@ import { useToggle } from "@/hooks/use-toggle";
 import { type MinifiedTemplate } from "@/server/api/template/types";
 
 import { TemplateCreateDialog } from "../template-create-dialog";
-import { TemplatesTable } from "../templates-table/templates-table";
+import { TemplatesTable } from "../customers-table/templates-table";
 
 interface PageTemplatesProps {
   templates: MinifiedTemplate[];

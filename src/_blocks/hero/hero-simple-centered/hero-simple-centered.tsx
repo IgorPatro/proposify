@@ -3,6 +3,10 @@ import { twMerge } from "tailwind-merge";
 
 import { ButtonField } from "@/_fields/button-field";
 import { getTheme } from "@/_hooks/use-theme";
+import {
+  getPrimaryButtonClassNames,
+  getSecondaryButtonClassNames,
+} from "@/_themes/utils";
 
 import { type BlockProps } from "../../types";
 
@@ -24,29 +28,40 @@ export const HeroSimpleCentered = ({ fields, themeEnum }: BlockProps) => {
         <ButtonField
           config={banner}
           className={twMerge(
-            "rounded-3xl border border-opacity-40 px-4 py-2 text-sm",
-            `border-${theme.text}`,
-            `text-${theme.text}`,
+            "rounded-3xl border border-opacity-40 px-4 py-2 text-xs md:text-sm",
+            `border-${theme.button.primary.border}`,
+            `text-${theme.button.primary.color}`,
           )}
         />
-        <h1 className={twMerge("text-5xl font-bold", `text-${theme.text}`)}>
+        <h1
+          className={twMerge(
+            "text-3xl font-bold lg:text-5xl",
+            `text-${theme.text.primary}`,
+          )}
+        >
           {heading.content}
         </h1>
-        <p className={twMerge("text-lg", `text-${theme.text}`)}>
+        <p
+          className={twMerge(
+            "text-base md:text-lg",
+            `text-${theme.text.secondary}`,
+          )}
+        >
           {subHeading.content}
         </p>
         <div className="flex gap-2">
           <ButtonField
             config={ctaButtonLeft}
             className={twMerge(
-              "rounded-md border bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-indigo-700",
+              "rounded-md border px-5 py-3 text-sm font-semibold transition-colors",
+              getPrimaryButtonClassNames(theme),
             )}
           />
           <ButtonField
             config={ctaButtonRight}
             className={twMerge(
-              "rounded-md border border-gray-500 px-5 py-3 transition-colors hover:bg-gray-500 hover:!text-white",
-              `text-${theme.text}`,
+              "rounded-md border px-5 py-3 transition-colors",
+              getSecondaryButtonClassNames(theme),
             )}
           />
         </div>

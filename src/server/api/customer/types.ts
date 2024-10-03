@@ -13,3 +13,16 @@ export const CustomerSchema = z.object({
 });
 
 export type Customer = z.infer<typeof CustomerSchema>;
+
+export const CustomerMinifiedSchema = CustomerSchema.pick({
+  email: true,
+  firstName: true,
+  lastName: true,
+  phone: true,
+  uuid: true,
+}).extend({
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type MinifiedCustomer = z.infer<typeof CustomerMinifiedSchema>;
