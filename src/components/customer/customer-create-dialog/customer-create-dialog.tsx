@@ -15,9 +15,14 @@ export const CustomerCreateDialog = ({
   isOpen,
   onClose,
 }: TemplateCreateDialogProps) => {
+  const onCreateCustomerCallback = () => {
+    // TODO: Revalidate customers
+    onClose();
+  };
+
   return (
     <Dialog header="Create template" isOpen={isOpen} onClose={onClose}>
-      <CustomerCreateForm />
+      <CustomerCreateForm onCreateCustomerCallback={onCreateCustomerCallback} />
     </Dialog>
   );
 };
