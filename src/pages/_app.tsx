@@ -42,7 +42,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
       <Head>
         <meta content="initial-scale=1, width=device-width" name="viewport" />
       </Head>
-      <SessionProvider basePath="/api-route/auth" session={pageProps.session}>
+      <SessionProvider session={pageProps.session}>
         <main className={poppins.className}>
           {getLayout(<Component {...pageProps} />)}
         </main>

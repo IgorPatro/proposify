@@ -19,7 +19,7 @@ export const PageTemplates = () => {
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}
       />
-      {templates && templates.length === 0 ? (
+      {templates && templates.length >= 1 ? (
         <TemplatesTable templates={templates} />
       ) : null}
       <div className="flex w-full justify-end">
