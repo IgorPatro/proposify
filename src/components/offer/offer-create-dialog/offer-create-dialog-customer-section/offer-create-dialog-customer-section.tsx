@@ -6,7 +6,7 @@ import { CustomerCreateForm } from "@/components/customer/customer-create-dialog
 import { Button } from "@/components/ui/button";
 import { type Customer } from "@/server/api/customer/types";
 import { type CreateOfferInput } from "@/server/api/offer/create-offer";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 
 import { useOfferCreateFormContext } from "../hooks";
 

@@ -4,7 +4,7 @@ import { type SubmitHandler, useForm, useFormContext } from "react-hook-form";
 
 import { toast } from "@/hooks/use-toast";
 import { type CreateOfferInput } from "@/server/api/offer/create-offer";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 import { isAPIError } from "@/utils/error";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
 

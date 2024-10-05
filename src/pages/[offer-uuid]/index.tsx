@@ -1,19 +1,30 @@
+import {
+  type InferGetServerSidePropsType,
+  type GetServerSideProps,
+} from "next";
 import React from "react";
 
 import { Resource } from "@/components/resource";
-import { getEditorOfferSsr } from "@/server/api/offer/get-editor-offer-ssr";
+import { getOfferPreviewSsr } from "@/server/api/offer/get-offer-preview-ssr";
+import { type Offer } from "@/server/api/offer/types";
 
-// TODO getServerSideProps
-interface OfferPageProps {
-  params: {
-    "offer-uuid": string;
+export const getServerSideProps: GetServerSideProps<{
+  offer: Offer;
+}> = async (ctx) => {
+  const offerUuid = ctx.query["offer-uuid"] as string;
+
+  const offer = await getOfferPreviewSsr(offerUuid);
+
+  return {
+    props: {
+      offer,
+    },
   };
-}
+};
 
-const OfferPage = ({ params }: OfferPageProps) => {
-  const { "offer-uuid": offerUuid } = params;
-  const offer = await getEditorOfferSsr(offerUuid);
-
+const OfferPage = ({
+  offer,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return <Resource resource={offer} />;
 };
 

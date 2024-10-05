@@ -3,7 +3,7 @@ import React from "react";
 import { CustomerCreateDialog } from "@/components/customer/customer-create-dialog/customer-create-dialog";
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 
 import { CustomersTable } from "../customers-table/customers-table";
 

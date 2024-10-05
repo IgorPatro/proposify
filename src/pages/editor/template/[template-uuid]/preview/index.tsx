@@ -1,21 +1,30 @@
+import {
+  type InferGetServerSidePropsType,
+  type GetServerSideProps,
+} from "next";
 import React from "react";
 
 import { Resource } from "@/components/resource";
+import { getTemplatePreviewSsr } from "@/server/api/template/get-template-preview-ssr";
+import { type Template } from "@/server/api/template/types";
 
-import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
+export const getServerSideProps: GetServerSideProps<{
+  template: Template;
+}> = async (ctx) => {
+  const templateUuid = ctx.query["template-uuid"] as string;
 
-interface EditorTemplatePagePreviewProps {
-  params: {
-    "template-uuid": string;
+  const template = await getTemplatePreviewSsr(templateUuid);
+
+  return {
+    props: {
+      template,
+    },
   };
-}
+};
 
-const EditorTemplatePagePreview = async ({
-  params,
-}: EditorTemplatePagePreviewProps) => {
-  const { "template-uuid": templateUuid } = params;
-  const template = await getEditorTemplateSsr(templateUuid);
-
+const EditorTemplatePagePreview = ({
+  template,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return <Resource resource={template} />;
 };
 

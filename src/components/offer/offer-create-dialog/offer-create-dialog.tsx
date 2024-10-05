@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 
 import { useOfferCreateForm } from "./hooks";
 import { OfferCreateDialogCustomerSection } from "./offer-create-dialog-customer-section";

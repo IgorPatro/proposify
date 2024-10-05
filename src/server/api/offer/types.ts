@@ -8,6 +8,7 @@ export const OfferSchema = z.object({
   blocks: z.array(BlockSchema),
   name: z.string(),
   theme: ThemeEnum,
+  uuid: z.string(),
 });
 
 export type Offer = z.infer<typeof OfferSchema>;

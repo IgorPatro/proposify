@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 import { type SignupFormType } from "@/server/api/auth/type";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 import { getLoginHref } from "@/utils/hrefs/auth";
 
 import { SignupFormValidationResolver } from "./utils";

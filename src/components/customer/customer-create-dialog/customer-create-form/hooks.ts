@@ -4,7 +4,7 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/hooks/use-toast";
 import { type CreateCustomerInput } from "@/server/api/customer/create-customer";
 import { type Customer } from "@/server/api/customer/types";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 import { isAPIError } from "@/utils/error";
 
 import { CustomerCreateFormValidationResolver } from "./utils";

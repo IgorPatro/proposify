@@ -1,25 +1,36 @@
+import {
+  type InferGetServerSidePropsType,
+  type GetServerSideProps,
+} from "next";
 import React from "react";
 
 import { Editor } from "@/components/editor";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
 import { EditorLayout } from "@/layouts/editor-layout";
-import { getEditorOfferSsr } from "@/server/api/offer/get-editor-offer-ssr";
+import { api } from "@/utils/api";
 
-interface EditorOfferPageProps {
-  params: {
-    "offer-uuid": string;
+export const getServerSideProps: GetServerSideProps<{
+  offerUuid: string;
+}> = async (ctx) => {
+  const offerUuid = ctx.query["offer-uuid"] as string;
+
+  return {
+    props: {
+      offerUuid,
+    },
   };
-}
+};
 
-const EditorOfferPage = async ({ params }: EditorOfferPageProps) => {
-  const { "offer-uuid": offerUuid } = params;
-  const offer = await getEditorOfferSsr(offerUuid);
+const EditorOfferPage = ({
+  offerUuid,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { data: offer } = api.offer.getOne.useQuery({ offerUuid });
 
   return (
     <>
-      <EditorNavigation isOffer />
+      <EditorNavigation />
       <div className="flex w-full bg-zinc-500">
-        <Editor isOffer resource={offer} resourceUuid={offerUuid} />
+        {offer ? <Editor resource={offer} resourceUuid={offerUuid} /> : null}
       </div>
     </>
   );

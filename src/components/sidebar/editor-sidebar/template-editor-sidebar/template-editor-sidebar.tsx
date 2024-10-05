@@ -3,7 +3,7 @@ import React from "react";
 import { useEditorStore } from "@/components/editor/store";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { api } from "@/server/trpc";
+import { api } from "@/utils/api";
 
 import { EditorSidebarBlockSettings } from "../editor-sidebar-block-settings";
 import { EditorSidebarBlocks } from "../editor-sidebar-blocks";
