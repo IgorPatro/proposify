@@ -62,7 +62,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: ["var(--font-poppins)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

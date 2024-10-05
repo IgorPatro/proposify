@@ -28,6 +28,7 @@ const defaultGetLayout: GetLayout = (page: ReactNode): ReactNode => {
 const poppins = Poppins({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "700", "600"],
+  variable: "--font-poppins",
 });
 
 const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
@@ -37,14 +38,17 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
 
   return (
     <>
+      <style jsx global>{`
+        html {
+          font-family: ${poppins.style.fontFamily};
+        }
+      `}</style>
       <Head>
         <meta content="initial-scale=1, width=device-width" name="viewport" />
       </Head>
-      <main className={poppins.className}>
-        <SessionProvider session={pageProps.session}>
-          {getLayout(<Component {...pageProps} />)}
-        </SessionProvider>
-      </main>
+      <SessionProvider session={pageProps.session}>
+        {getLayout(<Component {...pageProps} />)}
+      </SessionProvider>
     </>
   );
 };
