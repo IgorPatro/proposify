@@ -2,7 +2,7 @@ import React from "react";
 
 import { Editor } from "@/components/editor";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
-import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
+import { EditorLayout } from "@/layouts/editor-layout";
 
 interface EditorTemplatePageProps {
   params: {
@@ -12,7 +12,7 @@ interface EditorTemplatePageProps {
 
 const EditorTemplatePage = async ({ params }: EditorTemplatePageProps) => {
   const { "template-uuid": templateUuid } = params;
-  const template = await getEditorTemplateSsr(templateUuid);
+  // const template = await getEditorTemplateSsr(templateUuid);
 
   return (
     <>
@@ -23,5 +23,7 @@ const EditorTemplatePage = async ({ params }: EditorTemplatePageProps) => {
     </>
   );
 };
+
+EditorTemplatePage.getLayout = EditorLayout;
 
 export default EditorTemplatePage;

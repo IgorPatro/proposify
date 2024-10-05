@@ -2,6 +2,7 @@ import React from "react";
 
 import { Editor } from "@/components/editor";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
+import { EditorLayout } from "@/layouts/editor-layout";
 import { getEditorOfferSsr } from "@/server/api/offer/get-editor-offer-ssr";
 
 interface EditorOfferPageProps {
@@ -23,5 +24,7 @@ const EditorOfferPage = async ({ params }: EditorOfferPageProps) => {
     </>
   );
 };
+
+EditorOfferPage.getLayout = EditorLayout;
 
 export default EditorOfferPage;

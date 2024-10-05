@@ -1,18 +1,30 @@
 import { initTRPC, TRPCError } from "@trpc/server";
+import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { type Session } from "next-auth";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { getServerAuthSession } from "@/server/auth";
 import { db } from "@/server/db";
 
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const session = await getServerAuthSession();
+interface CreateContextOptions {
+  session: Session | null;
+}
 
+const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     db,
-    session,
-    ...opts,
+    session: opts.session,
   };
+};
+export const createTRPCContext = async (opts: CreateNextContextOptions) => {
+  const { req, res } = opts;
+
+  const session = await getServerAuthSession({ req, res });
+
+  return createInnerTRPCContext({
+    session,
+  });
 };
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
@@ -33,13 +45,18 @@ export const createCallerFactory = t.createCallerFactory;
 
 export const createTRPCRouter = t.router;
 
-export const timingMiddleware = t.middleware(async ({ next }) => {
+const timingMiddleware = t.middleware(async ({ next, path }) => {
+  const start = Date.now();
+
   if (t._config.isDev) {
     const waitMs = Math.floor(Math.random() * 400) + 100;
     await new Promise((resolve) => setTimeout(resolve, waitMs));
   }
 
   const result = await next();
+
+  const end = Date.now();
+  console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
 
   return result;
 });
@@ -54,7 +71,6 @@ export const protectedProcedure = t.procedure
     }
     return next({
       ctx: {
-        // infers the `session` as non-nullable
         session: { ...ctx.session, user: ctx.session.user },
       },
     });

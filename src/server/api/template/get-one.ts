@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-import { publicProcedure } from "../procedures";
+import { publicProcedure } from "../trpc";
 
 export const getOne = publicProcedure
   .input(z.object({ templateUuid: z.string().min(1) }))

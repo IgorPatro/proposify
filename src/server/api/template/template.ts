@@ -1,4 +1,4 @@
-import { createTRPCRouter } from "@/server/api/procedures";
+import { createTRPCRouter } from "../trpc";
 
 import { createEmpty } from "./create-empty";
 import { getAllTemplatesMinified } from "./get-all-templates-minified";

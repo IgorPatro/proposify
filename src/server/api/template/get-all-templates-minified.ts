@@ -1,4 +1,4 @@
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 export const getAllTemplatesMinified = protectedProcedure.query(
   async ({ ctx }) => {
@@ -25,7 +25,9 @@ export const getAllTemplatesMinified = protectedProcedure.query(
     });
 
     return templates.map((template) => ({
+      createdAt: template.createdAt,
       name: template.name,
+      updatedAt: template.updatedAt,
       uuid: template.uuid,
     }));
   },

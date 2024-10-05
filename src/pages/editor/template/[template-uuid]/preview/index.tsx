@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Resource } from "@/components/resource";
+
 import { getEditorTemplateSsr } from "@/server/api/template/get-editor-template-ssr";
 
 interface EditorTemplatePagePreviewProps {

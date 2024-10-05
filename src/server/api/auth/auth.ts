@@ -1,4 +1,4 @@
-import { createTRPCRouter } from "../procedures";
+import { createTRPCRouter } from "../trpc";
 
 import { signUp } from "./signup";
 

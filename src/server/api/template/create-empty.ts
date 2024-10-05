@@ -3,7 +3,7 @@ import { type z } from "zod";
 import { HERO_ONE_FIELDS_CONFIG } from "@/_blocks/hero/hero-one/config";
 import { BlockNameEnum } from "@/_blocks/types";
 
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 import { type Template, TemplateSchema } from "./types";
 

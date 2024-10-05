@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { getFullyDataPropagatedBlocks } from "@/utils/offer";
 
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 export const CreateOfferInputSchema = z.object({
   customerUuid: z.string(),

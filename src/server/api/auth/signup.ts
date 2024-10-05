@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 
-import { publicProcedure } from "../procedures";
+import { publicProcedure } from "../trpc";
 
 import { SignupRequestBodySchema } from "./type";
 

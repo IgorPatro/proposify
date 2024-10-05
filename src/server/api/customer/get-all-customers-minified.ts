@@ -1,4 +1,4 @@
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 export const getAllCustomersMinified = protectedProcedure.query(
   async ({ ctx }) => {

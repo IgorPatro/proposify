@@ -38,6 +38,7 @@
     "@tanstack/react-query": "^5.50.0",
     "@tanstack/react-table": "^8.20.5",
     "@trpc/client": "^11.0.0-rc.446",
+    "@trpc/next": "^11.0.0-rc.446",
     "@trpc/react-query": "^11.0.0-rc.446",
     "@trpc/server": "^11.0.0-rc.446",
     "bcryptjs": "^2.4.3",

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 import { ThemeEnum } from "./types";
 

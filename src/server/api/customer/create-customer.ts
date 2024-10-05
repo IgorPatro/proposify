@@ -1,6 +1,6 @@
 import { type z } from "zod";
 
-import { protectedProcedure } from "../procedures";
+import { protectedProcedure } from "../trpc";
 
 import { CustomerSchema } from "./types";
 

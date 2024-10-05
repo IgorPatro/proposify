@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { type GetServerSidePropsContext } from "next";
 import {
   type DefaultSession,
   type DefaultUser,
@@ -110,4 +111,9 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = (ctx: {
+  req: GetServerSidePropsContext["req"];
+  res: GetServerSidePropsContext["res"];
+}) => {
+  return getServerSession(ctx.req, ctx.res, authOptions);
+};

@@ -1,19 +1,14 @@
-"use client";
-
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
+import { api } from "@/utils/api";
 
 import { OfferCreateDialog } from "../offer-create-dialog";
 import { OffersTable } from "../offers-table";
-import { MinifiedOffer } from "@/server/api/offer/types";
 
-interface PageOffersProps {
-  offers: MinifiedOffer[];
-}
-
-export const PageOffers = ({ offers }: PageOffersProps) => {
+export const PageOffers = () => {
+  const { data: offers } = api.offer.getAll.useQuery();
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
@@ -23,7 +18,7 @@ export const PageOffers = ({ offers }: PageOffersProps) => {
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}
       />
-      <OffersTable offers={offers} />
+      {offers && offers.length >= 1 ? <OffersTable offers={offers} /> : null}
       <div className="flex w-full justify-end">
         <Button className="w-fit" onClick={toggleCreateDialog}>
           Create offer

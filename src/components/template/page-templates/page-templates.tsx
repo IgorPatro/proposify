@@ -1,19 +1,15 @@
-"use client";
-
 import React from "react";
 
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { type MinifiedTemplate } from "@/server/api/template/types";
+import { api } from "@/utils/api";
 
 import { TemplateCreateDialog } from "../template-create-dialog";
 import { TemplatesTable } from "../templates-table/templates-table";
 
-interface PageTemplatesProps {
-  templates: MinifiedTemplate[];
-}
+export const PageTemplates = () => {
+  const { data: templates } = api.template.getAll.useQuery();
 
-export const PageTemplates = ({ templates }: PageTemplatesProps) => {
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
@@ -23,7 +19,9 @@ export const PageTemplates = ({ templates }: PageTemplatesProps) => {
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}
       />
-      <TemplatesTable templates={templates} />
+      {templates && templates.length === 0 ? (
+        <TemplatesTable templates={templates} />
+      ) : null}
       <div className="flex w-full justify-end">
         <Button className="w-fit" onClick={toggleCreateDialog}>
           Create template

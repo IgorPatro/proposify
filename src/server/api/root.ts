@@ -1,8 +1,8 @@
 import { authRouter } from "./auth";
 import { customerRouter } from "./customer";
 import { offerRouter } from "./offer";
-import { createCallerFactory, createTRPCRouter } from "./procedures";
 import { templateRouter } from "./template";
+import { createCallerFactory, createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
   auth: authRouter,
