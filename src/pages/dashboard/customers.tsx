@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageCustomers } from "@/components/customers/page-customers/page-customers";
+import { PageCustomers } from "@/components/customer/page-customers/page-customers";
 import { DashboardLayout } from "@/layouts/dashboard-layout";
 
 const CustomersPage = () => {

@@ -1,13 +1,11 @@
-import "@/styles/globals.css";
-
 import { Poppins } from "next/font/google";
 import Head from "next/head";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { type ReactNode } from "react";
-
-import type { AppProps } from "next/app";
 import { api } from "@/utils/api";
+import { type ReactNode } from "react";
+import type { AppProps } from "next/app";
+import "@/styles/globals.css";
 
 type GetLayout = (page: ReactNode) => ReactNode;
 
@@ -42,11 +40,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
       <Head>
         <meta content="initial-scale=1, width=device-width" name="viewport" />
       </Head>
-      <SessionProvider session={pageProps.session}>
-        <main className={poppins.className}>
+      <main className={poppins.className}>
+        <SessionProvider session={pageProps.session}>
           {getLayout(<Component {...pageProps} />)}
-        </main>
-      </SessionProvider>
+        </SessionProvider>
+      </main>
     </>
   );
 };

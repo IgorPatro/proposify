@@ -23,10 +23,12 @@ export const getAllCustomersMinified = protectedProcedure.query(
     });
 
     return customers.map((customer) => ({
+      createdAt: customer.createdAt,
       email: customer.email,
       firstName: customer.firstName,
       lastName: customer.lastName,
       phone: customer.phone,
+      updatedAt: customer.updatedAt,
       uuid: customer.uuid,
     }));
   },

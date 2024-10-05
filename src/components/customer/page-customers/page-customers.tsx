@@ -8,14 +8,16 @@ import { api } from "@/utils/api";
 import { CustomersTable } from "../customers-table/customers-table";
 
 export const PageCustomers = () => {
-  const customers = api.customer.getAllCustomersMinified.useQuery();
+  const { data: customers } = api.customer.getAllCustomersMinified.useQuery();
 
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold">Klienci</h1>
-      <CustomersTable customers={customers} />
+      {customers && customers.length >= 1 ? (
+        <CustomersTable customers={customers} />
+      ) : null}
       <CustomerCreateDialog
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}

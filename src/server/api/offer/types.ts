@@ -16,10 +16,10 @@ export type Offer = z.infer<typeof OfferSchema>;
 export const MinifiedOfferSchema = z.object({
   createdAt: z.date(),
   customer: z.object({
-    email: z.string(),
+    email: z.string().nullish(),
     firstName: z.string(),
     lastName: z.string(),
-    phone: z.string(),
+    phone: z.string().nullish(),
     uuid: z.string(),
   }),
   name: z.string(),

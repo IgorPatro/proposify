@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export const CustomerSchema = z.object({
-  city: z.string().optional(),
-  country: z.string().optional(),
-  email: z.string().optional(),
+  city: z.string().nullish(),
+  country: z.string().nullish(),
+  email: z.string().nullish(),
   firstName: z.string(),
   lastName: z.string(),
-  phone: z.string().optional(),
-  street: z.string().optional(),
+  phone: z.string().nullish(),
+  street: z.string().nullish(),
   uuid: z.string().uuid(),
-  zipCode: z.string().optional(),
+  zipCode: z.string().nullish(),
 });
 
 export type Customer = z.infer<typeof CustomerSchema>;
