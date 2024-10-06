@@ -14,7 +14,7 @@ export const FooterOne = ({ fields, themeEnum }: BlockProps) => {
 
   return (
     <footer
-      className="min-h-180 p-4"
+      className="min-h-block p-4"
       style={{
         backgroundColor: theme.background,
       }}

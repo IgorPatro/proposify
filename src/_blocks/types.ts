@@ -8,6 +8,9 @@ export const BLOCK_NAMES_MAP = [
   "footer_one",
   "hero_one",
   "hero_simple_centered",
+  "hero_simple_left",
+  "footer_simple_left",
+  "about_simple_left",
 ] as const;
 export const BlockNameEnum = z.enum(BLOCK_NAMES_MAP);
 export type BlockName = z.infer<typeof BlockNameEnum>;

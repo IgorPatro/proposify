@@ -19,6 +19,7 @@ export const EditorNavigation = ({
       </div>
       <div className="flex items-center gap-4">
         <Button className="text-sm">Preview</Button>
+        TODO: Save button
       </div>
     </nav>
   );

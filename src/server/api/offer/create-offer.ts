@@ -54,12 +54,14 @@ export const createOffer = protectedProcedure
     // This data can then be manually changed by the user later
     const newOffer = await ctx.db.offer.create({
       data: {
-        blocks: await getFullyDataPropagatedBlocks(
-          JSON.stringify(template.blocks),
-          {
-            customer,
-          },
-        ),
+        // TODO: For now this feature is disabled
+        // blocks: await getFullyDataPropagatedBlocks(
+        //   JSON.stringify(template.blocks),
+        //   {
+        //     customer,
+        //   },
+        // ),
+        blocks: template.blocks,
         company: {
           connect: {
             id: company.companyId,

@@ -16,7 +16,7 @@ export const EditorDraggableBlock = ({ blockName }: { blockName: string }) => {
       ref={setDraggableRef}
       {...listeners}
     >
-      {blockName.slice(0, 6)}
+      {blockName}
     </div>
   );
 };

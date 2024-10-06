@@ -91,6 +91,7 @@ export default {
       },
       minHeight: {
         180: "720px",
+        block: "680px",
       },
       width: {
         168: "672px",

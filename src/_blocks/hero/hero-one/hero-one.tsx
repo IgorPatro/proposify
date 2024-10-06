@@ -16,7 +16,7 @@ export const HeroOne = ({ fields, themeEnum }: BlockProps) => {
 
   return (
     <div
-      className="flex h-full min-h-180 w-full flex-col items-center justify-center gap-4"
+      className="min-h-block flex h-full w-full flex-col items-center justify-center gap-4"
       style={{
         backgroundColor: theme.background,
       }}

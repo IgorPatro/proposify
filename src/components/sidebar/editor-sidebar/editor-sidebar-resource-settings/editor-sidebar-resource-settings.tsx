@@ -13,6 +13,7 @@ export const EditorSidebarResourceSettings = () => {
 
   return (
     <div className="flex flex-col gap-3">
+      TODO: Logo uploader
       <Input
         value={resourceName}
         onChange={handleResourceNameChange}
