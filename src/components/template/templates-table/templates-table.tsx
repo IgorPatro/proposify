@@ -20,21 +20,24 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type MinifiedTemplate } from "@/server/api/template/types";
+import { api } from "@/utils/api";
 import { formatDateToDayShortMonthYear } from "@/utils/date";
 import { getEditorTemplateHref } from "@/utils/hrefs/editor";
 
-interface TemplatesTableProps {
-  templates?: MinifiedTemplate[];
-}
-
 const HEADERS = ["", "Nazwa", "Data stworzenia", "Ostatnia edycja", ""];
 
-export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
+export const TemplatesTable = () => {
+  const { data: templates, error, isLoading } = api.template.getAll.useQuery();
   const { push } = useRouter();
 
   if (!templates || templates.length === 0) {
-    return <TableNoData headers={HEADERS} />;
+    return (
+      <TableNoData
+        isLoading={isLoading}
+        error={error?.message}
+        headers={HEADERS}
+      />
+    );
   }
 
   return (

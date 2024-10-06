@@ -12,14 +12,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToggle } from "@/hooks/use-toggle";
-import { api } from "@/utils/api";
 import { getDashboardOffersHref } from "@/utils/hrefs/dashboard";
 
 import { CustomersTable } from "../customers-table/customers-table";
 
 export const PageCustomers = () => {
-  const { data: customers } = api.customer.getAllCustomersMinified.useQuery();
-
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
@@ -47,7 +44,7 @@ export const PageCustomers = () => {
         onClose={toggleCreateDialog}
       />
       <CardContent>
-        <CustomersTable customers={customers} />
+        <CustomersTable />
       </CardContent>
     </Card>
   );

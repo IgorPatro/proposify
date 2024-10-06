@@ -19,13 +19,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type MinifiedOffer } from "@/server/api/offer/types";
+import { api } from "@/utils/api";
 import { formatDateToDayShortMonthYear } from "@/utils/date";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
-
-interface OffersTableProps {
-  offers?: MinifiedOffer[];
-}
 
 const HEADERS = [
   "Nazwa",
@@ -36,11 +32,18 @@ const HEADERS = [
   "",
 ];
 
-export const OffersTable = ({ offers }: OffersTableProps) => {
+export const OffersTable = () => {
+  const { data: offers, error, isLoading } = api.offer.getAll.useQuery();
   const { push } = useRouter();
 
   if (!offers || offers.length === 0) {
-    return <TableNoData headers={HEADERS} />;
+    return (
+      <TableNoData
+        isLoading={isLoading}
+        error={error?.message}
+        headers={HEADERS}
+      />
+    );
   }
 
   return (

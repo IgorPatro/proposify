@@ -11,15 +11,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToggle } from "@/hooks/use-toggle";
-import { api } from "@/utils/api";
 import { getDashboardOffersHref } from "@/utils/hrefs/dashboard";
 
 import { TemplateCreateDialog } from "../template-create-dialog";
 import { TemplatesTable } from "../templates-table";
 
 export const PageTemplates = () => {
-  const { data: templates } = api.template.getAll.useQuery();
-
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
@@ -47,7 +44,7 @@ export const PageTemplates = () => {
         onClose={toggleCreateDialog}
       />
       <CardContent>
-        <TemplatesTable templates={templates} />
+        <TemplatesTable />
       </CardContent>
     </Card>
   );

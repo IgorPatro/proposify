@@ -18,18 +18,26 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type MinifiedCustomer } from "@/server/api/customer/types";
+import { api } from "@/utils/api";
 import { formatDateToDayShortMonthYear } from "@/utils/date";
-
-interface CustomersTableProps {
-  customers?: MinifiedCustomer[];
-}
 
 const HEADERS = ["Imię i nazwisko", "Email", "Telefon", "Utworzono", "Akcje"];
 
-export const CustomersTable = ({ customers }: CustomersTableProps) => {
+export const CustomersTable = () => {
+  const {
+    data: customers,
+    error,
+    isLoading,
+  } = api.customer.getAllCustomersMinified.useQuery();
+
   if (!customers || customers.length === 0) {
-    return <TableNoData headers={HEADERS} />;
+    return (
+      <TableNoData
+        isLoading={isLoading}
+        error={error?.message}
+        headers={HEADERS}
+      />
+    );
   }
 
   return (

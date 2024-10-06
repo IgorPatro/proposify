@@ -11,14 +11,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToggle } from "@/hooks/use-toggle";
-import { api } from "@/utils/api";
 import { getDashboardTemplatesHref } from "@/utils/hrefs/dashboard";
 
 import { OfferCreateDialog } from "../offer-create-dialog";
 import { OffersTable } from "../offers-table";
 
 export const PageOffers = () => {
-  const { data: offers } = api.offer.getAll.useQuery();
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
@@ -47,7 +45,7 @@ export const PageOffers = () => {
         onClose={toggleCreateDialog}
       />
       <CardContent>
-        <OffersTable offers={offers} />
+        <OffersTable />
       </CardContent>
     </Card>
   );
