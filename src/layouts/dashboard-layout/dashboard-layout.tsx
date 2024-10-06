@@ -7,10 +7,10 @@ export const DashboardLayout = (page: ReactNode) => {
   return (
     <>
       <DashboardSidebar />
-      <div className="ml-64">
+      <main className="ml-64 min-h-screen bg-gray-50">
         <DashboardNavigation />
-        <div className="p-10">{page}</div>
-      </div>
+        <div className="px-10 py-6">{page}</div>
+      </main>
     </>
   );
 };

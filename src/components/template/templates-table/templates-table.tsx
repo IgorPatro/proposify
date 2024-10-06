@@ -41,7 +41,7 @@ export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-24"></TableHead>
+          {/* <TableHead className="w-24"></TableHead> */}
           <TableHead>Nazwa</TableHead>
           <TableHead>Data stworzenia</TableHead>
           <TableHead>Ostatnia edycja</TableHead>
@@ -51,7 +51,7 @@ export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
       <TableBody>
         {templates.map((template) => (
           <TableRow key={template.uuid}>
-            <TableCell className="hidden sm:table-cell">
+            <TableCell className="flex h-fit items-center gap-4">
               <Image
                 src="https://picsum.photos/70/50"
                 alt="Template thumbnail"
@@ -60,8 +60,8 @@ export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
                 objectFit="cover"
                 className="rounded-lg"
               />
+              {template.name}
             </TableCell>
-            <TableCell>{template.name}</TableCell>
             <TableCell>
               {formatDateToDayShortMonthYear(template.createdAt)}
             </TableCell>

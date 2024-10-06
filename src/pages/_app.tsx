@@ -2,8 +2,10 @@ import { Poppins } from "next/font/google";
 import Head from "next/head";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { api } from "@/utils/api";
 import { type ReactNode } from "react";
+
+import { api } from "@/utils/api";
+
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
 
@@ -27,8 +29,8 @@ const defaultGetLayout: GetLayout = (page: ReactNode): ReactNode => {
 
 const poppins = Poppins({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700", "600"],
   variable: "--font-poppins",
+  weight: ["400", "700", "600"],
 });
 
 const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {

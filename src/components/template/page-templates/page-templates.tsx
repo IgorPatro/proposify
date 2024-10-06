@@ -3,6 +3,13 @@ import React from "react";
 import { HiPlus } from "react-icons/hi2";
 
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useToggle } from "@/hooks/use-toggle";
 import { api } from "@/utils/api";
 import { getDashboardOffersHref } from "@/utils/hrefs/dashboard";
@@ -16,28 +23,32 @@ export const PageTemplates = () => {
   const [isCreateDialogOpen, toggleCreateDialog] = useToggle();
 
   return (
-    <div className="flex flex-col">
-      <header className="mb-10 flex items-center justify-between">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-semibold">Szablony</h1>
-          <p className="">
-            Twórz powatrzalne struktury, z których szybko możesz stworzyć{" "}
-            <Link className="underline" href={getDashboardOffersHref()}>
-              ofertę
-            </Link>
-            .
-          </p>
+    <Card>
+      <CardHeader>
+        <div className="flex w-full items-center justify-between">
+          <div className="flex flex-col gap-2">
+            <CardTitle>Szablony</CardTitle>
+            <CardDescription className="max-w-3/4">
+              Twórz powatrzalne struktury, z których szybko możesz stworzyć{" "}
+              <Link className="underline" href={getDashboardOffersHref()}>
+                ofertę
+              </Link>
+              .
+            </CardDescription>
+          </div>
+          <Button className="w-fit" onClick={toggleCreateDialog}>
+            <HiPlus className="mr-2 h-5 w-5" />
+            Nowy szablon
+          </Button>
         </div>
-        <Button className="w-fit" onClick={toggleCreateDialog}>
-          <HiPlus className="mr-2 h-5 w-5" />
-          Nowy szablon
-        </Button>
-      </header>
+      </CardHeader>
       <TemplateCreateDialog
         isOpen={isCreateDialogOpen}
         onClose={toggleCreateDialog}
       />
-      <TemplatesTable templates={templates} />
-    </div>
+      <CardContent>
+        <TemplatesTable templates={templates} />
+      </CardContent>
+    </Card>
   );
 };

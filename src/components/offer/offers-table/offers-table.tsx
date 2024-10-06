@@ -1,10 +1,3 @@
-"use client";
-
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";

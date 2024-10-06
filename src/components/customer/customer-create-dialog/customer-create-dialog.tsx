@@ -21,7 +21,7 @@ export const CustomerCreateDialog = ({
   };
 
   return (
-    <Dialog header="Create template" isOpen={isOpen} onClose={onClose}>
+    <Dialog header="Dodaj klienta" isOpen={isOpen} onClose={onClose}>
       <CustomerCreateForm onCreateCustomerCallback={onCreateCustomerCallback} />
     </Dialog>
   );

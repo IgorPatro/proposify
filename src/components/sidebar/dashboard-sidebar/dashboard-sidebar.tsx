@@ -12,20 +12,18 @@ export const DashboardSidebar = () => {
   const { pathname } = useRouter();
 
   return (
-    <aside className="fixed left-0 top-0 z-20 h-full w-64 border-r bg-gray-50">
-      <div className="flex h-16 items-center border-b px-6 py-4">
-        <Link href={getDashboardHref()}>
-          <Image
-            className="bg-transparent"
-            src="/logo.svg"
-            alt="Logo"
-            width={100}
-            height={30}
-            objectFit="contain"
-          />
-        </Link>
-      </div>
-      <ul className="flex flex-col gap-2 p-4 text-sm text-gray-700">
+    <aside className="fixed left-0 top-0 z-20 h-full w-64 border-r bg-white p-4">
+      <Link href={getDashboardHref()}>
+        <Image
+          className="bg-transparent"
+          src="/logo.svg"
+          alt="Logo"
+          width={100}
+          height={30}
+          objectFit="contain"
+        />
+      </Link>
+      <ul className="mt-8 flex flex-col gap-2 text-sm text-gray-700">
         {DASHBOARD_NAVIGATION.map((item) => (
           <li key={item.name}>
             <Link

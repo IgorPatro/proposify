@@ -1,12 +1,15 @@
-"use client";
-
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
 import * as React from "react";
+import { HiDotsHorizontal } from "react-icons/hi";
 
+import { TableNoData } from "@/components/base/table-no-data";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -16,67 +19,59 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { type MinifiedCustomer } from "@/server/api/customer/types";
-
-import { CUSTOMERS_COLUMNS } from "./utils";
+import { formatDateToDayShortMonthYear } from "@/utils/date";
 
 interface CustomersTableProps {
-  customers: MinifiedCustomer[];
+  customers?: MinifiedCustomer[];
 }
 
+const HEADERS = ["Imię i nazwisko", "Email", "Telefon", "Utworzono", "Akcje"];
+
 export const CustomersTable = ({ customers }: CustomersTableProps) => {
-  const table = useReactTable({
-    columns: CUSTOMERS_COLUMNS,
-    data: customers,
-    getCoreRowModel: getCoreRowModel(),
-  });
+  if (!customers || customers.length === 0) {
+    return <TableNoData headers={HEADERS} />;
+  }
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={CUSTOMERS_COLUMNS.length}
-                className="h-24 text-center"
-              >
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Imię i nazwisko</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Telefon</TableHead>
+          <TableHead>Utworzono</TableHead>
+          <TableHead className="w-24"></TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {customers.map((customer) => (
+          <TableRow key={customer.uuid}>
+            <TableCell>
+              {customer.firstName} {customer.lastName}
+            </TableCell>
+            <TableCell>{customer.email}</TableCell>
+            <TableCell>{customer.phone}</TableCell>
+            <TableCell>
+              {formatDateToDayShortMonthYear(customer.createdAt)}
+            </TableCell>
+            <TableCell className="w-fit">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                    <HiDotsHorizontal className="h-4 w-4" />
+                    <span className="sr-only">Menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Akcje</DropdownMenuLabel>
+                  <DropdownMenuItem>Edytuj</DropdownMenuItem>
+                  <DropdownMenuItem>Usuń</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
