@@ -1,7 +1,7 @@
 import { type ColumnDef } from "@tanstack/react-table";
 
 import { type MinifiedCustomer } from "@/server/api/customer/types";
-import { formatDateToDayMonthYear } from "@/utils/date";
+import { formatDateToDayFullMonthYear } from "@/utils/date";
 
 export const CUSTOMERS_COLUMNS: ColumnDef<MinifiedCustomer>[] = [
   {
@@ -19,14 +19,14 @@ export const CUSTOMERS_COLUMNS: ColumnDef<MinifiedCustomer>[] = [
   {
     accessorKey: "createdAt",
     cell: ({ row }) => (
-      <span>{formatDateToDayMonthYear(row.getValue("createdAt"))}</span>
+      <span>{formatDateToDayFullMonthYear(row.getValue("createdAt"))}</span>
     ),
     header: "Utworzono",
   },
   {
     accessorKey: "updatedAt",
     cell: ({ row }) => (
-      <span>{formatDateToDayMonthYear(row.getValue("updatedAt"))}</span>
+      <span>{formatDateToDayFullMonthYear(row.getValue("updatedAt"))}</span>
     ),
     header: "Edytowano",
   },

@@ -7,6 +7,10 @@ export const formatDate = (date: Date | string, formatStr: string) => {
   return format(date, formatStr);
 };
 
-export const formatDateToDayMonthYear = (date: Date | string) => {
+export const formatDateToDayFullMonthYear = (date: Date | string) => {
   return formatDate(date, "d MMMM yyyy");
+};
+
+export const formatDateToDayShortMonthYear = (date: Date | string) => {
+  return formatDate(date, "d MMM yyyy");
 };

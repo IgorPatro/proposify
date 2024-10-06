@@ -1,12 +1,17 @@
-"use client";
-
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import * as React from "react";
+import { HiDotsHorizontal } from "react-icons/hi";
 
+import { TableNoData } from "@/components/base/table-no-data";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -16,67 +21,75 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { type MinifiedTemplate } from "@/server/api/template/types";
-
-import { TEMPLATE_COLUMNS } from "./utils";
+import { formatDateToDayShortMonthYear } from "@/utils/date";
+import { getEditorTemplateHref } from "@/utils/hrefs/editor";
 
 interface TemplatesTableProps {
-  templates: MinifiedTemplate[];
+  templates?: MinifiedTemplate[];
 }
 
+const HEADERS = ["", "Nazwa", "Data stworzenia", "Ostatnia edycja", ""];
+
 export const TemplatesTable = ({ templates }: TemplatesTableProps) => {
-  const table = useReactTable({
-    columns: TEMPLATE_COLUMNS,
-    data: templates,
-    getCoreRowModel: getCoreRowModel(),
-  });
+  const { push } = useRouter();
+
+  if (!templates || templates.length === 0) {
+    return <TableNoData headers={HEADERS} />;
+  }
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={TEMPLATE_COLUMNS.length}
-                className="h-24 text-center"
-              >
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-24"></TableHead>
+          <TableHead>Nazwa</TableHead>
+          <TableHead>Data stworzenia</TableHead>
+          <TableHead>Ostatnia edycja</TableHead>
+          <TableHead className="w-24"></TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {templates.map((template) => (
+          <TableRow key={template.uuid}>
+            <TableCell className="hidden sm:table-cell">
+              <Image
+                src="https://picsum.photos/70/50"
+                alt="Template thumbnail"
+                width={70}
+                height={50}
+                objectFit="cover"
+                className="rounded-lg"
+              />
+            </TableCell>
+            <TableCell>{template.name}</TableCell>
+            <TableCell>
+              {formatDateToDayShortMonthYear(template.createdAt)}
+            </TableCell>
+            <TableCell>
+              {formatDateToDayShortMonthYear(template.updatedAt)}
+            </TableCell>
+            <TableCell className="w-fit">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button aria-haspopup="true" size="icon" variant="ghost">
+                    <HiDotsHorizontal className="h-4 w-4" />
+                    <span className="sr-only">Menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>Akcje</DropdownMenuLabel>
+                  <DropdownMenuItem
+                    onClick={() => push(getEditorTemplateHref(template.uuid))}
+                  >
+                    Edytuj
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Usuń</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };

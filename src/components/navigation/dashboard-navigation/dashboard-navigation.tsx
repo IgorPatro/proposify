@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const DashboardNavigation = () => {
   return (
-    <nav className="flex items-center justify-between border-b border-gray-300 px-10 py-4">
+    <nav className="flex h-16 items-center justify-between border-b bg-gray-50 px-10 py-4">
       <Input placeholder="Search" />
       <div className="flex items-center justify-center gap-4">
         <HiBellAlert className="h-5 w-5 cursor-pointer text-gray-500" />
