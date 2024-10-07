@@ -12,7 +12,7 @@ export const EditorDraggableBlock = ({ blockName }: { blockName: string }) => {
 
   return (
     <div
-      className="flex aspect-video w-full cursor-pointer items-center justify-center truncate rounded-lg bg-white text-black shadow-lg"
+      className="flex aspect-video w-full cursor-pointer items-center justify-center truncate rounded-lg bg-gray-100 text-black shadow-lg"
       ref={setDraggableRef}
       {...listeners}
     >

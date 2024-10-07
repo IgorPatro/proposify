@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { LuMousePointerClick } from "react-icons/lu";
 
 import { ButtonFieldForm } from "@/_fields/button-field";
 import { ImageFieldForm } from "@/_fields/image-field";
@@ -28,7 +29,8 @@ export const EditorSidebarBlockSettings = ({
 
   if (!block || !selectedBlockUuid) {
     return (
-      <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-dashed border-gray-500">
+      <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-gray-500">
+        <LuMousePointerClick className="h-10 w-10" />
         <span>Select block to start editing</span>
       </div>
     );

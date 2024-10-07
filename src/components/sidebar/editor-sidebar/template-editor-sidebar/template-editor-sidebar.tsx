@@ -1,8 +1,10 @@
 import React from "react";
+import { HiPlus } from "react-icons/hi";
 
 import { useEditorStore } from "@/components/editor/store";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { api } from "@/utils/api";
 
 import { EditorSidebarBlockSettings } from "../editor-sidebar-block-settings";
@@ -31,20 +33,38 @@ export const TemplateEditorSidebar = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-gray-100 p-4 scrollbar-hide">
-      <EditorSidebarResourceSettings />
-      <EditorSidebarThemeSettings />
-      <EditorSidebarBlocks />
-      <Separator />
-      <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
-      <Separator />
-      <Button
+    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-white p-4 scrollbar-hide">
+      <Tabs className="w-full" defaultValue="block">
+        <TabsList className="w-full">
+          <TabsTrigger className="w-full" value="block">
+            Blok
+          </TabsTrigger>
+          <TabsTrigger className="w-full" value="global">
+            Ustawienia
+          </TabsTrigger>
+          <TabsTrigger className="w-full" value="plus">
+            <HiPlus className="h-5 w-5" />
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="block">
+          <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
+        </TabsContent>
+        <TabsContent value="global">
+          <EditorSidebarResourceSettings />
+          <EditorSidebarThemeSettings />
+        </TabsContent>
+        <TabsContent value="plus">
+          <EditorSidebarBlocks />
+        </TabsContent>
+      </Tabs>
+
+      {/* <Button
         className="w-full"
         isLoading={isSaveTemplatePending}
         onClick={onSaveTemplate}
       >
         Save
-      </Button>
+      </Button> */}
     </div>
   );
 };
