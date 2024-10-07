@@ -2,6 +2,8 @@ import { Poppins } from "next/font/google";
 import Head from "next/head";
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { type ThemeProviderProps } from "next-themes/dist/types";
 import { type ReactNode } from "react";
 
 import { api } from "@/utils/api";
@@ -49,7 +51,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
         <meta content="initial-scale=1, width=device-width" name="viewport" />
       </Head>
       <SessionProvider session={pageProps.session}>
-        {getLayout(<Component {...pageProps} />)}
+        <NextThemesProvider defaultTheme="light" disableTransitionOnChange>
+          {getLayout(<Component {...pageProps} />)}
+        </NextThemesProvider>
       </SessionProvider>
     </>
   );

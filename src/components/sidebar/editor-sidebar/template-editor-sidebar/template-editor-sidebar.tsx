@@ -2,8 +2,6 @@ import React from "react";
 import { HiPlus } from "react-icons/hi";
 
 import { useEditorStore } from "@/components/editor/store";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { api } from "@/utils/api";
 
@@ -33,9 +31,9 @@ export const TemplateEditorSidebar = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll bg-white p-4 scrollbar-hide">
+    <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll border-r border-gray-700 bg-background p-4 scrollbar-hide">
       <Tabs className="w-full" defaultValue="block">
-        <TabsList className="w-full">
+        <TabsList className="mb-4 w-full">
           <TabsTrigger className="w-full" value="block">
             Blok
           </TabsTrigger>
@@ -49,7 +47,7 @@ export const TemplateEditorSidebar = ({
         <TabsContent value="block">
           <EditorSidebarBlockSettings selectedBlockUuid={selectedBlockUuid} />
         </TabsContent>
-        <TabsContent value="global">
+        <TabsContent value="global" className="flex flex-col gap-4">
           <EditorSidebarResourceSettings />
           <EditorSidebarThemeSettings />
         </TabsContent>

@@ -33,7 +33,7 @@ export const EditorBlockMenu = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            className="h-8 w-8 rounded-full bg-white/70"
+            className="h-8 w-8 rounded-full"
             aria-haspopup="true"
             size="icon"
             variant="ghost"

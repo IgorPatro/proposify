@@ -22,14 +22,16 @@ export const TextFieldForm = ({
   };
 
   return (
-    <Textarea
-      key={fieldName}
-      name={fieldName}
-      label={config.label}
-      placeholder="Type text here"
-      value={config.content}
-      onChange={onChange}
-      rows={5}
-    />
+    <fieldset className="grid gap-6 rounded-lg border p-4">
+      <legend className="-ml-1 px-1 text-sm font-medium">{config.label}</legend>
+      <Textarea
+        key={fieldName}
+        name={fieldName}
+        placeholder="Type text here"
+        value={config.content}
+        onChange={onChange}
+        rows={5}
+      />
+    </fieldset>
   );
 };
