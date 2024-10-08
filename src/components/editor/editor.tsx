@@ -18,15 +18,15 @@ import { useEditorStore } from "./store";
 import { fixCursorSnapOffset } from "./utils";
 
 interface EditorProps {
-  resourceUuid: string;
-  resource: Template;
+  resource: Template | undefined;
   isOffer?: boolean;
+  isLoading: boolean;
 }
 
 export const Editor = ({
+  isLoading,
   isOffer = false,
   resource,
-  resourceUuid,
 }: EditorProps) => {
   const updateResource = useEditorStore((store) => store.updateEditorState);
 
@@ -50,6 +50,10 @@ export const Editor = ({
     }),
   );
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <DndContext
       sensors={sensors}
@@ -59,15 +63,9 @@ export const Editor = ({
     >
       <div className="flex w-full">
         {isOffer ? (
-          <OfferEditorSidebar
-            selectedBlockUuid={selectedBlockUuid}
-            resourceUuid={resourceUuid}
-          />
+          <OfferEditorSidebar selectedBlockUuid={selectedBlockUuid} />
         ) : (
-          <TemplateEditorSidebar
-            selectedBlockUuid={selectedBlockUuid}
-            resourceUuid={resourceUuid}
-          />
+          <TemplateEditorSidebar selectedBlockUuid={selectedBlockUuid} />
         )}
         <EditorBlocksRenderer
           selectedBlockUuid={selectedBlockUuid}

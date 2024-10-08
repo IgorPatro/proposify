@@ -24,6 +24,7 @@ class MyDocument extends Document<DocumentProps> {
 
     const initialProps = await Document.getInitialProps(ctx);
 
+    // TODO: Add util for it
     const isEditorPage = ctx.pathname.includes("editor");
 
     return {

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 import * as React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 
@@ -28,7 +27,11 @@ const HEADERS = ["", "Nazwa", "Data stworzenia", "Ostatnia edycja", ""];
 
 export const TemplatesTable = () => {
   const { data: templates, error, isLoading } = api.template.getAll.useQuery();
-  const { push } = useRouter();
+
+  // Note: Reload the page to enable dark mode in the editor
+  const onMoveToEditor = (templateUuid: string) => {
+    window.open(getEditorTemplateHref(templateUuid));
+  };
 
   if (!templates || templates.length === 0) {
     return (
@@ -44,7 +47,6 @@ export const TemplatesTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          {/* <TableHead className="w-24"></TableHead> */}
           <TableHead>Nazwa</TableHead>
           <TableHead>Data stworzenia</TableHead>
           <TableHead>Ostatnia edycja</TableHead>
@@ -82,7 +84,7 @@ export const TemplatesTable = () => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Akcje</DropdownMenuLabel>
                   <DropdownMenuItem
-                    onClick={() => push(getEditorTemplateHref(template.uuid))}
+                    onClick={() => onMoveToEditor(template.uuid)}
                   >
                     Edytuj
                   </DropdownMenuItem>

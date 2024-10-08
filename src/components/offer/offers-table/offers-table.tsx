@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import * as React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 
@@ -34,7 +33,11 @@ const HEADERS = [
 
 export const OffersTable = () => {
   const { data: offers, error, isLoading } = api.offer.getAll.useQuery();
-  const { push } = useRouter();
+
+  // Note: Reload the page to enable dark mode in the editor
+  const onMoveToEditor = (offerUuid: string) => {
+    window.open(getEditorOfferHref(offerUuid));
+  };
 
   if (!offers || offers.length === 0) {
     return (
@@ -82,9 +85,7 @@ export const OffersTable = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Akcje</DropdownMenuLabel>
-                  <DropdownMenuItem
-                    onClick={() => push(getEditorOfferHref(offer.uuid))}
-                  >
+                  <DropdownMenuItem onClick={() => onMoveToEditor(offer.uuid)}>
                     Edytuj
                   </DropdownMenuItem>
                   <DropdownMenuItem>Usuń</DropdownMenuItem>

@@ -5,9 +5,11 @@ import {
 import React from "react";
 
 import { Editor } from "@/components/editor";
+import { useEditorStore } from "@/components/editor/store";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
 import { EditorLayout } from "@/layouts/editor-layout";
 import { api } from "@/utils/api";
+import { getDashboardTemplatesHref } from "@/utils/hrefs/dashboard";
 
 export const getServerSideProps: GetServerSideProps<{
   templateUuid: string;
@@ -24,15 +26,35 @@ export const getServerSideProps: GetServerSideProps<{
 const EditorTemplatePage = ({
   templateUuid,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { data: template } = api.template.getOne.useQuery({ templateUuid });
+  const { data: template, isFetching: isFetchingTemplate } =
+    api.template.getOne.useQuery({
+      templateUuid,
+    });
+  const { isPending: isPendingSaveTemplate, mutateAsync: saveTemplate } =
+    api.template.save.useMutation();
+  const blocks = useEditorStore((store) => store.blocks);
+  const theme = useEditorStore((store) => store.theme);
+  const name = useEditorStore((store) => store.name);
+
+  const onSaveTemplate = async () => {
+    // TODO: Add error handling and toast message
+    await saveTemplate({ blocks, name, templateUuid, theme });
+  };
+
+  // Note: Trigger a reload to turn off dark mode
+  const onGoBack = () => {
+    window.location.href = getDashboardTemplatesHref();
+  };
 
   return (
     <>
-      <EditorNavigation />
+      <EditorNavigation
+        onGoBack={onGoBack}
+        isLoading={isPendingSaveTemplate || isFetchingTemplate}
+        onSave={onSaveTemplate}
+      />
       <div className="flex w-full bg-zinc-500">
-        {template ? (
-          <Editor resource={template} resourceUuid={templateUuid} />
-        ) : null}
+        <Editor isLoading={isFetchingTemplate} resource={template} />
       </div>
     </>
   );
