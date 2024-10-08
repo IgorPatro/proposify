@@ -24,6 +24,7 @@ export const ImageFieldForm = ({
         <Input
           key={fieldName}
           name={fieldName}
+          label="Url"
           placeholder="Image src"
           value={config.url}
           onChange={(event) =>
