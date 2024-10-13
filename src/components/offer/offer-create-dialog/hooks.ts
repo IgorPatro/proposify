@@ -26,7 +26,8 @@ export const useOfferCreateForm = () => {
   const onSubmit: SubmitHandler<CreateOfferInput> = async (data) => {
     try {
       const newOffer = await createOffer(data);
-      router.push(getEditorOfferHref(newOffer.uuid));
+      // Note: Trigger a reload to turn off dark mode
+      window.location.href = getEditorOfferHref(newOffer.uuid);
     } catch (error) {
       if (isAPIError(error)) {
         toast({

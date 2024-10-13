@@ -7,6 +7,7 @@ import {
   getEditorOfferPreviewHref,
   getEditorTemplatePreviewHref,
 } from "@/utils/hrefs/editor";
+import { getEditorNavigationHeader } from "./utils";
 
 interface EditorNavigationProps {
   isOffer?: boolean;
@@ -14,6 +15,7 @@ interface EditorNavigationProps {
   onSave: () => Promise<void>;
   onGoBack: () => void;
   resourceUuid: string;
+  resourceName?: string;
 }
 
 export const EditorNavigation = ({
@@ -22,6 +24,7 @@ export const EditorNavigation = ({
   onGoBack,
   onSave,
   resourceUuid,
+  resourceName,
 }: EditorNavigationProps) => {
   const onPreviewOpen = () => {
     if (isOffer) {
@@ -39,7 +42,7 @@ export const EditorNavigation = ({
           Wróć
         </Button>
         <h1 className="text-lg font-semibold">
-          {isOffer ? "Offer" : "Template"} Editor
+          {getEditorNavigationHeader(isOffer, resourceName)}
         </h1>
       </div>
       <div className="flex items-center">

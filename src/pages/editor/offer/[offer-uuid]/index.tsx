@@ -58,6 +58,7 @@ const EditorOfferPage = ({
   return (
     <>
       <EditorNavigation
+        resourceName={offer?.name}
         resourceUuid={offerUuid}
         onGoBack={onGoBack}
         onSave={onSaveOffer}

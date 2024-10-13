@@ -54,6 +54,12 @@ export const EditorBlock = ({
       <EditorBlockDroppableArea isDraggedOver={isDraggedOver} />
       <div ref={setDroppableRef}>{renderBlock}</div>
       <EditorBlockMenu isSelected={isSelected} blockUuid={blockUuid} />
+      <div
+        className={twMerge(
+          "absolute left-0 top-0 h-full w-full bg-black/50",
+          isSelected ? "hidden" : "block",
+        )}
+      />
     </section>
   );
 };

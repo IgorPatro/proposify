@@ -60,6 +60,7 @@ const EditorTemplatePage = ({
   return (
     <>
       <EditorNavigation
+        resourceName={template?.name}
         resourceUuid={templateUuid}
         onGoBack={onGoBack}
         isLoading={isPendingSaveTemplate || isFetchingTemplate}

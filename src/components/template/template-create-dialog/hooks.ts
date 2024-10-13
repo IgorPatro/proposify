@@ -26,7 +26,8 @@ export const useTemplateCreateForm = () => {
   const onSubmit: SubmitHandler<CreateTemplateInput> = async (data) => {
     try {
       const newTemplate = await createTemplate(data);
-      router.push(getEditorTemplateHref(newTemplate.uuid));
+      // Note: Trigger a reload to turn off dark mode
+      window.location.href = getEditorTemplateHref(newTemplate.uuid);
     } catch (error) {
       toast({
         description: error.message,
