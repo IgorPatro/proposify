@@ -1,8 +1,7 @@
 import { z } from "zod";
 
 import { publicProcedure } from "../trpc";
-
-import { TemplateSchema } from "./types";
+import { ResourceSchema } from "../resource/types";
 
 export const getOne = publicProcedure
   .input(z.object({ templateUuid: z.string().min(1) }))
@@ -15,5 +14,5 @@ export const getOne = publicProcedure
       throw new Error("Template not found");
     }
 
-    return TemplateSchema.parse(template);
+    return ResourceSchema.parse(template);
   });

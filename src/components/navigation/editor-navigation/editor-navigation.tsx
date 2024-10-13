@@ -3,12 +3,17 @@ import { HiMiniArrowLeft, HiPlay } from "react-icons/hi2";
 import { IoIosSave } from "react-icons/io";
 
 import { Button } from "@/components/ui/button";
+import {
+  getEditorOfferPreviewHref,
+  getEditorTemplatePreviewHref,
+} from "@/utils/hrefs/editor";
 
 interface EditorNavigationProps {
   isOffer?: boolean;
   isLoading: boolean;
   onSave: () => Promise<void>;
   onGoBack: () => void;
+  resourceUuid: string;
 }
 
 export const EditorNavigation = ({
@@ -16,7 +21,16 @@ export const EditorNavigation = ({
   isOffer = false,
   onGoBack,
   onSave,
+  resourceUuid,
 }: EditorNavigationProps) => {
+  const onPreviewOpen = () => {
+    if (isOffer) {
+      return window.open(getEditorOfferPreviewHref(resourceUuid), "_blank");
+    }
+
+    return window.open(getEditorTemplatePreviewHref(resourceUuid), "_blank");
+  };
+
   return (
     <nav className="fixed left-0 top-0 flex h-14 w-full items-center justify-between border-b border-gray-700 bg-background p-3 text-white drop-shadow-2xl">
       <div className="flex items-center gap-4">
@@ -29,7 +43,11 @@ export const EditorNavigation = ({
         </h1>
       </div>
       <div className="flex items-center">
-        <Button variant="ghost" className="gap-1 text-sm">
+        <Button
+          variant="ghost"
+          className="gap-1 text-sm"
+          onClick={onPreviewOpen}
+        >
           <HiPlay />
           Preview
         </Button>

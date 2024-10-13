@@ -6,10 +6,10 @@ import { twMerge } from "tailwind-merge";
 
 import { getBlockByName } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
-import { type Template } from "@/server/api/template/types";
+import { Resource as ResourceType } from "@/server/api/resource/types";
 
 interface ResourceProps {
-  resource: Template;
+  resource: ResourceType;
 }
 
 export const Resource = ({ resource }: ResourceProps) => {

@@ -6,20 +6,20 @@ export const ThemeEnum = z.enum(["light", "dark"]);
 
 export type ThemeEnum = z.infer<typeof ThemeEnum>;
 
-export const TemplateSchema = z.object({
+export const ResourceSchema = z.object({
   blocks: z.array(BlockSchema),
   name: z.string(),
   theme: ThemeEnum,
   uuid: z.string(),
 });
 
-export type Template = z.infer<typeof TemplateSchema>;
+export type Resource = z.infer<typeof ResourceSchema>;
 
-export const MinifiedTemplateSchema = z.object({
+export const MinifiedResourceSchema = z.object({
   createdAt: z.date(),
   name: z.string(),
   updatedAt: z.date(),
   uuid: z.string(),
 });
 
-export type MinifiedTemplate = z.infer<typeof MinifiedTemplateSchema>;
+export type MinifiedResource = z.infer<typeof MinifiedResourceSchema>;

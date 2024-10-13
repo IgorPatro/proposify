@@ -47,6 +47,7 @@ const EditorOfferPage = ({
   return (
     <>
       <EditorNavigation
+        resourceUuid={offerUuid}
         onGoBack={onGoBack}
         onSave={onSaveOffer}
         isLoading={isPendingSaveOffer || isFetchingOffer}

@@ -1,12 +1,9 @@
 import { z } from "zod";
 
-import { type ThemeEnum } from "@/server/api/template/types";
-
 import { FieldConfigSchema } from "../_fields/types";
+import { ThemeEnum } from "@/server/api/resource/types";
 
 export const BLOCK_NAMES_MAP = [
-  "footer_one",
-  "hero_one",
   "hero_simple_centered",
   "hero_simple_left",
   "footer_simple_left",

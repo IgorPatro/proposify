@@ -3,18 +3,19 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 import { type Block } from "@/_blocks/types";
-import { type ThemeEnum, type Template } from "@/server/api/template/types";
+import { Resource, ThemeEnum } from "@/server/api/resource/types";
 
 export type EditorState = {
   blocks: Block[];
   name: string;
   theme: ThemeEnum;
+  logoUrl: string;
 };
 
 type EditorStoreActions = {
   updateBlocks: (blocks: Block[]) => void;
   updateTheme: (newTheme: ThemeEnum) => void;
-  updateEditorState: (template: Template) => void;
+  updateEditorState: (resource: Resource) => void;
   updateBlockProperty: (
     blockUuid: string,
     path: string,
@@ -22,6 +23,7 @@ type EditorStoreActions = {
   ) => void;
   removeBlock: (blockUuid: string) => void;
   updateName: (name: string) => void;
+  updateLogoUrl: (url: string) => void;
 };
 
 type EditorStore = EditorState & EditorStoreActions;
@@ -30,6 +32,7 @@ const initialState: EditorState = {
   blocks: [],
   name: "",
   theme: "light",
+  logoUrl: "",
 };
 
 export const useEditorStore = create<EditorStore>()(
@@ -51,11 +54,11 @@ export const useEditorStore = create<EditorStore>()(
       set((state) => {
         state.blocks = blocks;
       }),
-    updateEditorState: (template) =>
+    updateEditorState: (resource) =>
       set((state) => {
-        state.blocks = template.blocks;
-        state.name = template.name;
-        state.theme = template.theme;
+        state.blocks = resource.blocks;
+        state.name = resource.name;
+        state.theme = resource.theme;
       }),
     updateName: (name) =>
       set((state) => {
@@ -64,6 +67,10 @@ export const useEditorStore = create<EditorStore>()(
     updateTheme: (newTheme) =>
       set((state) => {
         state.theme = newTheme;
+      }),
+    updateLogoUrl: (url) =>
+      set((state) => {
+        state.logoUrl = url;
       }),
   })),
 );

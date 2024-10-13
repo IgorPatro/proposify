@@ -1,5 +1,5 @@
-import { OfferSchema } from "@/server/api/offer/types";
 import { db } from "@/server/db";
+import { ResourceSchema } from "../resource/types";
 
 export const getOfferPreviewSsr = async (offerUuid: string) => {
   const offer = await db.offer.findUnique({
@@ -10,5 +10,5 @@ export const getOfferPreviewSsr = async (offerUuid: string) => {
     throw new Error("Offer not found");
   }
 
-  return OfferSchema.parse(offer);
+  return ResourceSchema.parse(offer);
 };

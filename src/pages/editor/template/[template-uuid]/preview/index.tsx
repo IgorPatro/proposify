@@ -6,10 +6,10 @@ import React from "react";
 
 import { Resource } from "@/components/resource";
 import { getTemplatePreviewSsr } from "@/server/api/template/get-template-preview-ssr";
-import { type Template } from "@/server/api/template/types";
+import { Resource as ResourceType } from "@/server/api/resource/types";
 
 export const getServerSideProps: GetServerSideProps<{
-  template: Template;
+  template: ResourceType;
 }> = async (ctx) => {
   const templateUuid = ctx.query["template-uuid"] as string;
 

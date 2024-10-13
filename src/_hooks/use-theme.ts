@@ -1,5 +1,4 @@
-import { type ThemeEnum } from "@/server/api/template/types";
-
+import { ThemeEnum } from "@/server/api/resource/types";
 import { DARK_THEME } from "../_themes/dark";
 import { LIGHT_THEME } from "../_themes/light";
 

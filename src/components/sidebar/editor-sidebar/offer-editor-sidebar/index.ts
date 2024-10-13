@@ -1,1 +1,1 @@
-export { TemplateEditorSidebar } from "./template-editor-sidebar";
+export { OfferEditorSidebar } from "./offer-editor-sidebar";

@@ -59,6 +59,7 @@ model Template {
   companyId Int
   theme     String
   blocks    Json?
+  logoUrl   String?
 }
 
 model Offer {
@@ -73,6 +74,7 @@ model Offer {
   blocks     Json?
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId Int
+  logoUrl    String?
 }
 
 model Customer {

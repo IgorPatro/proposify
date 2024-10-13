@@ -1,20 +1,7 @@
 import { z } from "zod";
+import { ResourceSchema } from "../resource/types";
 
-import { BlockSchema } from "@/_blocks/types";
-
-import { ThemeEnum } from "../template/types";
-
-export const OfferSchema = z.object({
-  blocks: z.array(BlockSchema),
-  name: z.string(),
-  theme: ThemeEnum,
-  uuid: z.string(),
-});
-
-export type Offer = z.infer<typeof OfferSchema>;
-
-export const MinifiedOfferSchema = z.object({
-  createdAt: z.date(),
+export const MinifiedOfferSchema = ResourceSchema.extend({
   customer: z.object({
     email: z.string().nullish(),
     firstName: z.string(),
@@ -22,9 +9,6 @@ export const MinifiedOfferSchema = z.object({
     phone: z.string().nullish(),
     uuid: z.string(),
   }),
-  name: z.string(),
-  updatedAt: z.date(),
-  uuid: z.string(),
 });
 
 export type MinifiedOffer = z.infer<typeof MinifiedOfferSchema>;

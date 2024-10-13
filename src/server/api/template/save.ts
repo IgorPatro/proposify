@@ -3,8 +3,7 @@ import { z } from "zod";
 import { BlockSchema } from "@/_blocks/types";
 
 import { protectedProcedure } from "../trpc";
-
-import { ThemeEnum } from "./types";
+import { ThemeEnum } from "../resource/types";
 
 const SaveTemplateInputSchema = z.object({
   blocks: z.array(BlockSchema),

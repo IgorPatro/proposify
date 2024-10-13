@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-import { ThemeEnum } from "../template/types";
 import { protectedProcedure } from "../trpc";
+import { ThemeEnum } from "../resource/types";
 
 const SaveOfferInputSchema = z.object({
   blocks: z.array(BlockSchema),

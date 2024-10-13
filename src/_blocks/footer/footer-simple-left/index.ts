@@ -1,1 +1,1 @@
-export { HeroSimpleCentered } from "./hero-simple-centered";
+export { FooterSimpleLeft } from "./footer-simple-left";

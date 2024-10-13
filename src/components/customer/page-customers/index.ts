@@ -1,1 +1,1 @@
-export { PageTemplates } from "./page-templates";
+export { PageCustomers } from "./page-customers";

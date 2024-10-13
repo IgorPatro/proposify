@@ -1,5 +1,5 @@
-import { TemplateSchema } from "@/server/api/template/types";
 import { db } from "@/server/db";
+import { ResourceSchema } from "../resource/types";
 
 export const getTemplatePreviewSsr = async (templateUuid: string) => {
   const template = await db.template.findUnique({
@@ -10,5 +10,5 @@ export const getTemplatePreviewSsr = async (templateUuid: string) => {
     throw new Error("Template not found");
   }
 
-  return TemplateSchema.parse(template);
+  return ResourceSchema.parse(template);
 };

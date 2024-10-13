@@ -4,10 +4,9 @@ import { HERO_ONE_FIELDS_CONFIG } from "@/_blocks/hero/hero-one/config";
 import { BlockNameEnum } from "@/_blocks/types";
 
 import { protectedProcedure } from "../trpc";
+import { Resource, ResourceSchema } from "../resource/types";
 
-import { type Template, TemplateSchema } from "./types";
-
-export const CreateTemplateInputSchema = TemplateSchema.pick({
+export const CreateTemplateInputSchema = ResourceSchema.pick({
   name: true,
 });
 
@@ -52,7 +51,7 @@ export const createEmpty = protectedProcedure
     };
   });
 
-export const DEFAULT_EMPTY_TEMPLATE: Template = {
+export const DEFAULT_EMPTY_TEMPLATE: Omit<Resource, "uuid"> = {
   blocks: [
     {
       fields: HERO_ONE_FIELDS_CONFIG,
