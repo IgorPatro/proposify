@@ -27,6 +27,8 @@ type ImageUploaderProps = {
   onUpload: (formData: FormData) => void;
 };
 
+// NOTE: This component is not used, as we are using uploadthing
+// It was left though for future reference
 export const ImageUploader = ({
   accepts = IMAGE_UPLOAD_FORMATS,
   compress = true,

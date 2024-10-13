@@ -13,6 +13,7 @@ export const env = createEnv({
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NODE_ENV: process.env.NODE_ENV,
+    UPLOADTHING_TOKEN: process.env.UPLOADTHING_TOKEN,
   },
 
   server: {
@@ -30,6 +31,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    UPLOADTHING_TOKEN: z.string(),
   },
 
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

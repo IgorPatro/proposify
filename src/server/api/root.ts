@@ -1,3 +1,4 @@
+import { assetRouter } from "./asset";
 import { authRouter } from "./auth";
 import { customerRouter } from "./customer";
 import { offerRouter } from "./offer";
@@ -9,6 +10,7 @@ export const appRouter = createTRPCRouter({
   customer: customerRouter,
   offer: offerRouter,
   template: templateRouter,
+  asset: assetRouter,
 });
 
 export type AppRouter = typeof appRouter;

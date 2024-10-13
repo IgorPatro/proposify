@@ -8,6 +8,7 @@ import { api } from "@/utils/api";
 
 import type { AppProps } from "next/app";
 import "@/styles/globals.css";
+import { Toaster } from "@/components/ui/toaster";
 
 type GetLayout = (page: ReactNode) => ReactNode;
 
@@ -49,6 +50,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
         <meta content="initial-scale=1, width=device-width" name="viewport" />
       </Head>
       <SessionProvider session={pageProps.session}>
+        <Toaster />
         {getLayout(<Component {...pageProps} />)}
       </SessionProvider>
     </>
