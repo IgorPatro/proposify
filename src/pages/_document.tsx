@@ -1,3 +1,4 @@
+import { isEditorPageByPathname } from "@/utils/editor";
 import Document, {
   Html,
   Head,
@@ -24,8 +25,7 @@ class MyDocument extends Document<DocumentProps> {
 
     const initialProps = await Document.getInitialProps(ctx);
 
-    // TODO: Add util for it
-    const isEditorPage = ctx.pathname.includes("editor");
+    const isEditorPage = isEditorPageByPathname(ctx.pathname);
 
     return {
       ...initialProps,

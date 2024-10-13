@@ -10,6 +10,7 @@ import { EditorNavigation } from "@/components/navigation/editor-navigation";
 import { EditorLayout } from "@/layouts/editor-layout";
 import { api } from "@/utils/api";
 import { getDashboardOffersHref } from "@/utils/hrefs/dashboard";
+import { toast } from "@/hooks/use-toast";
 
 export const getServerSideProps: GetServerSideProps<{
   offerUuid: string;
@@ -36,8 +37,17 @@ const EditorOfferPage = ({
   const logoUrl = useEditorStore((store) => store.logoUrl);
 
   const onSaveOffer = async () => {
-    // TODO: Add error handling and toast message
-    await saveOffer({ blocks, name, offerUuid, theme, logoUrl });
+    try {
+      await saveOffer({ blocks, name, offerUuid, theme, logoUrl });
+      toast({
+        title: "Zapisano ofertę",
+      });
+    } catch (error) {
+      toast({
+        description: error.message,
+        variant: "destructive",
+      });
+    }
   };
 
   // Note: Trigger a reload to turn off dark mode

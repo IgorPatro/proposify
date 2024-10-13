@@ -65,6 +65,7 @@ export const EditorSidebarBlockSettings = ({
           case isFieldConfigImage(fieldConfig):
             return (
               <ImageFieldForm
+                key={fieldName}
                 blockUuid={selectedBlockUuid}
                 fieldName={fieldName}
                 updateBlockProperty={updateBlockProperty}
