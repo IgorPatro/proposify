@@ -10,6 +10,7 @@ const SaveOfferInputSchema = z.object({
   name: z.string().min(1),
   offerUuid: z.string().min(1),
   theme: ThemeEnum,
+  logoUrl: z.string().nullish(),
 });
 
 export const save = protectedProcedure
@@ -20,6 +21,7 @@ export const save = protectedProcedure
         blocks: input.blocks,
         name: input.name,
         theme: input.theme,
+        logoUrl: input.logoUrl,
       },
       where: { uuid: input.offerUuid },
     });

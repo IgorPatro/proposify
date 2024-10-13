@@ -15,7 +15,7 @@ export const FooterSimpleLeft = ({ fields, themeEnum }: BlockProps) => {
   return (
     <div
       className={twMerge(
-        "h-9/12 min-h-block relative w-full",
+        "h-9/12 relative min-h-block w-full",
         `bg-${theme.background}`,
       )}
     >

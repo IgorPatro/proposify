@@ -10,16 +10,20 @@ const SaveTemplateInputSchema = z.object({
   name: z.string().min(1),
   templateUuid: z.string().min(1),
   theme: ThemeEnum,
+  logoUrl: z.string().nullish(),
 });
 
 export const save = protectedProcedure
   .input(SaveTemplateInputSchema)
   .mutation(async ({ ctx, input }) => {
+    console.log(input);
+
     return ctx.db.template.update({
       data: {
         blocks: input.blocks,
         name: input.name,
         theme: input.theme,
+        logoUrl: input.logoUrl,
       },
       where: { uuid: input.templateUuid },
     });

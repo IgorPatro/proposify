@@ -4,18 +4,21 @@ import { twMerge } from "tailwind-merge";
 import { Input as InputPrimitive } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "value"> {
   error?: string;
   label?: string;
   name?: string;
+  value: string | null | undefined;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ error, label, name, ...props }, ref) => {
+  ({ error, label, name, value, ...props }, ref) => {
     return (
       <div className="relative flex flex-col gap-2">
         {label ? <Label htmlFor={name}>{label}</Label> : null}
         <InputPrimitive
+          value={value ?? ""}
           id={name}
           ref={ref}
           className={twMerge(

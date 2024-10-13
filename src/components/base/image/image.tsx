@@ -1,19 +1,22 @@
-import NextImage, { type ImageProps } from "next/image";
+import NextImage, { type ImageProps as NextImageProps } from "next/image";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { getFallbackImageUrl } from "./utils";
 
-interface ProductVariantImageProps extends Omit<ImageProps, "src"> {
+interface ImageProps extends Omit<NextImageProps, "src"> {
   placeholderClassName?: string;
-  src: string | undefined;
+  src: string | undefined | null;
   wrapperClassName?: string;
+  fallbackUrl?: string;
 }
 
 export const Image = ({
   placeholderClassName,
   src,
   wrapperClassName,
+  fallbackUrl,
   ...rest
-}: ProductVariantImageProps) => {
+}: ImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   if (!src) {
@@ -25,7 +28,7 @@ export const Image = ({
           alt="Image placeholder"
           className="m-auto h-fit w-fit max-w-32 object-contain p-2"
           sizes="128px"
-          src="/image-placeholder.svg"
+          src={getFallbackImageUrl(fallbackUrl)}
           style={{ objectFit: "contain", objectPosition: "center" }}
         />
       </div>
@@ -47,7 +50,7 @@ export const Image = ({
             alt="Image placeholder"
             className="m-auto h-fit w-fit max-w-32 object-contain p-2"
             sizes="128px"
-            src="/image-placeholder.svg"
+            src={getFallbackImageUrl(fallbackUrl)}
             style={{ objectFit: "contain", objectPosition: "center" }}
           />
         </div>

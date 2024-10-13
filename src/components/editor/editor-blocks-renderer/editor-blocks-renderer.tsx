@@ -20,6 +20,7 @@ export const EditorBlocksRenderer = ({
 }: EditorBlocksRendererProps) => {
   const blocks = useEditorStore((store) => store.blocks);
   const theme = useEditorStore((store) => store.theme);
+  const logoUrl = useEditorStore((store) => store.logoUrl);
 
   return (
     <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pl-80 pt-14">
@@ -35,6 +36,9 @@ export const EditorBlocksRenderer = ({
                 renderBlock={getBlockByName(block.name)({
                   fields: block.fields,
                   themeEnum: theme,
+                  resource: {
+                    logoUrl,
+                  },
                 })}
               />
             );

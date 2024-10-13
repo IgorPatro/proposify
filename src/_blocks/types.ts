@@ -15,6 +15,11 @@ export type BlockName = z.infer<typeof BlockNameEnum>;
 export const BlockFieldsSchema = z.record(FieldConfigSchema);
 export type BlockFields = z.infer<typeof BlockFieldsSchema>;
 
+export const BlockResourceDataSchema = z.object({
+  logoUrl: z.string().nullish(),
+});
+export type BlockResourceData = z.infer<typeof BlockResourceDataSchema>;
+
 export const BlockSchema = z.object({
   fields: BlockFieldsSchema,
   name: BlockNameEnum,
@@ -26,12 +31,15 @@ export type Block = z.infer<typeof BlockSchema>;
 export type BlockComponent = ({
   fields,
   themeEnum,
+  resource,
 }: {
   themeEnum: ThemeEnum;
   fields: BlockFields;
+  resource: BlockResourceData;
 }) => JSX.Element;
 
 export interface BlockProps {
+  resource: BlockResourceData;
   fields: BlockFields;
   themeEnum: ThemeEnum;
 }

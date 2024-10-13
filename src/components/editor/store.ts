@@ -9,7 +9,7 @@ export type EditorState = {
   blocks: Block[];
   name: string;
   theme: ThemeEnum;
-  logoUrl: string;
+  logoUrl: string | null | undefined;
 };
 
 type EditorStoreActions = {
@@ -59,6 +59,7 @@ export const useEditorStore = create<EditorStore>()(
         state.blocks = resource.blocks;
         state.name = resource.name;
         state.theme = resource.theme;
+        state.logoUrl = resource.logoUrl;
       }),
     updateName: (name) =>
       set((state) => {

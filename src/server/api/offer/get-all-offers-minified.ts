@@ -39,6 +39,7 @@ export const getAllOffersMinified = protectedProcedure.query(
       name: offer.name,
       updatedAt: offer.updatedAt,
       uuid: offer.uuid,
+      logoUrl: offer.logoUrl,
     }));
   },
 );

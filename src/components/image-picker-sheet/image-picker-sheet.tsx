@@ -49,6 +49,7 @@ export const ImagePickerSheet = ({
       <div className="grid grid-cols-2 gap-4">
         {companyAssets.map((asset) => (
           <div
+            key={asset.id}
             className="relative"
             onClick={() => handleSelectImageUrl(asset.url)}
           >
@@ -81,7 +82,7 @@ export const ImagePickerSheet = ({
               allowedContent: "Dostępne formaty: jpg, png, gif",
             }}
             appearance={{
-              button: "bg-gray-800 hover:bg-gray-700 text-sm",
+              button: "bg-gray-800 hover:bg-gray-700 text-sm px-4",
               container: "pt-4 pb-8",
             }}
             endpoint="editor"

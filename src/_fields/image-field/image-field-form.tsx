@@ -22,14 +22,14 @@ export const ImageFieldForm = ({
   fieldName,
   updateBlockProperty,
 }: ImageFieldFormProps) => {
-  const [isUploadDialogOpen, toggleIsUploadDialogOpen] = useToggle();
+  const [isPickImageSheetOpen, toggleIsPickImageSheetOpen] = useToggle();
 
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
       <legend className="-ml-1 px-1 text-sm font-medium">{config.label}</legend>
       <div className="flex flex-col gap-4">
         {config.url ? (
-          <div className="relative" onClick={toggleIsUploadDialogOpen}>
+          <div className="relative" onClick={toggleIsPickImageSheetOpen}>
             <Image
               wrapperClassName="w-full aspect-video rounded-lg overflow-hidden"
               fill
@@ -41,11 +41,11 @@ export const ImageFieldForm = ({
             </div>
           </div>
         ) : (
-          <Button>Wybierz zdjęcie</Button>
+          <Button onClick={toggleIsPickImageSheetOpen}>Wybierz zdjęcie</Button>
         )}
         <ImagePickerSheet
-          isOpen={isUploadDialogOpen}
-          onClose={toggleIsUploadDialogOpen}
+          isOpen={isPickImageSheetOpen}
+          onClose={toggleIsPickImageSheetOpen}
           onSelectImageUrl={(url) =>
             updateBlockProperty(blockUuid, `${fieldName}.url`, url)
           }

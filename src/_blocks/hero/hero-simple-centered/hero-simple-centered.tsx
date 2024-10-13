@@ -20,7 +20,7 @@ export const HeroSimpleCentered = ({ fields, themeEnum }: BlockProps) => {
   return (
     <div
       className={twMerge(
-        "h-9/12 min-h-block flex w-full flex-col items-center justify-center gap-4",
+        "h-9/12 flex min-h-block w-full flex-col items-center justify-center gap-4",
         `bg-${theme.background}`,
       )}
     >

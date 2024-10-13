@@ -11,6 +11,7 @@ export const ResourceSchema = z.object({
   name: z.string(),
   theme: ThemeEnum,
   uuid: z.string(),
+  logoUrl: z.string().nullish(),
 });
 
 export type Resource = z.infer<typeof ResourceSchema>;

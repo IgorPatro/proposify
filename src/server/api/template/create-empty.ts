@@ -1,10 +1,10 @@
 import { type z } from "zod";
 
-import { HERO_ONE_FIELDS_CONFIG } from "@/_blocks/hero/hero-one/config";
 import { BlockNameEnum } from "@/_blocks/types";
 
 import { protectedProcedure } from "../trpc";
 import { Resource, ResourceSchema } from "../resource/types";
+import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "@/_blocks/hero/hero-simple-left/config";
 
 export const CreateTemplateInputSchema = ResourceSchema.pick({
   name: true,
@@ -12,7 +12,6 @@ export const CreateTemplateInputSchema = ResourceSchema.pick({
 
 export type CreateTemplateInput = z.infer<typeof CreateTemplateInputSchema>;
 
-// TODO: Make sure to delete unused templates after some time
 export const createEmpty = protectedProcedure
   .input(CreateTemplateInputSchema)
   .mutation(async ({ ctx, input }) => {
@@ -51,11 +50,12 @@ export const createEmpty = protectedProcedure
     };
   });
 
+// TODO: Add more advanced default template
 export const DEFAULT_EMPTY_TEMPLATE: Omit<Resource, "uuid"> = {
   blocks: [
     {
-      fields: HERO_ONE_FIELDS_CONFIG,
-      name: BlockNameEnum.Values.hero_one,
+      fields: HERO_SIMPLE_LEFT_FIELDS_CONFIG,
+      name: BlockNameEnum.Values.hero_simple_left,
       uuid: "dummy-uuid-hero-one",
     },
   ],

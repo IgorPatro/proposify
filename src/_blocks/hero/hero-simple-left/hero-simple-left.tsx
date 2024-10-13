@@ -1,4 +1,4 @@
-import Image from "next/image";
+import NextImage from "next/image";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -7,33 +7,35 @@ import { getTheme } from "@/_hooks/use-theme";
 import { type BlockProps } from "../../types";
 
 import { type HeroSimpleLeftFields } from "./config";
+import { Image } from "@/components/base/image";
 
-export const HeroSimpleLeft = ({ fields, themeEnum }: BlockProps) => {
+export const HeroSimpleLeft = ({ fields, themeEnum, resource }: BlockProps) => {
   const { background, subtitle, title } = fields as HeroSimpleLeftFields;
   const theme = getTheme(themeEnum);
 
   return (
     <div
       className={twMerge(
-        "h-9/12 min-h-block relative w-full",
+        "h-9/12 relative min-h-block w-full",
         `bg-${theme.background}`,
       )}
     >
-      <Image
+      <NextImage
         src={background?.url}
         alt={background?.alt}
         fill
-        objectFit="cover"
+        className="object-cover"
       />
       <div className="absolute left-0 top-0 flex h-full w-full flex-col justify-between p-12">
-        <div className="relative h-8 w-52">
-          <Image
-            src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-            alt="Wellness Solutions logo"
-            fill
-            objectFit="contain"
-          />
-        </div>
+        <Image
+          wrapperClassName="h-8 w-52"
+          src={resource?.logoUrl}
+          fallbackUrl="/logo-placeholder.png"
+          alt="Logo"
+          width={100}
+          height={100}
+          className="object-contain object-left-top"
+        />
         <div className="flex w-3/4 max-w-2xl flex-col gap-6">
           <h1
             className={twMerge(

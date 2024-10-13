@@ -33,10 +33,11 @@ const EditorOfferPage = ({
   const blocks = useEditorStore((store) => store.blocks);
   const theme = useEditorStore((store) => store.theme);
   const name = useEditorStore((store) => store.name);
+  const logoUrl = useEditorStore((store) => store.logoUrl);
 
   const onSaveOffer = async () => {
     // TODO: Add error handling and toast message
-    await saveOffer({ blocks, name, offerUuid, theme });
+    await saveOffer({ blocks, name, offerUuid, theme, logoUrl });
   };
 
   // Note: Trigger a reload to turn off dark mode

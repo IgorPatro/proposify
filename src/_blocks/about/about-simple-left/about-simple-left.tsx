@@ -8,7 +8,11 @@ import { type BlockProps } from "../../types";
 
 import { type AboutSimpleLeftFields } from "./config";
 
-export const AboutSimpleLeft = ({ fields, themeEnum }: BlockProps) => {
+export const AboutSimpleLeft = ({
+  fields,
+  resource,
+  themeEnum,
+}: BlockProps) => {
   const { background, subtitle, title } = fields as AboutSimpleLeftFields;
   const theme = getTheme(themeEnum);
 

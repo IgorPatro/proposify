@@ -29,6 +29,7 @@ export const getAllTemplatesMinified = protectedProcedure.query(
       name: template.name,
       updatedAt: template.updatedAt,
       uuid: template.uuid,
+      logoUrl: template.logoUrl,
     }));
   },
 );

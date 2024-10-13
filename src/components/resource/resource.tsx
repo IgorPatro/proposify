@@ -62,6 +62,7 @@ export const Resource = ({ resource }: ResourceProps) => {
                   {getBlockByName(block.name)({
                     fields: block.fields,
                     themeEnum: resource.theme,
+                    resource,
                   })}
                 </section>
               );
