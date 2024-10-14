@@ -51,7 +51,7 @@ export const Resource = ({ resource }: ResourceProps) => {
                 onClick={toggleOpen}
                 className="block aspect-video w-full max-w-52"
               >
-                <Icon className="h-full w-full rounded-lg bg-gray-900 text-gray-500 hover:bg-gray-800" />
+                <Icon className="h-full w-full bg-gray-900 text-gray-500 hover:bg-gray-800" />
               </a>
               <div className="block w-full text-center font-medium text-gray-300">
                 {index + 1}
