@@ -1,7 +1,15 @@
+import { BlockName } from "@/_blocks/types";
+import { getBlockIcon } from "@/_blocks/utils";
 import { useDraggable } from "@dnd-kit/core";
 import React from "react";
 
-export const EditorDraggableBlock = ({ blockName }: { blockName: string }) => {
+interface EditorDraggableBlockProps {
+  blockName: BlockName;
+}
+
+export const EditorDraggableBlock = ({
+  blockName,
+}: EditorDraggableBlockProps) => {
   const { listeners, setNodeRef: setDraggableRef } = useDraggable({
     data: {
       blockName,
@@ -11,12 +19,8 @@ export const EditorDraggableBlock = ({ blockName }: { blockName: string }) => {
   });
 
   return (
-    <div
-      className="flex aspect-video w-full cursor-pointer items-center justify-center truncate rounded-lg bg-gray-100 text-black shadow-lg"
-      ref={setDraggableRef}
-      {...listeners}
-    >
-      {blockName}
+    <div className="cursor-grab" ref={setDraggableRef} {...listeners}>
+      {getBlockIcon(blockName)}
     </div>
   );
 };

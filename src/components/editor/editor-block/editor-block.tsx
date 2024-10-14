@@ -1,5 +1,5 @@
 import { useDraggable, useDroppable } from "@dnd-kit/core";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { EditorBlockDroppableArea } from "./editor-block-droppable-area";

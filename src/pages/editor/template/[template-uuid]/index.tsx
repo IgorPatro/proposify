@@ -52,7 +52,7 @@ const EditorTemplatePage = ({
     }
   };
 
-  // Note: Trigger a reload to turn off dark mode
+  // Note: Trigger a reload to turn on/off dark mode
   const onGoBack = () => {
     window.location.href = getDashboardTemplatesHref();
   };

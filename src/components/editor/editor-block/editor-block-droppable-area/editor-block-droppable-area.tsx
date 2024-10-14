@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 interface EditorBlockDroppableAreaProps {
   isDraggedOver: boolean;
@@ -11,5 +11,9 @@ export const EditorBlockDroppableArea = ({
     return null;
   }
 
-  return <div>Drop here</div>;
+  return (
+    <div className="mb-4 bg-black p-4 text-white">
+      Upuść teraz, aby dodać blok w tym miejscu
+    </div>
+  );
 };
