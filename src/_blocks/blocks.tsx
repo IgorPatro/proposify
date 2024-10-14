@@ -10,6 +10,7 @@ import { HERO_SIMPLE_CENTERED_FIELDS_CONFIG } from "./hero/hero-simple-centered/
 import { HeroSimpleLeft } from "./hero/hero-simple-left";
 import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "./hero/hero-simple-left/config";
 import { type BlockComponent, type BlockFields, type BlockName } from "./types";
+import { BlockIconProps } from "@/_icons/types";
 
 export const BLOCKS_MAP: {
   [T in BlockName]: BlockComponent;
@@ -29,11 +30,13 @@ export const BLOCKS_FIELDS_MAP: {
   hero_simple_left: HERO_SIMPLE_LEFT_FIELDS_CONFIG,
 };
 
+// Note: https://www.figma.com/design/xSDk1v5cE8sGbAllorqPj4/Oferty-Wellness-Solutions?node-id=131-107&t=dx8ZFlEnqUWMMhwi-1
+// Here you can generate icons for each block
 export const BLOCKS_ICONS_MAP: {
-  [T in BlockName]: JSX.Element;
+  [T in BlockName]: (props: BlockIconProps) => JSX.Element;
 } = {
-  about_simple_left: <HeroSimpleLeftIcon />,
-  footer_simple_left: <HeroSimpleLeftIcon />,
-  hero_simple_centered: <HeroSimpleCenteredIcon />,
-  hero_simple_left: <HeroSimpleLeftIcon />,
+  about_simple_left: HeroSimpleLeftIcon,
+  footer_simple_left: HeroSimpleLeftIcon,
+  hero_simple_centered: HeroSimpleCenteredIcon,
+  hero_simple_left: HeroSimpleLeftIcon,
 };

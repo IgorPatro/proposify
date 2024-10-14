@@ -29,9 +29,11 @@ export const EditorSidebarBlockSettings = ({
 
   if (!block || !selectedBlockUuid) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-gray-500">
+      <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-gray-500 p-4">
         <LuMousePointerClick className="h-10 w-10" />
-        <span>Select block to start editing</span>
+        <span className="text-center">
+          Wybierz blok, aby zacząć go edytować
+        </span>
       </div>
     );
   }

@@ -8,6 +8,7 @@ import { type BlockProps } from "../../types";
 
 import { type HeroSimpleLeftFields } from "./config";
 import { Image } from "@/components/base/image";
+import { isEmptyString } from "@/utils/string";
 
 export const HeroSimpleLeft = ({ fields, themeEnum, resource }: BlockProps) => {
   const { background, subtitle, title } = fields as HeroSimpleLeftFields;
@@ -20,12 +21,14 @@ export const HeroSimpleLeft = ({ fields, themeEnum, resource }: BlockProps) => {
         `bg-${theme.background}`,
       )}
     >
-      <NextImage
-        src={background?.url}
-        alt={background?.alt}
-        fill
-        className="object-cover"
-      />
+      {isEmptyString(background.url) ? null : (
+        <NextImage
+          src={background.url}
+          alt={background.alt}
+          fill
+          className="object-cover"
+        />
+      )}
       <div className="absolute left-0 top-0 flex h-full w-full flex-col justify-between p-12">
         <Image
           wrapperClassName="h-8 w-52"

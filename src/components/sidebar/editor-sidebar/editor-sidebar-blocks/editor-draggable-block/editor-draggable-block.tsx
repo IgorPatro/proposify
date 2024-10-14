@@ -18,9 +18,11 @@ export const EditorDraggableBlock = ({
     id: blockName,
   });
 
+  const Icon = getBlockIcon(blockName);
+
   return (
-    <div className="cursor-grab" ref={setDraggableRef} {...listeners}>
-      {getBlockIcon(blockName)}
+    <div className="w-full cursor-grab" ref={setDraggableRef} {...listeners}>
+      <Icon className="h-full w-full rounded-sm bg-gray-900 text-gray-500 hover:bg-gray-800" />
     </div>
   );
 };

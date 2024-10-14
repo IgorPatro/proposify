@@ -5,7 +5,7 @@ import { Input } from "@/components/base/input";
 import { ImagePickerSheet } from "@/components/image-picker-sheet";
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { HiRefresh } from "react-icons/hi";
+import { HiRefresh, HiTrash } from "react-icons/hi";
 
 import { type ImageFieldConfig } from "./type";
 
@@ -24,20 +24,33 @@ export const ImageFieldForm = ({
 }: ImageFieldFormProps) => {
   const [isPickImageSheetOpen, toggleIsPickImageSheetOpen] = useToggle();
 
+  const onRemoveImage = () => {
+    updateBlockProperty(blockUuid, `${fieldName}.url`, "");
+  };
+
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
       <legend className="-ml-1 px-1 text-sm font-medium">{config.label}</legend>
       <div className="flex flex-col gap-4">
         {config.url ? (
-          <div className="relative" onClick={toggleIsPickImageSheetOpen}>
+          <div className="relative">
             <Image
               wrapperClassName="w-full aspect-video rounded-lg overflow-hidden"
               fill
               src={config.url}
               alt="Image"
             />
-            <div className="absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100">
-              <HiRefresh className="h-12 w-12 text-red-800" />
+            <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 opacity-0 hover:opacity-100">
+              <div className="flex gap-2">
+                <HiRefresh
+                  onClick={toggleIsPickImageSheetOpen}
+                  className="h-6 w-6 cursor-pointer text-white"
+                />
+                <HiTrash
+                  onClick={onRemoveImage}
+                  className="h-6 w-6 cursor-pointer text-red-500"
+                />
+              </div>
             </div>
           </div>
         ) : (

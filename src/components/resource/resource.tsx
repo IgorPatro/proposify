@@ -4,7 +4,7 @@ import React from "react";
 import { HiOutlineMenuAlt2, HiOutlineX } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
-import { getBlockByName } from "@/_blocks/utils";
+import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
 import { Resource as ResourceType } from "@/server/api/resource/types";
 
@@ -32,25 +32,33 @@ export const Resource = ({ resource }: ResourceProps) => {
       {/* TODO: Add current slide indicator */}
       <aside
         className={twMerge(
-          "fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-full flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4 transition-transform lg:w-64",
+          "fixed bottom-0 left-0 z-20 flex h-[calc(100vh-56px)] w-full flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4 transition-transform lg:w-64",
           isOpen ? "translate-x-0" : "-translate-x-full",
           "lg:translate-x-0",
           "max-w-96 shadow-2xl shadow-black scrollbar-hide lg:shadow-none lg:scrollbar-default",
         )}
       >
-        {resource.blocks.map((block, index) => (
-          <a
-            key={block.uuid}
-            href={`#${block.uuid}`}
-            className="flex flex-col gap-2"
-            onClick={toggleOpen}
-          >
-            <div className="aspect-video w-44 bg-black" />
-            <div className="block w-full text-center font-medium text-gray-300">
-              {index + 1}
+        {resource.blocks.map((block, index) => {
+          const Icon = getBlockIcon(block.name);
+
+          return (
+            <div
+              key={block.uuid}
+              className="flex w-full flex-col items-center justify-center gap-2"
+            >
+              <a
+                href={`#${block.uuid}`}
+                onClick={toggleOpen}
+                className="block aspect-video w-full max-w-52"
+              >
+                <Icon className="h-full w-full rounded-lg bg-gray-900 text-gray-500 hover:bg-gray-800" />
+              </a>
+              <div className="block w-full text-center font-medium text-gray-300">
+                {index + 1}
+              </div>
             </div>
-          </a>
-        ))}
+          );
+        })}
       </aside>
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
