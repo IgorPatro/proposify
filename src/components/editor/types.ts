@@ -9,6 +9,7 @@ export type DraggedNewBlock = z.infer<typeof DraggedNewBlockSchema>;
 
 export const DraggedExistingBlockSchema = z.object({
   isNewBlock: z.literal(false),
+  blockName: BlockNameEnum,
   uuid: z.string(),
 });
 export type DraggedExistingBlock = z.infer<typeof DraggedExistingBlockSchema>;

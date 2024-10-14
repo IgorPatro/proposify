@@ -29,6 +29,7 @@ export const EditorBlocksRenderer = ({
           {blocks.map((block) => {
             return (
               <EditorBlock
+                blockName={block.name}
                 blockUuid={block.uuid}
                 onSelectBlock={onSelectBlock}
                 isSelected={selectedBlockUuid === block.uuid}

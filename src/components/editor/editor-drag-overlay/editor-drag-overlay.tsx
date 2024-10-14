@@ -6,6 +6,7 @@ import { EditorDraggableBlock } from "@/components/sidebar/editor-sidebar/editor
 
 import { type DraggedBlock } from "../types";
 import { isDraggedBlockNew } from "../utils";
+import { getBlockIcon } from "@/_blocks/utils";
 
 interface EditorDragOverlayProps {
   draggedBlock: DraggedBlock | null;
@@ -21,9 +22,11 @@ export const EditorDragOverlay = ({ draggedBlock }: EditorDragOverlayProps) => {
       return <EditorDraggableBlock blockName={draggedBlock.blockName} />;
     }
 
+    const Icon = getBlockIcon(draggedBlock.blockName);
+
     return (
-      <div className="h-10 w-full bg-red-500 text-white">
-        {draggedBlock.uuid}
+      <div className="aspect-video w-96 cursor-grabbing bg-black text-white">
+        <Icon className="h-full w-full bg-gray-900 text-gray-500" />
       </div>
     );
   };

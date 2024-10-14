@@ -4,10 +4,12 @@ import { twMerge } from "tailwind-merge";
 
 import { EditorBlockDroppableArea } from "./editor-block-droppable-area";
 import { EditorBlockMenu } from "./editor-block-menu";
+import { BlockName } from "@/_blocks/types";
 
 interface EditorBlockProps {
   renderBlock: JSX.Element;
   blockUuid: string;
+  blockName: BlockName;
   isSelected: boolean;
   onSelectBlock: (blockUuid: string) => void;
 }
@@ -17,6 +19,7 @@ export const EditorBlock = ({
   isSelected,
   onSelectBlock,
   renderBlock,
+  blockName,
 }: EditorBlockProps) => {
   const { active: globalActive } = useDndContext();
   const { isOver: isDraggedOver, setNodeRef: setDroppableRef } = useDroppable({
@@ -28,6 +31,7 @@ export const EditorBlock = ({
     setNodeRef: setDraggableRef,
   } = useDraggable({
     data: {
+      blockName,
       isNewBlock: false,
       uuid: blockUuid,
     },
