@@ -4,6 +4,7 @@ import React from "react";
 import { DROPPABLE_AREA_BOTTOM_ID } from "../constants";
 import { useEditorStore } from "../store";
 import { type DraggedBlock } from "../types";
+import { twMerge } from "tailwind-merge";
 
 interface EditorDroppableAreaProps {
   draggedBlock: DraggedBlock | null;
@@ -20,10 +21,13 @@ export const EditorDroppableArea = ({
   if (!!draggedBlock || blocks.length === 0) {
     return (
       <div
-        className="flex h-32 w-full cursor-pointer items-center justify-center bg-black text-white"
+        className={twMerge(
+          "flex h-32 w-full bg-black p-4 text-white",
+          isOver ? "opacity-100" : "opacity-0",
+        )}
         ref={setDroppableRef}
       >
-        Drop here - {isOver ? "over" : "not over"}
+        Upuść tutaj, aby dodać blok w tym miejscu
       </div>
     );
   }

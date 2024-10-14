@@ -41,7 +41,7 @@ export const EditorNavigation = ({
           <HiMiniArrowLeft />
           Wróć
         </Button>
-        <h1 className="text-lg font-semibold">
+        <h1 className="text-md font-semibold">
           {getEditorNavigationHeader(isOffer, resourceName)}
         </h1>
       </div>

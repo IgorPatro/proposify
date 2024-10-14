@@ -1,4 +1,4 @@
-import { useDraggable, useDroppable } from "@dnd-kit/core";
+import { useDndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import React, { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -18,6 +18,7 @@ export const EditorBlock = ({
   onSelectBlock,
   renderBlock,
 }: EditorBlockProps) => {
+  const { active: globalActive } = useDndContext();
   const { isOver: isDraggedOver, setNodeRef: setDroppableRef } = useDroppable({
     id: blockUuid,
   });
@@ -53,13 +54,23 @@ export const EditorBlock = ({
     >
       <EditorBlockDroppableArea isDraggedOver={isDraggedOver} />
       <div ref={setDroppableRef}>{renderBlock}</div>
-      <EditorBlockMenu isSelected={isSelected} blockUuid={blockUuid} />
+      {!globalActive ? (
+        <EditorBlockMenu isSelected={isSelected} blockUuid={blockUuid} />
+      ) : null}
       <div
         className={twMerge(
           "absolute left-0 top-0 h-full w-full bg-black/50",
-          isSelected ? "hidden" : "block",
+          getOverlayStyles(isSelected, !!globalActive),
         )}
       />
     </section>
   );
+};
+
+export const getOverlayStyles = (isSelected: boolean, isDragMode: boolean) => {
+  if (isDragMode) {
+    return "hidden";
+  }
+
+  return isSelected ? "hidden" : "block";
 };

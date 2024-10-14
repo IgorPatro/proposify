@@ -12,7 +12,7 @@ export const EditorBlockDroppableArea = ({
   }
 
   return (
-    <div className="mb-4 bg-black p-4 text-white">
+    <div className="mb-4 rounded-lg bg-black p-8 text-white">
       Upuść teraz, aby dodać blok w tym miejscu
     </div>
   );
