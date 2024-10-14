@@ -1,7 +1,8 @@
+import { BlockNameEnum } from "@/_blocks/types";
 import { z } from "zod";
 
 export const DraggedNewBlockSchema = z.object({
-  blockName: z.string(),
+  blockName: BlockNameEnum,
   isNewBlock: z.literal(true),
 });
 export type DraggedNewBlock = z.infer<typeof DraggedNewBlockSchema>;

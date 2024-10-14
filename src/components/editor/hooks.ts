@@ -11,6 +11,7 @@ import { getBlockDefaultFieldsByName } from "@/_blocks/utils";
 import { useEditorStore } from "./store";
 import { type DraggedBlock } from "./types";
 import { isDraggedBlockNew, isDroppableAreaBottom } from "./utils";
+import { generateUuid } from "@/utils/uuid";
 
 export const useManageBlocks = () => {
   const updateBlocks = useEditorStore((store) => store.updateBlocks);
@@ -24,7 +25,7 @@ export const useManageBlocks = () => {
       const newBlock: Block = {
         fields: newBlockFields,
         name: blockName,
-        uuid: Math.random().toString(),
+        uuid: generateUuid(),
       };
 
       if (isDroppableAreaBottom(over.id as string)) {
