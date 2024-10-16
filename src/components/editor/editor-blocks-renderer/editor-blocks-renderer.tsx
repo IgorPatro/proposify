@@ -8,15 +8,11 @@ import { useEditorStore } from "../store";
 import { type DraggedBlock } from "../types";
 
 interface EditorBlocksRendererProps {
-  onSelectBlock: (blockUuid: string) => void;
-  selectedBlockUuid: string;
   draggedBlock: DraggedBlock | null;
 }
 
 export const EditorBlocksRenderer = ({
   draggedBlock,
-  onSelectBlock,
-  selectedBlockUuid,
 }: EditorBlocksRendererProps) => {
   const blocks = useEditorStore((store) => store.blocks);
   const theme = useEditorStore((store) => store.theme);
@@ -31,8 +27,6 @@ export const EditorBlocksRenderer = ({
               <EditorBlock
                 blockName={block.name}
                 blockUuid={block.uuid}
-                onSelectBlock={onSelectBlock}
-                isSelected={selectedBlockUuid === block.uuid}
                 key={block.uuid}
                 renderBlock={getBlockByName(block.name)({
                   fields: block.fields,

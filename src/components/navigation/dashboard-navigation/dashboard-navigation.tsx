@@ -57,6 +57,7 @@ export const DashboardNavigation = () => {
         <div className="relative">
           <HiSearch className="absolute left-2.5 top-2.5 z-10 h-4 w-4 text-gray-500" />
           <Input
+            value=""
             type="search"
             placeholder="Search..."
             className="w-full rounded-lg pl-8 md:w-52 lg:w-80"

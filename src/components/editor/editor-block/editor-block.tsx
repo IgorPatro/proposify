@@ -5,19 +5,17 @@ import { twMerge } from "tailwind-merge";
 import { EditorBlockDroppableArea } from "./editor-block-droppable-area";
 import { EditorBlockMenu } from "./editor-block-menu";
 import { BlockName } from "@/_blocks/types";
+import { useSelectedBlockUuid } from "../atoms";
 
 interface EditorBlockProps {
   renderBlock: JSX.Element;
   blockUuid: string;
   blockName: BlockName;
-  isSelected: boolean;
-  onSelectBlock: (blockUuid: string) => void;
 }
 
 export const EditorBlock = ({
   blockUuid,
-  isSelected,
-  onSelectBlock,
+
   renderBlock,
   blockName,
 }: EditorBlockProps) => {
@@ -37,10 +35,12 @@ export const EditorBlock = ({
     },
     id: blockUuid,
   });
+  const [selectedBlockUuid, setSelectedBlockUuid] = useSelectedBlockUuid();
 
   const isDragged = useMemo(() => {
     return active?.id === blockUuid;
   }, [active?.id, blockUuid]);
+  const isSelected = selectedBlockUuid === blockUuid;
 
   if (isDragged) {
     return null;
@@ -54,7 +54,7 @@ export const EditorBlock = ({
         "relative w-full",
         isDragged ? "invisible" : "visible",
       )}
-      onClick={() => onSelectBlock(blockUuid)}
+      onClick={() => setSelectedBlockUuid(blockUuid)}
     >
       <EditorBlockDroppableArea isDraggedOver={isDraggedOver} />
       <div ref={setDroppableRef}>{renderBlock}</div>

@@ -12,10 +12,12 @@ import { useEditorStore } from "./store";
 import { type DraggedBlock } from "./types";
 import { isDraggedBlockNew, isDroppableAreaBottom } from "./utils";
 import { generateUuid } from "@/utils/uuid";
+import { useSelectedBlockUuid } from "./atoms";
 
 export const useManageBlocks = () => {
   const updateBlocks = useEditorStore((store) => store.updateBlocks);
   const blocks = useEditorStore((store) => store.blocks);
+  const [, setSelectedBlockUuid] = useSelectedBlockUuid();
 
   const [draggedBlock, setDraggedBlock] = useState<DraggedBlock | null>(null);
 
@@ -41,6 +43,7 @@ export const useManageBlocks = () => {
         newBlock,
         ...blocks.slice(dragEndBlockIndex),
       ];
+      setSelectedBlockUuid(newBlock.uuid);
       return updateBlocks(newBlocks);
     },
     [blocks, updateBlocks],
@@ -70,6 +73,7 @@ export const useManageBlocks = () => {
         draggedBlock,
         ...temporaryBlocks.slice(dragEndBlockIndex),
       ];
+      setSelectedBlockUuid(draggedBlock.uuid);
       return updateBlocks(newBlocks);
     },
     [blocks, updateBlocks],

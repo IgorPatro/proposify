@@ -22,7 +22,7 @@ export const EditorSidebarResourceSettings = () => {
   return (
     <div className="flex flex-col gap-3">
       {logoUrl ? (
-        <div className="relative" onClick={toggleIsPickImageSheetOpen}>
+        <div className="relative">
           <Image
             wrapperClassName="w-full aspect-video rounded-lg overflow-hidden p-4"
             src={logoUrl}
@@ -31,8 +31,11 @@ export const EditorSidebarResourceSettings = () => {
             height={100}
             className="h-full w-full object-contain object-center"
           />
-          <div className="absolute left-0 top-0 flex h-full w-full cursor-pointer items-center justify-center opacity-0 hover:opacity-100">
-            <HiRefresh className="h-12 w-12 text-red-800" />
+          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 opacity-0 hover:opacity-100">
+            <HiRefresh
+              onClick={toggleIsPickImageSheetOpen}
+              className="h-6 w-6 cursor-pointer text-white"
+            />
           </div>
         </div>
       ) : (

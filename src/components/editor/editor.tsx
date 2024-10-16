@@ -16,6 +16,7 @@ import { useManageBlocks } from "./hooks";
 import { useEditorStore } from "./store";
 import { fixCursorSnapOffset } from "./utils";
 import { Resource } from "@/server/api/resource/types";
+import { useSelectedBlockUuid } from "./atoms";
 
 interface EditorProps {
   resource: Resource | undefined;
@@ -35,12 +36,7 @@ export const Editor = ({
     updateResource(resource);
   }, [resource, updateResource]);
 
-  const [selectedBlockUuid, setSelectedBlockUuid] = React.useState<string>("");
   const { draggedBlock, handleDragEnd, handleDragStart } = useManageBlocks();
-
-  const onSelectBlock = (blockUuid: string) => {
-    setSelectedBlockUuid(blockUuid);
-  };
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -51,7 +47,7 @@ export const Editor = ({
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="">Loading...</div>;
   }
 
   return (
@@ -62,16 +58,8 @@ export const Editor = ({
       collisionDetection={fixCursorSnapOffset}
     >
       <div className="flex w-full">
-        {isOffer ? (
-          <OfferEditorSidebar selectedBlockUuid={selectedBlockUuid} />
-        ) : (
-          <TemplateEditorSidebar selectedBlockUuid={selectedBlockUuid} />
-        )}
-        <EditorBlocksRenderer
-          selectedBlockUuid={selectedBlockUuid}
-          onSelectBlock={onSelectBlock}
-          draggedBlock={draggedBlock}
-        />
+        {isOffer ? <OfferEditorSidebar /> : <TemplateEditorSidebar />}
+        <EditorBlocksRenderer draggedBlock={draggedBlock} />
         <EditorDragOverlay draggedBlock={draggedBlock} />
       </div>
     </DndContext>
