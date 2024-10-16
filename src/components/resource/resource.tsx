@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { HiOutlineMenuAlt2, HiOutlineX } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
@@ -7,6 +5,7 @@ import { twMerge } from "tailwind-merge";
 import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
 import { Resource as ResourceType } from "@/server/api/resource/types";
+import { useTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
 
 interface ResourceProps {
   resource: ResourceType;
@@ -14,11 +13,15 @@ interface ResourceProps {
 
 export const Resource = ({ resource }: ResourceProps) => {
   const [isOpen, toggleOpen] = useToggle(false);
+  const { sectionRefs } = useTimeSpentTracker();
 
   return (
     <main className="max-w-screen max-h-screen overflow-hidden bg-gray-500">
       <header className="fixed left-0 top-0 flex h-14 w-full items-center justify-between bg-gray-800 p-4 text-white drop-shadow-2xl">
         <div>{resource.name}</div>
+        {/* <button onClick={() => console.log(handleSubmitTime())}>
+          Show times
+        </button> */}
         <button className="lg:hidden" onClick={toggleOpen}>
           {isOpen ? (
             <HiOutlineX className="h-7 w-7" />
@@ -28,8 +31,6 @@ export const Resource = ({ resource }: ResourceProps) => {
         </button>
       </header>
 
-      {/* TODO: Display slides covers */}
-      {/* TODO: Add current slide indicator */}
       <aside
         className={twMerge(
           "fixed bottom-0 left-0 z-20 flex h-[calc(100vh-56px)] w-full flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4 transition-transform lg:w-64",
@@ -66,7 +67,13 @@ export const Resource = ({ resource }: ResourceProps) => {
           <div className="flex w-full max-w-360 flex-col gap-4">
             {resource.blocks.map((block) => {
               return (
-                <section key={block.uuid} id={block.uuid}>
+                <section
+                  key={block.uuid}
+                  id={block.uuid}
+                  ref={(el) => {
+                    sectionRefs.current[block.uuid] = el;
+                  }}
+                >
                   {getBlockByName(block.name)({
                     fields: block.fields,
                     themeEnum: resource.theme,
