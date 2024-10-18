@@ -98,6 +98,9 @@ export default {
         168: "672px",
         "full-hd": "1920px",
       },
+      height: {
+        block: "680px",
+      },
     },
   },
 } satisfies Config;
