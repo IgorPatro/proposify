@@ -3,6 +3,7 @@ import { Resource, ResourceEnum } from "@/server/api/resource/types";
 import { twMerge } from "tailwind-merge";
 import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { getBlockPreviewHref } from "@/utils/hrefs/editor";
+import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
 
 interface ResourceSidebarProps {
   resource: Resource;
@@ -39,13 +40,10 @@ export const ResourceSidebar = ({
               onClick={toggleMobileSidebarOpen}
               className="relative block aspect-video w-full"
             >
-              <iframe
-                // Note: calculate the aspect ratio of the video and scale it down
-                className="h-block pointer-events-none absolute left-0 top-0 aspect-video scale-[calc(208/1216)]"
-                style={{
-                  transformOrigin: "top left",
-                }}
-                src={getBlockPreviewHref(block.uuid, resource.uuid, type)}
+              <BlockDynamicThumbnail
+                blockUuid={block.uuid}
+                resourceUuid={resource.uuid}
+                type={type}
               />
             </a>
             <div className="block w-full text-center font-medium text-gray-300">
