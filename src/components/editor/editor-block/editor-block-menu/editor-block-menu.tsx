@@ -14,8 +14,8 @@ import {
 import { useEditorStore } from "../../store";
 
 interface EditorBlockMenuProps {
-  isSelected: boolean;
   blockUuid: string;
+  isSelected: boolean;
 }
 
 export const EditorBlockMenu = ({
@@ -33,12 +33,12 @@ export const EditorBlockMenu = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            className="h-8 w-8 rounded-full"
             aria-haspopup="true"
+            className="size-8 rounded-full"
             size="icon"
             variant="ghost"
           >
-            <HiDotsHorizontal className="h-4 w-4" />
+            <HiDotsHorizontal className="size-4" />
             <span className="sr-only">Menu</span>
           </Button>
         </DropdownMenuTrigger>
@@ -49,7 +49,7 @@ export const EditorBlockMenu = ({
             onClick={() => removeBlock(blockUuid)}
           >
             Usuń
-            <FaTrashAlt className="h-4 w-4 text-red-500" />
+            <FaTrashAlt className="size-4 text-red-500" />
           </DropdownMenuItem>
           <DropdownMenuItem>Duplikuj</DropdownMenuItem>
         </DropdownMenuContent>

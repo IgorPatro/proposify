@@ -1,70 +1,71 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { BlockIconProps } from "./types";
+
+import { type BlockIconProps } from "./types";
 
 export const HeroSimpleCenteredIcon = ({ className }: BlockIconProps) => {
   return (
     <svg
-      width="160"
+      className={twMerge(className)}
+      fill="none"
       height="90"
       viewBox="0 0 160 90"
-      fill="none"
+      width="160"
       xmlns="http://www.w3.org/2000/svg"
-      className={twMerge(className)}
     >
       <rect
+        fill="currentColor"
+        height="5"
+        rx="0.5"
+        stroke="currentColor"
+        width="20"
         x="70"
         y="10.5"
-        width="20"
-        height="5"
-        rx="0.5"
-        fill="currentColor"
-        stroke="currentColor"
       />
       <rect
-        x="48.5"
-        y="36.5"
-        width="63"
+        fill="currentColor"
         height="8"
         rx="0.5"
-        fill="currentColor"
         stroke="currentColor"
+        width="63"
+        x="48.5"
+        y="36.5"
       />
       <rect
-        x="56"
-        y="49.5"
-        width="48"
+        fill="currentColor"
         height="5"
         rx="0.5"
-        fill="currentColor"
         stroke="currentColor"
+        width="48"
+        x="56"
+        y="49.5"
       />
       <rect
+        fill="currentColor"
+        height="4"
+        rx="0.5"
+        stroke="currentColor"
+        width="25"
         x="38.5"
         y="75.5"
-        width="25"
-        height="4"
-        rx="0.5"
-        fill="currentColor"
-        stroke="currentColor"
       />
       <rect
+        fill="currentColor"
+        height="4"
+        rx="0.5"
+        stroke="currentColor"
+        width="25"
         x="67.5"
         y="75.5"
-        width="25"
-        height="4"
-        rx="0.5"
-        fill="currentColor"
-        stroke="currentColor"
       />
       <rect
-        x="96.5"
-        y="75.5"
-        width="25"
+        fill="currentColor"
         height="4"
         rx="0.5"
-        fill="currentColor"
         stroke="currentColor"
+        width="25"
+        x="96.5"
+        y="75.5"
       />
     </svg>
   );

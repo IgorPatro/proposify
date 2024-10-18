@@ -6,8 +6,8 @@ import { type TextFieldConfig } from "./type";
 
 interface TextFieldFormProps {
   blockUuid: string;
-  fieldName: string;
   config: TextFieldConfig;
+  fieldName: string;
   updateBlockProperty: (blockUuid: string, path: string, value: string) => void;
 }
 
@@ -28,9 +28,9 @@ export const TextFieldForm = ({
         key={fieldName}
         name={fieldName}
         placeholder="Type text here"
+        rows={5}
         value={config.content}
         onChange={onChange}
-        rows={5}
       />
     </fieldset>
   );

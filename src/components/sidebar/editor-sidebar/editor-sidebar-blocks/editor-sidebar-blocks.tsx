@@ -8,7 +8,7 @@ export const EditorSidebarBlocks = () => {
   return (
     <div className="grid grid-cols-2 gap-3">
       {BlockNameEnum._def.values.map((blockName) => {
-        return <EditorDraggableBlock key={blockName} blockName={blockName} />;
+        return <EditorDraggableBlock blockName={blockName} key={blockName} />;
       })}
     </div>
   );

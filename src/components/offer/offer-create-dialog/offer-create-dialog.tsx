@@ -40,21 +40,21 @@ export const OfferCreateDialog = ({
       <FormProvider {...form}>
         <div className="flex flex-col gap-4">
           <Controller
-            name="name"
             control={control}
+            name="name"
             render={({ field }) => (
               <Input
+                error={errors.name?.message}
                 label="Name"
                 placeholder="My awesome offer"
-                error={errors.name?.message}
                 {...field}
               />
             )}
           />
           <OfferCreateDialogCustomerSection />
           <Controller
-            name="templateUuid"
             control={control}
+            name="templateUuid"
             render={({ field }) => (
               <Select
                 name="templateUuid"
@@ -75,8 +75,8 @@ export const OfferCreateDialog = ({
             )}
           />
           <Button
-            isLoading={isSubmitting}
             className="self-end"
+            isLoading={isSubmitting}
             type="button"
             onClick={onSubmit}
           >

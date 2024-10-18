@@ -33,9 +33,9 @@ export const CustomersTable = () => {
   if (!customers || customers.length === 0) {
     return (
       <TableNoData
-        isLoading={isLoading}
         error={error?.message}
         headers={HEADERS}
+        isLoading={isLoading}
       />
     );
   }
@@ -66,7 +66,7 @@ export const CustomersTable = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button aria-haspopup="true" size="icon" variant="ghost">
-                    <HiDotsHorizontal className="h-4 w-4" />
+                    <HiDotsHorizontal className="size-4" />
                     <span className="sr-only">Menu</span>
                   </Button>
                 </DropdownMenuTrigger>

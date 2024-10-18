@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { ResourceSchema } from "../resource/types";
 
 export const MinifiedOfferSchema = ResourceSchema.extend({

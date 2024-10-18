@@ -26,10 +26,10 @@ export const getAllTemplatesMinified = protectedProcedure.query(
 
     return templates.map((template) => ({
       createdAt: template.createdAt,
+      logoUrl: template.logoUrl,
       name: template.name,
       updatedAt: template.updatedAt,
       uuid: template.uuid,
-      logoUrl: template.logoUrl,
     }));
   },
 );

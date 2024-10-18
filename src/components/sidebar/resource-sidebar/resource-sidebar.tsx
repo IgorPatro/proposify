@@ -1,20 +1,21 @@
 import React from "react";
-import { Resource, ResourceEnum } from "@/server/api/resource/types";
 import { twMerge } from "tailwind-merge";
+
 import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
+import { type Resource, type ResourceEnum } from "@/server/api/resource/types";
 
 interface ResourceSidebarProps {
-  resource: Resource;
   isMobileSidebarOpen: boolean;
-  toggleMobileSidebarOpen: () => void;
+  resource: Resource;
   type: ResourceEnum;
+  toggleMobileSidebarOpen: () => void;
 }
 
 export const ResourceSidebar = ({
-  resource,
   isMobileSidebarOpen,
-  type,
+  resource,
   toggleMobileSidebarOpen,
+  type,
 }: ResourceSidebarProps) => {
   return (
     <aside
@@ -28,13 +29,13 @@ export const ResourceSidebar = ({
       {resource.blocks.map((block, index) => {
         return (
           <div
-            key={block.uuid}
             className="flex w-52 flex-col items-center justify-center gap-2"
+            key={block.uuid}
           >
             <a
+              className="relative block aspect-video w-full"
               href={`#${block.uuid}`}
               onClick={toggleMobileSidebarOpen}
-              className="relative block aspect-video w-full"
             >
               <BlockDynamicThumbnail
                 blockUuid={block.uuid}

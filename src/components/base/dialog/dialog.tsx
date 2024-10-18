@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/dialog";
 
 interface DialogProps {
-  isOpen: boolean;
-  onClose: () => void;
   children: ReactNode;
   header: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export const Dialog = ({ children, header, isOpen, onClose }: DialogProps) => {

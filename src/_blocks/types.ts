@@ -1,7 +1,8 @@
 import { z } from "zod";
 
+import { type ThemeEnum } from "@/server/api/resource/types";
+
 import { FieldConfigSchema } from "../_fields/types";
-import { ThemeEnum } from "@/server/api/resource/types";
 
 export const BLOCK_NAMES_MAP = [
   "hero_simple_centered",
@@ -30,16 +31,16 @@ export type Block = z.infer<typeof BlockSchema>;
 
 export type BlockComponent = ({
   fields,
-  themeEnum,
   resource,
+  themeEnum,
 }: {
-  themeEnum: ThemeEnum;
   fields: BlockFields;
   resource: BlockResourceData;
+  themeEnum: ThemeEnum;
 }) => JSX.Element;
 
 export interface BlockProps {
-  resource: BlockResourceData;
   fields: BlockFields;
+  resource: BlockResourceData;
   themeEnum: ThemeEnum;
 }

@@ -27,97 +27,97 @@ export const CustomerCreateForm = ({
     <form className={twMerge("flex flex-col gap-4", formClassName)}>
       <div className="flex gap-2">
         <Controller
-          name="firstName"
           control={control}
+          name="firstName"
           render={({ field }) => (
             <Input
+              error={errors.firstName?.message}
               label="First name"
               placeholder="John"
-              error={errors.firstName?.message}
               {...field}
             />
           )}
         />
         <Controller
-          name="lastName"
           control={control}
+          name="lastName"
           render={({ field }) => (
             <Input
+              error={errors.lastName?.message}
               label="Last name"
               placeholder="Doe"
-              error={errors.lastName?.message}
               {...field}
             />
           )}
         />
       </div>
       <Controller
-        name="email"
         control={control}
+        name="email"
         render={({ field }) => (
           <Input
+            error={errors.email?.message}
             label="Email"
             placeholder="john.doe@user.com"
-            error={errors.email?.message}
             {...field}
           />
         )}
       />
       <Controller
-        name="phone"
         control={control}
+        name="phone"
         render={({ field }) => (
           <Input
+            error={errors.phone?.message}
             label="Phone"
             placeholder="+48 432 434 434"
-            error={errors.phone?.message}
             {...field}
           />
         )}
       />
       <Controller
-        name="street"
         control={control}
+        name="street"
         render={({ field }) => (
           <Input
+            error={errors.street?.message}
             label="Ulica i numer"
             placeholder="Złota 44"
-            error={errors.street?.message}
             {...field}
           />
         )}
       />
       <div className="flex gap-2">
         <Controller
-          name="zipCode"
           control={control}
+          name="zipCode"
           render={({ field }) => (
             <Input
+              error={errors.zipCode?.message}
               label="Kod pocztowy"
               placeholder="31-141"
-              error={errors.zipCode?.message}
               {...field}
             />
           )}
         />
         <Controller
-          name="city"
           control={control}
+          name="city"
           render={({ field }) => (
             <Input
+              error={errors.city?.message}
               label="Miasto"
               placeholder="Warszawa"
-              error={errors.city?.message}
               {...field}
             />
           )}
         />
       </div>
       <Button
-        onClick={onSubmit}
-        isLoading={isSubmitting}
         className="self-end"
+        isLoading={isSubmitting}
         type="button"
+        onClick={onSubmit}
       >
         Create
       </Button>

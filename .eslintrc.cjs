@@ -28,6 +28,7 @@ const config = {
         prefer: "type-imports",
       },
     ],
+    "@typescript-eslint/no-empty-object-type": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "import/extensions": [
@@ -73,7 +74,7 @@ const config = {
     ],
     "sort-destructure-keys/sort-destructure-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
-    "tailwindcss/no-custom-classname": "error",
+    "tailwindcss/no-custom-classname": "off",
     "typescript-custom-sort-keys/interface": [
       "error",
       "asc",

@@ -2,22 +2,24 @@ import { useDndContext, useDraggable, useDroppable } from "@dnd-kit/core";
 import React, { useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-import { EditorBlockDroppableArea } from "./editor-block-droppable-area";
-import { EditorBlockMenu } from "./editor-block-menu";
-import { BlockName } from "@/_blocks/types";
+import { type BlockName } from "@/_blocks/types";
+
 import { useSelectedBlockUuid } from "../atoms";
 
+import { EditorBlockDroppableArea } from "./editor-block-droppable-area";
+import { EditorBlockMenu } from "./editor-block-menu";
+
 interface EditorBlockProps {
-  renderBlock: JSX.Element;
-  blockUuid: string;
   blockName: BlockName;
+  blockUuid: string;
+  renderBlock: JSX.Element;
 }
 
 export const EditorBlock = ({
-  blockUuid,
-
-  renderBlock,
   blockName,
+
+  blockUuid,
+  renderBlock,
 }: EditorBlockProps) => {
   const { active: globalActive } = useDndContext();
   const { isOver: isDraggedOver, setNodeRef: setDroppableRef } = useDroppable({
@@ -59,11 +61,11 @@ export const EditorBlock = ({
       <EditorBlockDroppableArea isDraggedOver={isDraggedOver} />
       <div ref={setDroppableRef}>{renderBlock}</div>
       {!globalActive ? (
-        <EditorBlockMenu isSelected={isSelected} blockUuid={blockUuid} />
+        <EditorBlockMenu blockUuid={blockUuid} isSelected={isSelected} />
       ) : null}
       <div
         className={twMerge(
-          "absolute left-0 top-0 h-full w-full bg-black/50",
+          "absolute left-0 top-0 size-full bg-black/50",
           getOverlayStyles(isSelected, !!globalActive),
         )}
       />

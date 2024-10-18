@@ -1,9 +1,9 @@
+import { type GetServerSideProps, type InferGetServerSidePropsType } from "next";
 import React from "react";
 
 import { Seo } from "@/components/base/seo";
-import { DashboardLayout } from "@/layouts/dashboard-layout";
 import { OfferDetails } from "@/components/offer/offer-details";
-import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { DashboardLayout } from "@/layouts/dashboard-layout";
 
 export const getServerSideProps: GetServerSideProps<{
   offerUuid: string;

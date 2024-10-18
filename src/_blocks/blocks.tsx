@@ -1,16 +1,16 @@
+import { HeroSimpleCenteredIcon, HeroSimpleLeftIcon } from "@/_icons";
+import { type BlockIconProps } from "@/_icons/types";
+
 import { AboutSimpleLeft } from "./about/about-simple-left";
 import { ABOUT_SIMPLE_LEFT_FIELDS_CONFIG } from "./about/about-simple-left/config";
-import { HeroSimpleCenteredIcon, HeroSimpleLeftIcon } from "@/_icons";
-
 import { FOOTER_SIMPLE_LEFT_FIELDS_CONFIG } from "./footer/footer-simple-left/config";
 import { FooterSimpleLeft } from "./footer/footer-simple-left/footer-simple-left";
-
 import { HeroSimpleCentered } from "./hero/hero-simple-centered";
 import { HERO_SIMPLE_CENTERED_FIELDS_CONFIG } from "./hero/hero-simple-centered/config";
 import { HeroSimpleLeft } from "./hero/hero-simple-left";
 import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "./hero/hero-simple-left/config";
 import { type BlockComponent, type BlockFields, type BlockName } from "./types";
-import { BlockIconProps } from "@/_icons/types";
+
 
 export const BLOCKS_MAP: {
   [T in BlockName]: BlockComponent;

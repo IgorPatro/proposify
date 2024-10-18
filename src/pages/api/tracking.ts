@@ -1,15 +1,17 @@
-import { db } from "@/server/db";
-import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
+
+import { db } from "@/server/db";
+
+import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = {
   message: string;
 };
 
 export const TrackingBodySchema = z.object({
-  tracking: z.record(z.number()),
-  offerUuid: z.string(),
   guestUuid: z.string().nullish(),
+  offerUuid: z.string(),
+  tracking: z.record(z.number()),
 });
 
 export type TrackingBody = z.infer<typeof TrackingBodySchema>;
@@ -20,16 +22,13 @@ export default async function handler(
 ) {
   try {
     const body = TrackingBodySchema.parse(JSON.parse(req.body));
-    const { offerUuid, tracking, guestUuid } = body;
+    const { guestUuid, offerUuid, tracking } = body;
 
     if (!offerUuid || !tracking) {
       throw new Error("No offerUuid or tracking provided");
     }
 
     const offer = await db.offer.findUnique({
-      where: {
-        uuid: offerUuid,
-      },
       include: {
         company: {
           select: {
@@ -40,6 +39,9 @@ export default async function handler(
             },
           },
         },
+      },
+      where: {
+        uuid: offerUuid,
       },
     });
 

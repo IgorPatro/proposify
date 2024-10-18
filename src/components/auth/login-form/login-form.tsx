@@ -17,30 +17,30 @@ export const LoginForm = () => {
 
   return (
     <form
-      onSubmit={onSubmit}
       className="flex w-80 flex-col gap-6 rounded-xl bg-white px-6 py-10 shadow-xl"
+      onSubmit={onSubmit}
     >
       <Controller
-        name="email"
         control={control}
+        name="email"
         render={({ field }) => (
           <Input
+            error={errors.email?.message}
             label="Email"
             placeholder="john.doe@gmail.com"
-            error={errors.email?.message}
             {...field}
           />
         )}
       />
       <Controller
-        name="password"
         control={control}
+        name="password"
         render={({ field }) => (
           <Input
+            error={errors.password?.message}
             label="Password"
             placeholder="Password"
             type="password"
-            error={errors.password?.message}
             {...field}
           />
         )}

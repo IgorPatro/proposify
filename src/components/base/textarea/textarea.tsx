@@ -16,12 +16,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className="relative flex flex-col gap-2">
         {label ? <Label htmlFor={name}>{label}</Label> : null}
         <TextareaPrimitive
-          id={name}
-          ref={ref}
           className={twMerge(
             error ? "border-destructive" : "",
             props.className,
           )}
+          id={name}
+          ref={ref}
           {...props}
         />
         {error ? (

@@ -1,4 +1,4 @@
-import { Visit } from "../visit/types";
+import { type Visit } from "../visit/types";
 
 export const generateTimeReportFromVisits = (visits: Visit[]) => {
   return visits.reduce(

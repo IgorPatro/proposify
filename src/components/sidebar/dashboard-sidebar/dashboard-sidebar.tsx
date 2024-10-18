@@ -15,12 +15,12 @@ export const DashboardSidebar = () => {
     <aside className="fixed left-0 top-0 z-20 h-full w-64 border-r bg-white p-4">
       <Link href={getDashboardHref()}>
         <Image
-          className="bg-transparent"
-          src="/logo.svg"
           alt="Logo"
-          width={100}
+          className="bg-transparent"
           height={30}
           objectFit="contain"
+          src="/logo.svg"
+          width={100}
         />
       </Link>
       <ul className="mt-8 flex flex-col gap-2 text-sm text-gray-700">
@@ -33,7 +33,7 @@ export const DashboardSidebar = () => {
               )}
               href={item.href}
             >
-              <item.icon className="h-4 w-4 text-gray-500" />
+              <item.icon className="size-4 text-gray-500" />
               {item.content}
             </Link>
           </li>

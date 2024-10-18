@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/table";
 
 interface TableNoDataProps {
+  error?: string;
   headers: string[];
   isLoading: boolean;
-  error?: string;
 }
 
 export const TableNoData = ({
@@ -56,7 +56,7 @@ export const TableNoData = ({
       </TableHeader>
       <TableBody>
         <TableRow>
-          <TableCell colSpan={headers.length} className="h-64 text-center">
+          <TableCell className="h-64 text-center" colSpan={headers.length}>
             {error ? "Wystąpił błąd podczas ładowania danych" : "Brak danych"}
           </TableCell>
         </TableRow>

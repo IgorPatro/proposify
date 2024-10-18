@@ -4,11 +4,12 @@ import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 import { type ReactNode } from "react";
 
+import { Toaster } from "@/components/ui/toaster";
 import { api } from "@/utils/api";
 
 import type { AppProps } from "next/app";
+
 import "@/styles/globals.css";
-import { Toaster } from "@/components/ui/toaster";
 
 type GetLayout = (page: ReactNode) => ReactNode;
 
@@ -41,7 +42,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout<CustomPageProps>) => {
 
   return (
     <>
-      <style jsx global>{`
+      <style global jsx>{`
         html {
           font-family: ${poppins.style.fontFamily};
         }

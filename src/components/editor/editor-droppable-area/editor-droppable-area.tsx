@@ -1,10 +1,10 @@
 import { useDroppable } from "@dnd-kit/core";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 import { DROPPABLE_AREA_BOTTOM_ID } from "../constants";
 import { useEditorStore } from "../store";
 import { type DraggedBlock } from "../types";
-import { twMerge } from "tailwind-merge";
 
 interface EditorDroppableAreaProps {
   draggedBlock: DraggedBlock | null;

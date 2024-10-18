@@ -3,9 +3,9 @@ import { type CSSProperties } from "react";
 import { type TextFieldConfig } from "./type";
 
 interface TextFieldProps {
-  config: TextFieldConfig;
   as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span";
   className?: string;
+  config: TextFieldConfig;
   style?: CSSProperties;
 }
 

@@ -9,8 +9,8 @@ import {
   isFieldConfigImage,
   isFieldConfigText,
 } from "@/_fields/utils";
-import { useEditorStore } from "@/components/editor/store";
 import { useSelectedBlockUuid } from "@/components/editor/atoms";
+import { useEditorStore } from "@/components/editor/store";
 
 interface EditorSidebarBlockSettingsProps {}
 
@@ -29,7 +29,7 @@ export const EditorSidebarBlockSettings =
     if (!block || !selectedBlockUuid) {
       return (
         <div className="flex aspect-video w-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-gray-500 p-4">
-          <LuMousePointerClick className="h-10 w-10" />
+          <LuMousePointerClick className="size-10" />
           <span className="text-center">
             Wybierz blok, aby zacząć go edytować
           </span>
@@ -46,31 +46,31 @@ export const EditorSidebarBlockSettings =
             case isFieldConfigText(fieldConfig):
               return (
                 <TextFieldForm
-                  key={fieldName}
                   blockUuid={selectedBlockUuid}
                   config={fieldConfig}
                   fieldName={fieldName}
+                  key={fieldName}
                   updateBlockProperty={updateBlockProperty}
                 />
               );
             case isFieldConfigButton(fieldConfig):
               return (
                 <ButtonFieldForm
-                  key={fieldName}
                   blockUuid={selectedBlockUuid}
                   config={fieldConfig}
                   fieldName={fieldName}
+                  key={fieldName}
                   updateBlockProperty={updateBlockProperty}
                 />
               );
             case isFieldConfigImage(fieldConfig):
               return (
                 <ImageFieldForm
-                  key={fieldName}
                   blockUuid={selectedBlockUuid}
-                  fieldName={fieldName}
-                  updateBlockProperty={updateBlockProperty}
                   config={fieldConfig}
+                  fieldName={fieldName}
+                  key={fieldName}
+                  updateBlockProperty={updateBlockProperty}
                 />
               );
             default:

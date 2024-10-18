@@ -26,20 +26,20 @@ export const TemplateCreateDialog = ({
 
   return (
     <Dialog header="Create template" isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={onSubmit} className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={onSubmit}>
         <Controller
-          name="name"
           control={control}
+          name="name"
           render={({ field }) => (
             <Input
+              error={errors.name?.message}
               label="Name"
               placeholder="My awesome template"
-              error={errors.name?.message}
               {...field}
             />
           )}
         />
-        <Button isLoading={isSubmitting} className="self-end" type="submit">
+        <Button className="self-end" isLoading={isSubmitting} type="submit">
           Create
         </Button>
       </form>

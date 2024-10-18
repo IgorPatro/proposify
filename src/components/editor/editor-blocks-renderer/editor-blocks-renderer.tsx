@@ -30,10 +30,10 @@ export const EditorBlocksRenderer = ({
                 key={block.uuid}
                 renderBlock={getBlockByName(block.name)({
                   fields: block.fields,
-                  themeEnum: theme,
                   resource: {
                     logoUrl,
                   },
+                  themeEnum: theme,
                 })}
               />
             );

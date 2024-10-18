@@ -3,41 +3,41 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 import { getTheme } from "@/_hooks/use-theme";
+import { Image } from "@/components/base/image";
+import { isEmptyString } from "@/utils/string";
 
 import { type BlockProps } from "../../types";
 
 import { type HeroSimpleLeftFields } from "./config";
-import { Image } from "@/components/base/image";
-import { isEmptyString } from "@/utils/string";
 
-export const HeroSimpleLeft = ({ fields, themeEnum, resource }: BlockProps) => {
+export const HeroSimpleLeft = ({ fields, resource, themeEnum }: BlockProps) => {
   const { background, subtitle, title } = fields as HeroSimpleLeftFields;
   const theme = getTheme(themeEnum);
 
   return (
     <div
       className={twMerge(
-        "h-9/12 relative min-h-block w-full",
+        "relative h-5/6 min-h-block w-full",
         `bg-${theme.background}`,
       )}
     >
       {isEmptyString(background.url) ? null : (
         <NextImage
-          src={background.url}
-          alt={background.alt}
           fill
+          alt={background.alt}
           className="object-cover"
+          src={background.url}
         />
       )}
-      <div className="absolute left-0 top-0 flex h-full w-full flex-col justify-between p-12">
+      <div className="absolute left-0 top-0 flex size-full flex-col justify-between p-12">
         <Image
-          wrapperClassName="h-8 w-52"
-          src={resource?.logoUrl}
-          fallbackUrl="/logo-placeholder.png"
           alt="Logo"
-          width={100}
-          height={100}
           className="object-contain object-left-top"
+          fallbackUrl="/logo-placeholder.png"
+          height={100}
+          src={resource?.logoUrl}
+          width={100}
+          wrapperClassName="h-8 w-52"
         />
         <div className="flex w-3/4 max-w-2xl flex-col gap-6">
           <h1

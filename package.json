@@ -15,6 +15,7 @@
     "postinstall": "prisma generate",
     "prettify": "prettier --write '{src,pages,test}/**/*.{ts,tsx}'",
     "lint": "next lint",
+    "lint:fix": "yarn lint --fix",
     "start": "next start",
     "check-types": "tsc --noEmit"
   },

@@ -6,7 +6,7 @@ import React from "react";
 
 import { Resource } from "@/components/resource";
 import { getOfferPreviewSsr } from "@/server/api/offer/get-offer-preview-ssr";
-import { Resource as ResourceType } from "@/server/api/resource/types";
+import { type Resource as ResourceType } from "@/server/api/resource/types";
 
 export const getServerSideProps: GetServerSideProps<{
   offer: ResourceType;
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<{
 const OfferPage = ({
   offer,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Resource trackingEnabled={true} resource={offer} type="offer" />;
+  return <Resource resource={offer} trackingEnabled={true} type="offer" />;
 };
 
 export default OfferPage;

@@ -18,13 +18,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="relative flex flex-col gap-2">
         {label ? <Label htmlFor={name}>{label}</Label> : null}
         <InputPrimitive
-          value={value ?? ""}
-          id={name}
-          ref={ref}
           className={twMerge(
             error ? "border-destructive" : "",
             props.className,
           )}
+          id={name}
+          ref={ref}
+          value={value ?? ""}
           {...props}
         />
         {error ? (

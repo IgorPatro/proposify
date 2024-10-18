@@ -7,15 +7,16 @@ import {
   getEditorOfferPreviewHref,
   getEditorTemplatePreviewHref,
 } from "@/utils/hrefs/editor";
+
 import { getEditorNavigationHeader } from "./utils";
 
 interface EditorNavigationProps {
-  isOffer?: boolean;
   isLoading: boolean;
-  onSave: () => Promise<void>;
-  onGoBack: () => void;
-  resourceUuid: string;
+  isOffer?: boolean;
   resourceName?: string;
+  resourceUuid: string;
+  onGoBack: () => void;
+  onSave: () => Promise<void>;
 }
 
 export const EditorNavigation = ({
@@ -23,8 +24,8 @@ export const EditorNavigation = ({
   isOffer = false,
   onGoBack,
   onSave,
-  resourceUuid,
   resourceName,
+  resourceUuid,
 }: EditorNavigationProps) => {
   const onPreviewOpen = () => {
     if (isOffer) {
@@ -37,7 +38,7 @@ export const EditorNavigation = ({
   return (
     <nav className="fixed left-0 top-0 flex h-14 w-full items-center justify-between border-b border-gray-700 bg-background p-3 text-white drop-shadow-2xl">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" className="gap-1 text-sm" onClick={onGoBack}>
+        <Button className="gap-1 text-sm" variant="ghost" onClick={onGoBack}>
           <HiMiniArrowLeft />
           Wróć
         </Button>
@@ -47,18 +48,18 @@ export const EditorNavigation = ({
       </div>
       <div className="flex items-center">
         <Button
-          variant="ghost"
           className="gap-1 text-sm"
+          variant="ghost"
           onClick={onPreviewOpen}
         >
           <HiPlay />
           Preview
         </Button>
         <Button
-          isLoading={isLoading}
-          onClick={onSave}
-          variant="ghost"
           className="gap-1 text-sm"
+          isLoading={isLoading}
+          variant="ghost"
+          onClick={onSave}
         >
           <IoIosSave />
           Zapisz

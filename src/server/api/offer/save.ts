@@ -2,15 +2,15 @@ import { z } from "zod";
 
 import { BlockSchema } from "@/_blocks/types";
 
-import { protectedProcedure } from "../trpc";
 import { ThemeEnum } from "../resource/types";
+import { protectedProcedure } from "../trpc";
 
 const SaveOfferInputSchema = z.object({
   blocks: z.array(BlockSchema),
+  logoUrl: z.string().nullish(),
   name: z.string().min(1),
   offerUuid: z.string().min(1),
   theme: ThemeEnum,
-  logoUrl: z.string().nullish(),
 });
 
 export const save = protectedProcedure
@@ -19,9 +19,9 @@ export const save = protectedProcedure
     return ctx.db.offer.update({
       data: {
         blocks: input.blocks,
+        logoUrl: input.logoUrl,
         name: input.name,
         theme: input.theme,
-        logoUrl: input.logoUrl,
       },
       where: { uuid: input.offerUuid },
     });

@@ -1,4 +1,3 @@
-import { isEditorPageByPathname } from "@/utils/editor";
 import Document, {
   Html,
   Head,
@@ -7,6 +6,8 @@ import Document, {
   type DocumentContext,
   type DocumentInitialProps,
 } from "next/document";
+
+import { isEditorPageByPathname } from "@/utils/editor";
 
 interface DocumentProps extends DocumentInitialProps {
   isEditorPage: boolean;
@@ -38,7 +39,7 @@ class MyDocument extends Document<DocumentProps> {
     const htmlClassName = this.props.isEditorPage ? "dark" : "";
 
     return (
-      <Html lang="en" className={htmlClassName}>
+      <Html className={htmlClassName} lang="en">
         <Head />
         <body>
           <Main />

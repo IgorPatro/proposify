@@ -4,10 +4,10 @@ import {
 } from "next";
 import React from "react";
 
-import { EditorLayout } from "@/layouts/editor-layout";
-import { ResourceEnum } from "@/server/api/resource/types";
-import { BlockData, getBlockDataSsr } from "@/server/api/block/get-block-data";
 import { getBlockByName } from "@/_blocks/utils";
+import { EditorLayout } from "@/layouts/editor-layout";
+import { type BlockData, getBlockDataSsr } from "@/server/api/block/get-block-data";
+import { type ResourceEnum } from "@/server/api/resource/types";
 
 export const getServerSideProps: GetServerSideProps<{
   data: BlockData;
@@ -38,10 +38,10 @@ const BlockPreviewPage = ({
     <div className="h-block w-[1216px]">
       {getBlockByName(data.block.name)({
         fields: data.block.fields,
-        themeEnum: data.theme,
         resource: {
           logoUrl: data.logoUrl,
         },
+        themeEnum: data.theme,
       })}
     </div>
   );

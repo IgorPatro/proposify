@@ -6,8 +6,8 @@ import { type ButtonFieldConfig } from "./type";
 import { isButtonActionDownload, isButtonActionLink } from "./utils";
 
 interface ButtonFieldProps {
-  config: ButtonFieldConfig;
   className?: string;
+  config: ButtonFieldConfig;
   style?: CSSProperties;
 }
 

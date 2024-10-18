@@ -4,20 +4,20 @@ import { type CSSProperties } from "react";
 import { type ImageFieldConfig } from "./type";
 
 interface ImageFieldProps extends Omit<NextImageProps, "src" | "alt"> {
-  config: ImageFieldConfig;
   className?: string;
+  config: ImageFieldConfig;
   style?: CSSProperties;
 }
 
 export const ImageField = ({ className, config, style }: ImageFieldProps) => {
   return (
     <NextImage
-      className={className}
-      style={style}
-      alt={config.alt}
-      src={config.url}
       fill
+      alt={config.alt}
+      className={className}
       objectFit="cover"
+      src={config.url}
+      style={style}
     />
   );
 };

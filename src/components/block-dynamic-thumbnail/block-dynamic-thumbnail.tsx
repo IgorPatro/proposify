@@ -1,8 +1,9 @@
-import { useIsIFrameLoaded } from "@/hooks/use-is-iframe-loaded";
-import { ResourceEnum } from "@/server/api/resource/types";
-import { getBlockPreviewHref } from "@/utils/hrefs/editor";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+
+import { useIsIFrameLoaded } from "@/hooks/use-is-iframe-loaded";
+import { type ResourceEnum } from "@/server/api/resource/types";
+import { getBlockPreviewHref } from "@/utils/hrefs/editor";
 
 interface BlockDynamicThumbnailProps {
   blockUuid: string;
@@ -19,10 +20,10 @@ export const BlockDynamicThumbnail = ({
     <div className="relative aspect-video w-52">
       {/* Note: Before loading iframe, show placeholder */}
       <Image
-        alt="Block placeholder"
-        src="/image-placeholder.svg"
         fill
+        alt="Block placeholder"
         className="bg-black/40 object-cover"
+        src="/image-placeholder.svg"
       />
       <iframe
         // Note: calculate the aspect ratio of the block and scale it down

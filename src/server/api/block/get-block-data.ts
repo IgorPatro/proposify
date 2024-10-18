@@ -1,4 +1,5 @@
 import { db } from "@/server/db";
+
 import { ResourceSchema, type ResourceEnum } from "../resource/types";
 
 export const getBlockDataSsr = async (
@@ -33,10 +34,10 @@ export const getBlockDataSsr = async (
 
   return {
     block,
+    logoUrl: parsedResource.data.logoUrl,
     name: parsedResource.data.name,
     theme: parsedResource.data.theme,
     uuid: parsedResource.data.uuid,
-    logoUrl: parsedResource.data.logoUrl,
   };
 };
 

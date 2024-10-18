@@ -1,10 +1,10 @@
 import { type z } from "zod";
 
+import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "@/_blocks/hero/hero-simple-left/config";
 import { BlockNameEnum } from "@/_blocks/types";
 
+import { type Resource, ResourceSchema } from "../resource/types";
 import { protectedProcedure } from "../trpc";
-import { Resource, ResourceSchema } from "../resource/types";
-import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "@/_blocks/hero/hero-simple-left/config";
 
 export const CreateTemplateInputSchema = ResourceSchema.pick({
   name: true,

@@ -6,11 +6,11 @@ import { templateRouter } from "./template";
 import { createCallerFactory, createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({
+  asset: assetRouter,
   auth: authRouter,
   customer: customerRouter,
   offer: offerRouter,
   template: templateRouter,
-  asset: assetRouter,
 });
 
 export type AppRouter = typeof appRouter;

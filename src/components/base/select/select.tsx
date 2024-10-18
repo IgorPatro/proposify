@@ -10,18 +10,18 @@ import {
 } from "@/components/ui/select";
 
 interface Option {
-  value: string;
   label: string;
+  value: string;
 }
 
 interface SelectProps {
-  name: string;
-  value?: string;
+  error?: string;
   label?: string;
-  onChange: (value: string) => void;
+  name: string;
   options: Option[];
   placeholder?: string;
-  error?: string;
+  value?: string;
+  onChange: (value: string) => void;
 }
 
 export const Select = ({

@@ -8,20 +8,20 @@ import React from "react";
 
 import { OfferEditorSidebar } from "@/components/sidebar/editor-sidebar/offer-editor-sidebar/offer-editor-sidebar";
 import { TemplateEditorSidebar } from "@/components/sidebar/editor-sidebar/template-editor-sidebar";
+import { type Resource } from "@/server/api/resource/types";
 
+import { useSelectedBlockUuid } from "./atoms";
 import { POINTER_SENSOR_CONSTRAINTS_DISTANCE } from "./constants";
 import { EditorBlocksRenderer } from "./editor-blocks-renderer";
 import { EditorDragOverlay } from "./editor-drag-overlay";
 import { useManageBlocks } from "./hooks";
 import { useEditorStore } from "./store";
 import { fixCursorSnapOffset } from "./utils";
-import { Resource } from "@/server/api/resource/types";
-import { useSelectedBlockUuid } from "./atoms";
 
 interface EditorProps {
-  resource: Resource | undefined;
-  isOffer?: boolean;
   isLoading: boolean;
+  isOffer?: boolean;
+  resource: Resource | undefined;
 }
 
 export const Editor = ({
@@ -52,10 +52,10 @@ export const Editor = ({
 
   return (
     <DndContext
-      sensors={sensors}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
       collisionDetection={fixCursorSnapOffset}
+      sensors={sensors}
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
     >
       <div className="flex w-full">
         {isOffer ? <OfferEditorSidebar /> : <TemplateEditorSidebar />}

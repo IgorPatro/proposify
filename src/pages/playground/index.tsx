@@ -94,7 +94,7 @@ const DndPlayground = () => {
   const renderDraggedOverlay = () => {
     if (draggedElement?.isNew) {
       return (
-        <div className="h-10 w-10 bg-black text-white">
+        <div className="size-10 bg-black text-white">
           {draggedElement?.id}
         </div>
       );
@@ -110,13 +110,13 @@ const DndPlayground = () => {
   return (
     <DndContext
       sensors={sensors}
-      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
     >
       <div className="flex gap-10">
         <div className="border p-5">
           {leftPanelItems.map((item) => (
-            <DraggableItem key={item.value} item={item}>
+            <DraggableItem item={item} key={item.value}>
               <button>{item.value}</button>
             </DraggableItem>
           ))}
@@ -124,7 +124,7 @@ const DndPlayground = () => {
 
         <div className="flex w-full flex-col">
           {items.map((item) => (
-            <ExistingBlock key={item.uuid} item={item} />
+            <ExistingBlock item={item} key={item.uuid} />
           ))}
           <DroppableSpaceBelow />
         </div>
@@ -155,8 +155,8 @@ function DroppableSpaceBelow() {
 }
 
 function DraggableItem(props: {
-  item: { bg: string; value: number };
   children: ReactNode;
+  item: { bg: string; value: number };
 }) {
   const { listeners, setNodeRef } = useDraggable({
     data: {
@@ -168,7 +168,7 @@ function DraggableItem(props: {
 
   return (
     <div
-      className="h-10 w-10 cursor-pointer bg-black text-white"
+      className="size-10 cursor-pointer bg-black text-white"
       ref={setNodeRef}
       {...listeners}
     >

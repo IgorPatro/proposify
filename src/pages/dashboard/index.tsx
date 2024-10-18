@@ -1,9 +1,9 @@
 import React from "react";
 
 import { Seo } from "@/components/base/seo";
+import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
 import { Button } from "@/components/ui/button";
 import { DashboardLayout } from "@/layouts/dashboard-layout";
-import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
 
 const DashboardPage = () => {
   return (

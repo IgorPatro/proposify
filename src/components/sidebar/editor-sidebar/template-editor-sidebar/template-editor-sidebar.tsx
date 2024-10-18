@@ -22,13 +22,13 @@ export const TemplateEditorSidebar = ({}: TemplateEditorSidebarProps) => {
             Ustawienia
           </TabsTrigger>
           <TabsTrigger className="w-full" value="plus">
-            <HiPlus className="h-5 w-5" />
+            <HiPlus className="size-5" />
           </TabsTrigger>
         </TabsList>
         <TabsContent value="block">
           <EditorSidebarBlockSettings />
         </TabsContent>
-        <TabsContent value="global" className="flex flex-col gap-4">
+        <TabsContent className="flex flex-col gap-4" value="global">
           <EditorSidebarResourceSettings />
           <EditorSidebarThemeSettings />
         </TabsContent>

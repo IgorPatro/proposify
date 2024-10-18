@@ -1,4 +1,5 @@
 import { db } from "@/server/db";
+
 import { ResourceSchema } from "../resource/types";
 
 export const getOfferPreviewSsr = async (offerUuid: string) => {

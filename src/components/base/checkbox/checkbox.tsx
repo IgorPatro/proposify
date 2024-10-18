@@ -18,8 +18,8 @@ export const Checkbox = forwardRef<
   return (
     <div className="relative flex items-center gap-1">
       <CheckboxPrimitive
-        id={name}
         className={error ? "border-destructive" : "border-input"}
+        id={name}
         ref={ref}
         {...props}
       />

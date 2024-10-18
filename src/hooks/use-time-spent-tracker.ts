@@ -1,6 +1,7 @@
-import { TrackingBody } from "@/pages/api/tracking";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+
+import { type TrackingBody } from "@/pages/api/tracking";
 
 export const useOfferTimeSpentTracker = (
   offerUuid: string,
@@ -15,7 +16,7 @@ export const useOfferTimeSpentTracker = (
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const { target, isIntersecting } = entry;
+          const { isIntersecting, target } = entry;
           const sectionUuid = target.id;
 
           if (isIntersecting) {
@@ -60,9 +61,9 @@ export const useOfferTimeSpentTracker = (
       navigator.sendBeacon(
         "/api/tracking",
         JSON.stringify({
-          tracking: timeSpent,
-          offerUuid,
           guestUuid: status === "authenticated" ? session?.user?.id : null,
+          offerUuid,
+          tracking: timeSpent,
         } as TrackingBody),
       );
     };

@@ -1,7 +1,8 @@
-import { BlockName } from "@/_blocks/types";
-import { getBlockIcon } from "@/_blocks/utils";
 import { useDraggable } from "@dnd-kit/core";
 import React from "react";
+
+import { type BlockName } from "@/_blocks/types";
+import { getBlockIcon } from "@/_blocks/utils";
 
 interface EditorDraggableBlockProps {
   blockName: BlockName;
@@ -22,7 +23,7 @@ export const EditorDraggableBlock = ({
 
   return (
     <div className="w-full cursor-grab" ref={setDraggableRef} {...listeners}>
-      <Icon className="h-full w-full rounded-sm bg-gray-900 text-gray-500 hover:bg-gray-800" />
+      <Icon className="size-full rounded-sm bg-gray-900 text-gray-500 hover:bg-gray-800" />
     </div>
   );
 };

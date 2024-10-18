@@ -2,7 +2,7 @@ import React from "react";
 
 import { Select } from "@/components/base/select";
 import { useEditorStore } from "@/components/editor/store";
-import { ThemeEnum } from "@/server/api/resource/types";
+import { type ThemeEnum } from "@/server/api/resource/types";
 
 export const EditorSidebarThemeSettings = () => {
   const updateTheme = useEditorStore((store) => store.updateTheme);
@@ -15,15 +15,15 @@ export const EditorSidebarThemeSettings = () => {
   return (
     <div className="flex flex-col gap-3">
       <Select
-        name="theme"
         label="Theme"
-        value={theme}
-        onChange={onSelectTheme}
-        // TODO: Add const options
+        name="theme"
+        // TODO: Add options
         options={[
           { label: "Light", value: "light" },
           { label: "Dark", value: "dark" },
         ]}
+        value={theme}
+        onChange={onSelectTheme}
       />
     </div>
   );

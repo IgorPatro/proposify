@@ -35,7 +35,7 @@ export const PageOffers = () => {
             </CardDescription>
           </div>
           <Button className="w-fit" onClick={toggleCreateDialog}>
-            <HiPlus className="mr-2 h-5 w-5" />
+            <HiPlus className="mr-2 size-5" />
             Nowa oferta
           </Button>
         </div>

@@ -15,8 +15,8 @@ import { isButtonActionDownload, isButtonActionLink } from "./utils";
 
 interface ButtonFieldFormProps {
   blockUuid: string;
-  fieldName: string;
   config: ButtonFieldConfig;
+  fieldName: string;
   updateBlockProperty: (
     blockUuid: string,
     path: string,
@@ -41,16 +41,17 @@ export const ButtonFieldForm = ({
           <div className="flex flex-col gap-2">
             <Textarea
               key="link"
-              name="link"
               label="Link URL"
+              name="link"
               placeholder="Type link here"
+              rows={2}
               value={config.action.href}
               onChange={(event) => onChange(`${fieldName}.action.href`, event)}
-              rows={2}
             />
             <Switch
-              label="Open in new tab"
               checked={config.action.newTab}
+              label="Open in new tab"
+              name="newTab"
               onCheckedChange={(isChecked) =>
                 updateBlockProperty(
                   blockUuid,
@@ -58,7 +59,6 @@ export const ButtonFieldForm = ({
                   isChecked,
                 )
               }
-              name="newTab"
             />
           </div>
         );
@@ -67,14 +67,14 @@ export const ButtonFieldForm = ({
         return (
           <Textarea
             key="download"
-            name="download"
             label="Download URL"
+            name="download"
             placeholder="Type download link here"
+            rows={2}
             value={config.action.downloadUrl}
             onChange={(event) =>
               onChange(`${fieldName}.action.downloadUrl`, event)
             }
-            rows={2}
           />
         );
     }
@@ -85,12 +85,12 @@ export const ButtonFieldForm = ({
       <div className="flex flex-col gap-2">
         <Textarea
           key={fieldName}
-          name={fieldName}
           label={config.label}
+          name={fieldName}
           placeholder="Type text here"
+          rows={3}
           value={config.content}
           onChange={(event) => onChange(`${fieldName}.content`, event)}
-          rows={3}
         />
         <Select
           name="action"

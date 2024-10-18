@@ -1,12 +1,12 @@
 import React, { type ChangeEvent } from "react";
+import { HiRefresh } from "react-icons/hi";
 
+import { Image } from "@/components/base/image";
 import { Input } from "@/components/base/input";
 import { useEditorStore } from "@/components/editor/store";
-import { Image } from "@/components/base/image";
-import { HiRefresh } from "react-icons/hi";
+import { ImagePickerSheet } from "@/components/image-picker-sheet";
 import { Button } from "@/components/ui/button";
 import { useToggle } from "@/hooks/use-toggle";
-import { ImagePickerSheet } from "@/components/image-picker-sheet";
 
 export const EditorSidebarResourceSettings = () => {
   const [isPickImageSheetOpen, toggleIsPickImageSheetOpen] = useToggle();
@@ -24,17 +24,17 @@ export const EditorSidebarResourceSettings = () => {
       {logoUrl ? (
         <div className="relative">
           <Image
-            wrapperClassName="w-full aspect-video rounded-lg overflow-hidden p-4"
-            src={logoUrl}
             alt="Image"
-            width={100}
+            className="size-full object-contain object-center"
             height={100}
-            className="h-full w-full object-contain object-center"
+            src={logoUrl}
+            width={100}
+            wrapperClassName="w-full aspect-video rounded-lg overflow-hidden p-4"
           />
-          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 opacity-0 hover:opacity-100">
+          <div className="absolute left-0 top-0 flex size-full items-center justify-center bg-black/50 opacity-0 hover:opacity-100">
             <HiRefresh
+              className="size-6 cursor-pointer text-white"
               onClick={toggleIsPickImageSheetOpen}
-              className="h-6 w-6 cursor-pointer text-white"
             />
           </div>
         </div>
@@ -47,10 +47,10 @@ export const EditorSidebarResourceSettings = () => {
         onSelectImageUrl={(url) => updateLogoUrl(url)}
       />
       <Input
+        label="Name"
+        name="resourceName"
         value={resourceName}
         onChange={handleResourceNameChange}
-        name="resourceName"
-        label="Name"
       />
     </div>
   );

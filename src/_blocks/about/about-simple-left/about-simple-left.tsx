@@ -24,12 +24,12 @@ export const AboutSimpleLeft = ({
       )}
     >
       <Image
-        src={background?.url}
-        alt={background?.alt}
         fill
+        alt={background?.alt}
         objectFit="cover"
+        src={background?.url}
       />
-      <div className="absolute left-0 top-0 flex h-full w-full flex-col justify-between p-12">
+      <div className="absolute left-0 top-0 flex size-full flex-col justify-between p-12">
         <div className="flex w-full justify-between">
           <span className={twMerge(`text-${theme.text.secondary}`)}>
             Oferta
@@ -60,10 +60,10 @@ export const AboutSimpleLeft = ({
           </p>
           <div className="relative h-20 w-44">
             <Image
-              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-              alt="Wellness Solutions logo"
               fill
+              alt="Wellness Solutions logo"
               objectFit="contain"
+              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
             />
           </div>
         </div>
@@ -71,10 +71,10 @@ export const AboutSimpleLeft = ({
         <div className="flex w-full items-end justify-between">
           <div className="relative h-8 w-24">
             <Image
-              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-              alt="Wellness Solutions logo"
               fill
+              alt="Wellness Solutions logo"
               objectFit="contain"
+              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
             />
           </div>
           <span className={twMerge(`text-${theme.text.secondary}`)}>6/7</span>

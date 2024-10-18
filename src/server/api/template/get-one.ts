@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { publicProcedure } from "../trpc";
 import { ResourceSchema } from "../resource/types";
+import { publicProcedure } from "../trpc";
 
 export const getOne = publicProcedure
   .input(z.object({ templateUuid: z.string().min(1) }))

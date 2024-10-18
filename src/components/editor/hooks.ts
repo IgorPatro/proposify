@@ -7,12 +7,12 @@ import { useCallback, useState } from "react";
 
 import { type Block, type BlockName } from "@/_blocks/types";
 import { getBlockDefaultFieldsByName } from "@/_blocks/utils";
+import { generateUuid } from "@/utils/uuid";
 
+import { useSelectedBlockUuid } from "./atoms";
 import { useEditorStore } from "./store";
 import { type DraggedBlock } from "./types";
 import { isDraggedBlockNew, isDroppableAreaBottom } from "./utils";
-import { generateUuid } from "@/utils/uuid";
-import { useSelectedBlockUuid } from "./atoms";
 
 export const useManageBlocks = () => {
   const updateBlocks = useEditorStore((store) => store.updateBlocks);

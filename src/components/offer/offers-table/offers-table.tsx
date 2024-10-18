@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import * as React from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 
@@ -20,9 +21,8 @@ import {
 } from "@/components/ui/table";
 import { api } from "@/utils/api";
 import { formatDateToDayShortMonthYear } from "@/utils/date";
-import { getEditorOfferHref } from "@/utils/hrefs/editor";
 import { getDashboardOfferDetailsHref } from "@/utils/hrefs/dashboard";
-import { useRouter } from "next/router";
+import { getEditorOfferHref } from "@/utils/hrefs/editor";
 
 const HEADERS = [
   "Nazwa",
@@ -49,9 +49,9 @@ export const OffersTable = () => {
   if (!offers || offers.length === 0) {
     return (
       <TableNoData
-        isLoading={isLoading}
         error={error?.message}
         headers={HEADERS}
+        isLoading={isLoading}
       />
     );
   }
@@ -90,7 +90,7 @@ export const OffersTable = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button aria-haspopup="true" size="icon" variant="ghost">
-                    <HiDotsHorizontal className="h-4 w-4" />
+                    <HiDotsHorizontal className="size-4" />
                     <span className="sr-only">Menu</span>
                   </Button>
                 </DropdownMenuTrigger>

@@ -18,8 +18,8 @@ export const Switch = forwardRef<
   return (
     <div className="relative flex items-center gap-1">
       <SwitchPrimitive
-        id={name}
         className={error ? "border-destructive" : "border-input"}
+        id={name}
         ref={ref}
         {...props}
       />

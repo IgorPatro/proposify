@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const ImageFieldConfigSchema = z.object({
-  label: z.string(),
   alt: z.string(),
+  label: z.string(),
   type: z.literal("image"),
   url: z.string(),
 });

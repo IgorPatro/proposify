@@ -51,24 +51,24 @@ export const OfferCreateDialogCustomerSection =
         return (
           <>
             <Controller
-              name="customerUuid"
               control={control}
+              name="customerUuid"
               render={({ field }) => (
                 <Select
-                  options={customersOptions}
-                  label="Customer"
-                  placeholder="Select customer"
                   error={errors.customerUuid?.message}
+                  label="Customer"
+                  name="customerUuid"
+                  options={customersOptions}
+                  placeholder="Select customer"
                   value={field.value}
                   onChange={field.onChange}
-                  name="customerUuid"
                 />
               )}
             />
             <Button
-              onClick={toggleMode}
-              variant="outline"
               className="w-fit self-end"
+              variant="outline"
+              onClick={toggleMode}
             >
               Add new customer
             </Button>
@@ -79,8 +79,8 @@ export const OfferCreateDialogCustomerSection =
       return (
         <>
           <Button
-            variant="link"
             className="w-fit self-end"
+            variant="link"
             onClick={toggleMode}
           >
             Back

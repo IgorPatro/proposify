@@ -1,4 +1,4 @@
-import { ResourceEnum } from "@/server/api/resource/types";
+import { type ResourceEnum } from "@/server/api/resource/types";
 
 export const getEditorTemplateHref = (templateUuid: string) =>
   `/editor/template/${templateUuid}`;

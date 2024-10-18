@@ -55,24 +55,24 @@ export const DashboardNavigation = () => {
       </Breadcrumb>
       <div className="flex items-center justify-center gap-4">
         <div className="relative">
-          <HiSearch className="absolute left-2.5 top-2.5 z-10 h-4 w-4 text-gray-500" />
+          <HiSearch className="absolute left-2.5 top-2.5 z-10 size-4 text-gray-500" />
           <Input
-            value=""
-            type="search"
-            placeholder="Search..."
             className="w-full rounded-lg pl-8 md:w-52 lg:w-80"
+            placeholder="Search..."
+            type="search"
+            value=""
           />
         </div>
-        <HiBellAlert className="h-5 w-5 cursor-pointer text-gray-500" />
+        <HiBellAlert className="size-5 cursor-pointer text-gray-500" />
         <DropdownMenu>
           <DropdownMenuTrigger>
             <div className="flex cursor-pointer items-center gap-2">
-              <Avatar className="h-8 w-8">
+              <Avatar className="size-8">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <span>Jan Kowalski</span>
-              <HiChevronDown className="h-4 w-4" />
+              <HiChevronDown className="size-4" />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-52">

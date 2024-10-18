@@ -36,9 +36,9 @@ export const TemplatesTable = () => {
   if (!templates || templates.length === 0) {
     return (
       <TableNoData
-        isLoading={isLoading}
         error={error?.message}
         headers={HEADERS}
+        isLoading={isLoading}
       />
     );
   }
@@ -58,12 +58,12 @@ export const TemplatesTable = () => {
           <TableRow key={template.uuid}>
             <TableCell className="flex h-fit items-center gap-4">
               <Image
-                src="https://picsum.photos/70/50"
                 alt="Template thumbnail"
-                width={70}
+                className="rounded-lg"
                 height={50}
                 objectFit="cover"
-                className="rounded-lg"
+                src="https://picsum.photos/70/50"
+                width={70}
               />
               {template.name}
             </TableCell>
@@ -77,7 +77,7 @@ export const TemplatesTable = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button aria-haspopup="true" size="icon" variant="ghost">
-                    <HiDotsHorizontal className="h-4 w-4" />
+                    <HiDotsHorizontal className="size-4" />
                     <span className="sr-only">Menu</span>
                   </Button>
                 </DropdownMenuTrigger>

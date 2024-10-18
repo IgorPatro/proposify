@@ -20,18 +20,18 @@ export const FooterSimpleLeft = ({ fields, themeEnum }: BlockProps) => {
       )}
     >
       <Image
-        src={background?.url}
-        alt={background?.alt}
         fill
+        alt={background?.alt}
         objectFit="cover"
+        src={background?.url}
       />
-      <div className="absolute left-0 top-0 flex h-full w-full flex-col justify-between p-12">
+      <div className="absolute left-0 top-0 flex size-full flex-col justify-between p-12">
         <div className="relative h-8 w-52">
           <Image
-            src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-            alt="Wellness Solutions logo"
             fill
+            alt="Wellness Solutions logo"
             objectFit="contain"
+            src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
           />
         </div>
         <div className="flex w-3/4 max-w-3xl translate-y-12 flex-col gap-10">
