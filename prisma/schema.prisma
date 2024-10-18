@@ -23,6 +23,16 @@ model User {
   Asset         Asset[]
 }
 
+model Visit {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tracking  Json?
+  offer     Offer    @relation(fields: [offerId], references: [id])
+  offerId   Int
+}
+
 model Company {
   id        Int        @id @default(autoincrement())
   uuid      String     @unique @default(uuid())
@@ -75,6 +85,7 @@ model Offer {
   customer   Customer @relation(fields: [customerId], references: [id])
   customerId Int
   logoUrl    String?
+  Visit Visit[]
 }
 
 model Customer {

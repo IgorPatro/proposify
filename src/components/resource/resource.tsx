@@ -5,15 +5,22 @@ import { twMerge } from "tailwind-merge";
 import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
 import { Resource as ResourceType } from "@/server/api/resource/types";
-import { useTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
+import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
 
 interface ResourceProps {
   resource: ResourceType;
+  trackingEnabled?: boolean;
 }
 
-export const Resource = ({ resource }: ResourceProps) => {
+export const Resource = ({
+  resource,
+  trackingEnabled = false,
+}: ResourceProps) => {
   const [isOpen, toggleOpen] = useToggle(false);
-  const { sectionRefs } = useTimeSpentTracker();
+  const { sectionRefs } = useOfferTimeSpentTracker(
+    resource.uuid,
+    trackingEnabled,
+  );
 
   return (
     <main className="max-w-screen max-h-screen overflow-hidden bg-gray-500">

@@ -1,39 +1,29 @@
+import { TrackingBody } from "@/pages/api/tracking";
+import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
-export const useTimeSpentTracker = () => {
-  const [visibilityTimes, setVisibilityTimes] = useState<{
-    [key: string]: number;
-  }>({});
+export const useOfferTimeSpentTracker = (
+  offerUuid: string,
+  trackingEnabled = true,
+) => {
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const visibilityTimers = useRef<{ [key: string]: number }>({});
+  const [timeSpent, setTimeSpent] = useState<{ [key: string]: number }>({});
+  const [visibleSectionUuid, setVisibleSectionUuid] = useState("");
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const { target, isIntersecting } = entry;
-          const sectionId = target.id;
+          const sectionUuid = target.id;
 
           if (isIntersecting) {
-            // Start timer
-            visibilityTimers.current[sectionId] = Date.now();
-          } else {
-            // Stop timer and calculate time
-            const endTime = Date.now();
-            const startTime = visibilityTimers.current[sectionId];
-
-            if (startTime) {
-              const timeSpent = endTime - startTime;
-
-              setVisibilityTimes((prevTimes) => ({
-                ...prevTimes,
-                [sectionId]: (prevTimes[sectionId] || 0) + timeSpent,
-              }));
-            }
+            setVisibleSectionUuid(sectionUuid);
           }
         });
       },
-      { threshold: 0.5 }, // Only track when 50% of the section is visible
+      { threshold: 0.5 },
     );
 
     Object.values(sectionRefs.current).forEach((section) => {
@@ -47,28 +37,42 @@ export const useTimeSpentTracker = () => {
     };
   }, []);
 
-  // Log visibilityTimes whenever it changes
   useEffect(() => {
-    console.log(visibilityTimes);
-  }, [visibilityTimes]); // Correctly track state changes
-
-  // Logging on unload or at intervals
-  useEffect(() => {
-    const handleUnload = () => {
-      navigator.sendBeacon("/api/track-time", JSON.stringify(visibilityTimes));
-    };
-
-    // const interval = setInterval(() => {
-    //   handleUnload();
-    // }, 1000);
-
-    window.addEventListener("beforeunload", handleUnload);
+    const interval = setInterval(() => {
+      if (visibleSectionUuid) {
+        setTimeSpent((prevTime) => ({
+          ...prevTime,
+          [visibleSectionUuid]: (prevTime[visibleSectionUuid] || 0) + 1,
+        }));
+      }
+    }, 1000);
 
     return () => {
-      window.removeEventListener("beforeunload", handleUnload);
-      //   clearInterval(interval);
+      clearInterval(interval);
     };
-  }, [visibilityTimes]); // Track visibilityTimes as dependency
+  }, [visibleSectionUuid]);
+
+  useEffect(() => {
+    const handleSubmitTrackedTime = () => {
+      if (!trackingEnabled) return;
+
+      // NOTE: Add details about the device and location
+      navigator.sendBeacon(
+        "/api/tracking",
+        JSON.stringify({
+          tracking: timeSpent,
+          offerUuid,
+          guestUuid: status === "authenticated" ? session?.user?.id : null,
+        } as TrackingBody),
+      );
+    };
+
+    window.addEventListener("beforeunload", handleSubmitTrackedTime);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleSubmitTrackedTime);
+    };
+  }, [timeSpent]);
 
   return { sectionRefs };
 };

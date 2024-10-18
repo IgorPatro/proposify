@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<{
 const OfferPage = ({
   offer,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Resource resource={offer} />;
+  return <Resource trackingEnabled={true} resource={offer} />;
 };
 
 export default OfferPage;
