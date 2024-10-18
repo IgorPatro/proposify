@@ -7,10 +7,10 @@ import React from "react";
 import { Editor } from "@/components/editor";
 import { useEditorStore } from "@/components/editor/store";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
+import { toast } from "@/hooks/use-toast";
 import { EditorLayout } from "@/layouts/editor-layout";
 import { api } from "@/utils/api";
 import { getDashboardOffersHref } from "@/utils/hrefs/dashboard";
-import { toast } from "@/hooks/use-toast";
 
 export const getServerSideProps: GetServerSideProps<{
   offerUuid: string;
@@ -38,13 +38,13 @@ const EditorOfferPage = ({
 
   const onSaveOffer = async () => {
     try {
-      await saveOffer({ blocks, name, offerUuid, theme, logoUrl });
+      await saveOffer({ blocks, logoUrl, name, offerUuid, theme });
       toast({
         title: "Zapisano ofertę",
       });
     } catch (error) {
       toast({
-        description: error.message,
+        description: (error as Error).message,
         variant: "destructive",
       });
     }
@@ -58,15 +58,15 @@ const EditorOfferPage = ({
   return (
     <>
       <EditorNavigation
+        isOffer
+        isLoading={isPendingSaveOffer || isFetchingOffer}
         resourceName={offer?.name}
         resourceUuid={offerUuid}
         onGoBack={onGoBack}
         onSave={onSaveOffer}
-        isLoading={isPendingSaveOffer || isFetchingOffer}
-        isOffer
       />
       <div className="flex w-full bg-zinc-500">
-        <Editor isLoading={isFetchingOffer} resource={offer} isOffer />
+        <Editor isOffer isLoading={isFetchingOffer} resource={offer} />
       </div>
     </>
   );

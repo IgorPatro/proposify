@@ -7,10 +7,10 @@ import React from "react";
 import { Editor } from "@/components/editor";
 import { useEditorStore } from "@/components/editor/store";
 import { EditorNavigation } from "@/components/navigation/editor-navigation";
+import { toast } from "@/hooks/use-toast";
 import { EditorLayout } from "@/layouts/editor-layout";
 import { api } from "@/utils/api";
 import { getDashboardTemplatesHref } from "@/utils/hrefs/dashboard";
-import { toast } from "@/hooks/use-toast";
 
 export const getServerSideProps: GetServerSideProps<{
   templateUuid: string;
@@ -40,13 +40,13 @@ const EditorTemplatePage = ({
 
   const onSaveTemplate = async () => {
     try {
-      await saveTemplate({ blocks, name, templateUuid, theme, logoUrl });
+      await saveTemplate({ blocks, logoUrl, name, templateUuid, theme });
       toast({
         title: "Zapisano szablon",
       });
     } catch (error) {
       toast({
-        description: error.message,
+        description: (error as Error).message,
         variant: "destructive",
       });
     }
@@ -60,10 +60,10 @@ const EditorTemplatePage = ({
   return (
     <>
       <EditorNavigation
+        isLoading={isPendingSaveTemplate || isFetchingTemplate}
         resourceName={template?.name}
         resourceUuid={templateUuid}
         onGoBack={onGoBack}
-        isLoading={isPendingSaveTemplate || isFetchingTemplate}
         onSave={onSaveTemplate}
       />
       <div className="flex w-full bg-zinc-500">

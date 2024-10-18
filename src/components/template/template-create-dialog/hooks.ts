@@ -4,11 +4,10 @@ import { type SubmitHandler, useForm } from "react-hook-form";
 
 import { useToast } from "@/hooks/use-toast";
 import { type CreateTemplateInput } from "@/server/api/template/create-empty";
-
+import { api } from "@/utils/api";
 import { getEditorTemplateHref } from "@/utils/hrefs/editor";
 
 import { TemplateCreateFormValidationResolver } from "./utils";
-import { api } from "@/utils/api";
 
 export const useTemplateCreateForm = () => {
   const { toast } = useToast();
@@ -30,7 +29,7 @@ export const useTemplateCreateForm = () => {
       window.location.href = getEditorTemplateHref(newTemplate.uuid);
     } catch (error) {
       toast({
-        description: error.message,
+        description: (error as Error).message,
         variant: "destructive",
       });
     }
