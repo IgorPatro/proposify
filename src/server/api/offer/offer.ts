@@ -3,6 +3,7 @@ import { createTRPCRouter } from "../trpc";
 import { createOffer } from "./create-offer";
 import { getAllOffersMinified } from "./get-all-offers-minified";
 import { getOne } from "./get-one";
+import { getTimeReport } from "./get-time-report";
 import { save } from "./save";
 
 export const offerRouter = createTRPCRouter({
@@ -10,4 +11,5 @@ export const offerRouter = createTRPCRouter({
   getAll: getAllOffersMinified,
   getOne: getOne,
   save,
+  getTimeReport: getTimeReport,
 });

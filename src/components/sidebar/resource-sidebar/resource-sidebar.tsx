@@ -1,8 +1,6 @@
 import React from "react";
 import { Resource, ResourceEnum } from "@/server/api/resource/types";
 import { twMerge } from "tailwind-merge";
-import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
-import { getBlockPreviewHref } from "@/utils/hrefs/editor";
 import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
 
 interface ResourceSidebarProps {
@@ -28,8 +26,6 @@ export const ResourceSidebar = ({
       )}
     >
       {resource.blocks.map((block, index) => {
-        const Icon = getBlockIcon(block.name);
-
         return (
           <div
             key={block.uuid}

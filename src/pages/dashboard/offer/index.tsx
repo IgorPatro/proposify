@@ -4,7 +4,7 @@ import { Seo } from "@/components/base/seo";
 import { PageOffers } from "@/components/offer/page-offers";
 import { DashboardLayout } from "@/layouts/dashboard-layout";
 
-const OfferPage = () => {
+const OffersPage = () => {
   return (
     <>
       <Seo title="Oferty | Proposify" />
@@ -13,6 +13,6 @@ const OfferPage = () => {
   );
 };
 
-OfferPage.getLayout = DashboardLayout;
+OffersPage.getLayout = DashboardLayout;
 
-export default OfferPage;
+export default OffersPage;

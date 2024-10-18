@@ -21,6 +21,8 @@ import {
 import { api } from "@/utils/api";
 import { formatDateToDayShortMonthYear } from "@/utils/date";
 import { getEditorOfferHref } from "@/utils/hrefs/editor";
+import { getDashboardOfferDetailsHref } from "@/utils/hrefs/dashboard";
+import { useRouter } from "next/router";
 
 const HEADERS = [
   "Nazwa",
@@ -32,11 +34,16 @@ const HEADERS = [
 ];
 
 export const OffersTable = () => {
+  const { push } = useRouter();
   const { data: offers, error, isLoading } = api.offer.getAll.useQuery();
 
   // Note: Reload the page to enable dark mode in the editor
   const onMoveToEditor = (offerUuid: string) => {
     window.open(getEditorOfferHref(offerUuid));
+  };
+
+  const onMoveToDetails = (offerUuid: string) => {
+    push(getDashboardOfferDetailsHref(offerUuid));
   };
 
   if (!offers || offers.length === 0) {
@@ -63,7 +70,11 @@ export const OffersTable = () => {
       </TableHeader>
       <TableBody>
         {offers.map((offer) => (
-          <TableRow key={offer.uuid}>
+          <TableRow
+            className="cursor-pointer"
+            key={offer.uuid}
+            onClick={() => onMoveToDetails(offer.uuid)}
+          >
             <TableCell>{offer.name}</TableCell>
             <TableCell className="underline">
               {offer.customer.firstName} {offer.customer.lastName}

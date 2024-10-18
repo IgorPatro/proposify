@@ -23,7 +23,7 @@ export default async function handler(
     const { offerUuid, tracking, guestUuid } = body;
 
     if (!offerUuid || !tracking) {
-      return res.status(400).json({ message: "BAD_REQUEST" });
+      throw new Error("No offerUuid or tracking provided");
     }
 
     const offer = await db.offer.findUnique({
@@ -44,14 +44,14 @@ export default async function handler(
     });
 
     if (!offer) {
-      return res.status(404).json({ message: "OFFER_NOT_FOUND" });
+      throw new Error("Offer not found");
     }
 
     const companyUserUuids = offer.company.User.map((user) => user.uuid);
 
     // Note: Skip tracking if the guest works for the company that owns the offer
     if (guestUuid && companyUserUuids?.includes(guestUuid)) {
-      return res.status(400).json({ message: "TRACKING_ABORTED" });
+      throw new Error("Guest works for the company that owns the offer");
     }
 
     await db.visit.create({
@@ -65,6 +65,7 @@ export default async function handler(
       },
     });
   } catch (error) {
+    console.error(error);
     return res.status(400).json({ message: "BAD_REQUEST" });
   }
 
