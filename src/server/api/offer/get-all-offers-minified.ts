@@ -36,10 +36,10 @@ export const getAllOffersMinified = protectedProcedure.query(
         phone: offer.customer?.phone,
         uuid: offer.customer?.uuid,
       },
+      logoUrl: offer.logoUrl,
       name: offer.name,
       updatedAt: offer.updatedAt,
       uuid: offer.uuid,
-      logoUrl: offer.logoUrl,
     }));
   },
 );

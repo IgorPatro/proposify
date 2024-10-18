@@ -1,7 +1,8 @@
 import React from "react";
-import { OfferDetailsTimeSpent } from "./offer-details-time-spent";
+
 import { OfferDetailsCustomer } from "./offer-details-customer";
 import { OfferDetailsHistory } from "./offer-details-history";
+import { OfferDetailsTimeSpent } from "./offer-details-time-spent";
 
 interface OfferDetailsProps {
   offerUuid: string;

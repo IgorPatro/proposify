@@ -1,14 +1,14 @@
 import React from "react";
 import { HiOutlineMenuAlt2, HiOutlineX } from "react-icons/hi";
-import { twMerge } from "tailwind-merge";
 
-import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
+import { getBlockByName } from "@/_blocks/utils";
+import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
 import { useToggle } from "@/hooks/use-toggle";
 import {
-  ResourceEnum,
-  Resource as ResourceType,
+  type ResourceEnum,
+  type Resource as ResourceType,
 } from "@/server/api/resource/types";
-import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
+
 import { ResourceSidebar } from "../sidebar/resource-sidebar";
 
 interface ResourceProps {
@@ -29,7 +29,7 @@ export const Resource = ({
   );
 
   return (
-    <main className="max-w-screen max-h-screen overflow-hidden bg-gray-500">
+    <main className="max-h-full max-w-full overflow-hidden bg-gray-500">
       <header className="fixed left-0 top-0 flex h-14 w-full items-center justify-between bg-gray-800 p-4 text-white drop-shadow-2xl">
         <div>{resource.name}</div>
         {/* <button onClick={() => console.log(handleSubmitTime())}>
@@ -37,18 +37,18 @@ export const Resource = ({
         </button> */}
         <button className="lg:hidden" onClick={toggleMobileSidebarOpen}>
           {isMobileSidebarOpen ? (
-            <HiOutlineX className="h-7 w-7" />
+            <HiOutlineX className="size-7" />
           ) : (
-            <HiOutlineMenuAlt2 className="h-7 w-7" />
+            <HiOutlineMenuAlt2 className="size-7" />
           )}
         </button>
       </header>
 
       <ResourceSidebar
-        type={type}
-        resource={resource}
         isMobileSidebarOpen={isMobileSidebarOpen}
+        resource={resource}
         toggleMobileSidebarOpen={toggleMobileSidebarOpen}
+        type={type}
       />
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
@@ -59,16 +59,16 @@ export const Resource = ({
                 <section
                   // Note: Append a scroll top, so after navigating to this slide, it is not hidden by the header
                   className="scroll-mt-4"
-                  key={block.uuid}
                   id={block.uuid}
+                  key={block.uuid}
                   ref={(el) => {
                     sectionRefs.current[block.uuid] = el;
                   }}
                 >
                   {getBlockByName(block.name)({
                     fields: block.fields,
-                    themeEnum: resource.theme,
                     resource,
+                    themeEnum: resource.theme,
                   })}
                 </section>
               );

@@ -5,7 +5,6 @@ import {
 import React from "react";
 
 import { EditorLayout } from "@/layouts/editor-layout";
-
 import { ResourceEnum } from "@/server/api/resource/types";
 import { BlockData, getBlockDataSsr } from "@/server/api/block/get-block-data";
 import { getBlockByName } from "@/_blocks/utils";

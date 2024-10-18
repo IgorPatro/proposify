@@ -64,6 +64,9 @@ export default {
       fontFamily: {
         sans: ["var(--font-poppins)", ...fontFamily.sans],
       },
+      height: {
+        block: "680px",
+      },
       keyframes: {
         "accordion-down": {
           from: {
@@ -97,9 +100,6 @@ export default {
       width: {
         168: "672px",
         "full-hd": "1920px",
-      },
-      height: {
-        block: "680px",
       },
     },
   },

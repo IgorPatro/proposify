@@ -10,6 +10,6 @@ export const offerRouter = createTRPCRouter({
   createOffer,
   getAll: getAllOffersMinified,
   getOne: getOne,
-  save,
   getTimeReport: getTimeReport,
+  save,
 });

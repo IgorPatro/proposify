@@ -26,7 +26,7 @@ export const BlockDynamicThumbnail = ({
       />
       <iframe
         // Note: calculate the aspect ratio of the block and scale it down
-        className="h-block pointer-events-none absolute left-0 top-0 aspect-video origin-top-left scale-[calc(208/1216)]"
+        className="pointer-events-none absolute left-0 top-0 aspect-video h-block origin-top-left scale-[calc(208/1216)]"
         src={getBlockPreviewHref(blockUuid, resourceUuid, type)}
       />
     </div>

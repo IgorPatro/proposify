@@ -1,4 +1,9 @@
 import React from "react";
+import { HiEye } from "react-icons/hi";
+import { HashLoader } from "react-spinners";
+
+import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -7,11 +12,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { api } from "@/utils/api";
-import { HashLoader } from "react-spinners";
-import { twMerge } from "tailwind-merge";
-import { BlockDynamicThumbnail } from "@/components/block-dynamic-thumbnail";
-import { Button } from "@/components/ui/button";
-import { HiEye } from "react-icons/hi";
 import { getEditorOfferPreviewHref } from "@/utils/hrefs/editor";
 
 interface OfferDetailsTimeSpentProps {
@@ -53,7 +53,7 @@ export const OfferDetailsTimeSpent = ({
         <div className="flex w-full flex-col gap-4">
           {offer.blocks.map((block) => {
             return (
-              <div key={block.uuid} className="flex items-center gap-6">
+              <div className="flex items-center gap-6" key={block.uuid}>
                 <div className="w-52 overflow-hidden rounded-md">
                   <BlockDynamicThumbnail
                     blockUuid={block.uuid}
@@ -84,7 +84,7 @@ export const OfferDetailsTimeSpent = ({
             </CardDescription>
           </div>
           <Button className="w-fit" onClick={onMoveToPreview}>
-            <HiEye className="mr-2 h-5 w-5" />
+            <HiEye className="mr-2 size-5" />
             Preview
           </Button>
         </div>

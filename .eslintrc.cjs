@@ -1,23 +1,26 @@
+/** @type {import("eslint").Linter.Config} */
 const config = {
   extends: [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
+    // "plugin:react-hooks/recommended",
     "plugin:tailwindcss/recommended",
+    "prettier",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: true,
+    project: "./tsconfig.json",
   },
   plugins: [
     "@typescript-eslint",
     "import",
-    "sort-destructure-keys",
+    "unicorn",
     "sort-keys-fix",
+    "sort-destructure-keys",
+    "typescript-custom-sort-keys",
   ],
+  root: true,
   rules: {
-    "@typescript-eslint/array-type": "off",
-    "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
@@ -25,22 +28,8 @@ const config = {
         prefer: "type-imports",
       },
     ],
-    "@typescript-eslint/no-empty-object-type": "off",
-    "@typescript-eslint/no-misused-promises": [
-      "error",
-      {
-        checksVoidReturn: {
-          attributes: false,
-        },
-      },
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        argsIgnorePattern: "^_",
-      },
-    ],
-    "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -66,8 +55,42 @@ const config = {
         "newlines-between": "always",
       },
     ],
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-curly-brace-presence": ["error", "never"],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        callbacksLast: true,
+        shorthandFirst: true,
+      },
+    ],
+    "react/sort-prop-types": [
+      "warn",
+      {
+        callbacksLast: true,
+      },
+    ],
     "sort-destructure-keys/sort-destructure-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
+    "tailwindcss/no-custom-classname": "error",
+    "typescript-custom-sort-keys/interface": [
+      "error",
+      "asc",
+      {
+        caseSensitive: true,
+        showFunctionsAtEnd: true,
+      },
+    ],
+    "unicorn/filename-case": ["error", { case: "kebabCase" }],
+  },
+  settings: {
+    tailwindcss: {
+      callees: ["twMerge"],
+      config: "./tailwind.config.ts",
+      removeDuplicates: true,
+    },
   },
 };
+
 module.exports = config;

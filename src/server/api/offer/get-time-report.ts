@@ -1,16 +1,18 @@
 import { z } from "zod";
+
 import { protectedProcedure } from "../trpc";
 import { VisitSchema } from "../visit/types";
+
 import { generateTimeReportFromVisits } from "./utils";
 
 export const getTimeReport = protectedProcedure
   .input(z.object({ offerUuid: z.string().min(1) }))
   .query(async ({ ctx, input }) => {
     const offer = await ctx.db.offer.findUnique({
-      where: { uuid: input.offerUuid },
       include: {
         Visit: true,
       },
+      where: { uuid: input.offerUuid },
     });
 
     if (!offer) {
