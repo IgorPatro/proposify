@@ -4,18 +4,23 @@ import { twMerge } from "tailwind-merge";
 
 import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
-import { Resource as ResourceType } from "@/server/api/resource/types";
+import {
+  ResourceEnum,
+  Resource as ResourceType,
+} from "@/server/api/resource/types";
 import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
 import { ResourceSidebar } from "../sidebar/resource-sidebar";
 
 interface ResourceProps {
   resource: ResourceType;
   trackingEnabled?: boolean;
+  type: ResourceEnum;
 }
 
 export const Resource = ({
   resource,
   trackingEnabled = false,
+  type,
 }: ResourceProps) => {
   const [isMobileSidebarOpen, toggleMobileSidebarOpen] = useToggle(false);
   const { sectionRefs } = useOfferTimeSpentTracker(
@@ -40,6 +45,7 @@ export const Resource = ({
       </header>
 
       <ResourceSidebar
+        type={type}
         resource={resource}
         isMobileSidebarOpen={isMobileSidebarOpen}
         toggleMobileSidebarOpen={toggleMobileSidebarOpen}

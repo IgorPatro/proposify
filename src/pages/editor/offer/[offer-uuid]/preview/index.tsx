@@ -26,7 +26,7 @@ const EditorOfferPagePreview = ({
   offer,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   // TODO: Tracking is enabled only for testing purposes
-  return <Resource trackingEnabled={true} resource={offer} />;
+  return <Resource trackingEnabled={true} resource={offer} type="offer" />;
 };
 
 export default EditorOfferPagePreview;

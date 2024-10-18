@@ -14,16 +14,16 @@ export const getServerSideProps: GetServerSideProps<{
   data: BlockData;
 }> = async (ctx) => {
   const resourceUuid = ctx.query["resourceUuid"] as string;
-  const resourceType = ctx.query["resourceType"] as ResourceEnum;
-  const blockUuid = ctx.query["blockUuid"] as string;
+  const type = ctx.query["type"] as ResourceEnum;
+  const blockUuid = ctx.query["block-uuid"] as string;
 
-  if (!resourceUuid || !resourceType || !blockUuid) {
+  if (!resourceUuid || !type || !blockUuid) {
     return {
       notFound: true,
     };
   }
 
-  const data = await getBlockDataSsr(blockUuid, resourceUuid, resourceType);
+  const data = await getBlockDataSsr(blockUuid, resourceUuid, type);
 
   return {
     props: {

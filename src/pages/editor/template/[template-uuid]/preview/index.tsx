@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<{
 const EditorTemplatePagePreview = ({
   template,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  return <Resource resource={template} />;
+  return <Resource resource={template} type="template" />;
 };
 
 export default EditorTemplatePagePreview;

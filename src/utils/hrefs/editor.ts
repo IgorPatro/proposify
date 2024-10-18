@@ -1,3 +1,5 @@
+import { ResourceEnum } from "@/server/api/resource/types";
+
 export const getEditorTemplateHref = (templateUuid: string) =>
   `/editor/template/${templateUuid}`;
 
@@ -10,4 +12,12 @@ export const getEditorTemplatePreviewHref = (templateUuid: string) => {
 
 export const getEditorOfferPreviewHref = (offerUuid: string) => {
   return `/editor/offer/${offerUuid}/preview`;
+};
+
+export const getBlockPreviewHref = (
+  blockUuid: string,
+  resourceUuid: string,
+  type: ResourceEnum,
+) => {
+  return `/editor/block/${blockUuid}?resourceUuid=${resourceUuid}&type=${type}`;
 };
