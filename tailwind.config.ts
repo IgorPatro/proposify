@@ -96,6 +96,7 @@ export default {
       },
       width: {
         168: "672px",
+        "full-hd": "1920px",
       },
     },
   },

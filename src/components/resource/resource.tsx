@@ -6,6 +6,7 @@ import { getBlockByName, getBlockIcon } from "@/_blocks/utils";
 import { useToggle } from "@/hooks/use-toggle";
 import { Resource as ResourceType } from "@/server/api/resource/types";
 import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
+import { ResourceSidebar } from "../sidebar/resource-sidebar";
 
 interface ResourceProps {
   resource: ResourceType;
@@ -16,7 +17,7 @@ export const Resource = ({
   resource,
   trackingEnabled = false,
 }: ResourceProps) => {
-  const [isOpen, toggleOpen] = useToggle(false);
+  const [isMobileSidebarOpen, toggleMobileSidebarOpen] = useToggle(false);
   const { sectionRefs } = useOfferTimeSpentTracker(
     resource.uuid,
     trackingEnabled,
@@ -29,8 +30,8 @@ export const Resource = ({
         {/* <button onClick={() => console.log(handleSubmitTime())}>
           Show times
         </button> */}
-        <button className="lg:hidden" onClick={toggleOpen}>
-          {isOpen ? (
+        <button className="lg:hidden" onClick={toggleMobileSidebarOpen}>
+          {isMobileSidebarOpen ? (
             <HiOutlineX className="h-7 w-7" />
           ) : (
             <HiOutlineMenuAlt2 className="h-7 w-7" />
@@ -38,36 +39,11 @@ export const Resource = ({
         </button>
       </header>
 
-      <aside
-        className={twMerge(
-          "fixed bottom-0 left-0 z-20 flex h-[calc(100vh-56px)] w-full flex-col items-center gap-4 overflow-y-scroll bg-gray-700 p-4 transition-transform lg:w-64",
-          isOpen ? "translate-x-0" : "-translate-x-full",
-          "lg:translate-x-0",
-          "max-w-96 shadow-2xl shadow-black scrollbar-hide lg:shadow-none lg:scrollbar-default",
-        )}
-      >
-        {resource.blocks.map((block, index) => {
-          const Icon = getBlockIcon(block.name);
-
-          return (
-            <div
-              key={block.uuid}
-              className="flex w-full flex-col items-center justify-center gap-2"
-            >
-              <a
-                href={`#${block.uuid}`}
-                onClick={toggleOpen}
-                className="block aspect-video w-full max-w-52"
-              >
-                <Icon className="h-full w-full bg-gray-900 text-gray-500 hover:bg-gray-800" />
-              </a>
-              <div className="block w-full text-center font-medium text-gray-300">
-                {index + 1}
-              </div>
-            </div>
-          );
-        })}
-      </aside>
+      <ResourceSidebar
+        resource={resource}
+        isMobileSidebarOpen={isMobileSidebarOpen}
+        toggleMobileSidebarOpen={toggleMobileSidebarOpen}
+      />
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
         <div className="flex w-full justify-center overflow-y-scroll px-10 py-4">
@@ -75,6 +51,8 @@ export const Resource = ({
             {resource.blocks.map((block) => {
               return (
                 <section
+                  // Note: Append a scroll top, so after navigating to this slide, it is not hidden by the header
+                  className="scroll-mt-4"
                   key={block.uuid}
                   id={block.uuid}
                   ref={(el) => {
