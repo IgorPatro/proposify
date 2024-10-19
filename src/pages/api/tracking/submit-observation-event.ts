@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { SUBMIT_OBSERVATION_EVENT_URL } from "@/hooks/use-submit-observation-event";
+import { SUBMIT_OBSERVATION_EVENT_URL } from "@/hooks/use-tracking/use-submit-observation-event";
 import { db } from "@/server/db";
 
 import type { NextApiRequest, NextApiResponse } from "next";

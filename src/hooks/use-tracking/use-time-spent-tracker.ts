@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
+import { HOUR_QUARTER_IN_MS } from "@/contants/time";
 import { api } from "@/utils/api";
 import { getSessionStorageItem } from "@/utils/session-storage";
 
@@ -22,6 +23,9 @@ export const useOfferTimeSpentTracker = (
       offerUuid,
       visitSessionUuid: getSessionStorageItem(VISIT_SESSION_UUID_STORAGE_KEY),
     },
+    {
+      refetchInterval: HOUR_QUARTER_IN_MS,
+    },
   );
 
   const handleSubmitObservationEvent = (
@@ -37,7 +41,7 @@ export const useOfferTimeSpentTracker = (
       timeStamp - visibleBlockObservationTimestamp.current.getTime();
 
     // Note: Skip tracking if the user spent less than 3 seconds in the block
-    if (timeSpent <= 3000) {
+    if (timeSpent < 3000) {
       return;
     }
 
@@ -48,6 +52,9 @@ export const useOfferTimeSpentTracker = (
       timeSpent,
       visitSessionUuid: visitSession.uuid,
     });
+
+    setVisibleBlockUuid(blockUuid);
+    visibleBlockObservationTimestamp.current = new Date();
   };
 
   useEffect(() => {
@@ -59,8 +66,6 @@ export const useOfferTimeSpentTracker = (
 
           if (isIntersecting && visibleBlockUuid !== blockUuid) {
             handleSubmitObservationEvent(blockUuid, new Date().getTime());
-            setVisibleBlockUuid(blockUuid);
-            visibleBlockObservationTimestamp.current = new Date();
           }
         });
       },
