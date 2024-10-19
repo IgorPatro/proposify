@@ -11,12 +11,12 @@ export default async function handler(
   const observationEventsUuidsToRemove: string[] = [];
 
   try {
-    const THIRTY_MINUTES_AGO = new Date(Date.now() - 30 * 60 * 1000);
+    const THIRTY_MINUTES_AGO_TIMESTAMP = new Date(Date.now() - 30 * 60 * 1000);
 
     const visitSessionsToCheck = await db.visitSession.findMany({
       where: {
         updatedAt: {
-          lt: THIRTY_MINUTES_AGO,
+          lt: THIRTY_MINUTES_AGO_TIMESTAMP,
         },
       },
     });

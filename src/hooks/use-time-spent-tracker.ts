@@ -2,9 +2,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
 import { api } from "@/utils/api";
-import { generateUuid } from "@/utils/uuid";
+import { getSessionStorageItem } from "@/utils/session-storage";
 
-import { useSessionStorage } from "./use-session-storage";
 import { useSubmitObservationEvent } from "./use-submit-observation-event";
 
 const VISIT_SESSION_UUID_STORAGE_KEY = "visitSessionUuid";
@@ -17,25 +16,28 @@ export const useOfferTimeSpentTracker = (
   const [visibleBlockUuid, setVisibleBlockUuid] = useState("");
   const visibleBlockObservationTimestamp = useRef(new Date());
   const { data: session } = useSession();
-  const [visitSessionUuid, setVisitSessionUuid] = useSessionStorage(
-    VISIT_SESSION_UUID_STORAGE_KEY,
-    "",
-  );
   const { submitObservationEvent } = useSubmitObservationEvent();
-  const { mutateAsync: validateVisitSession } =
-    api.visitSession.validateVisitSession.useMutation({
-      onError: () => {
-        // Note: if the visit session is invalid -> generate a new session
-        setVisitSessionUuid(generateUuid());
-      },
-    });
+  const { data: visitSession } = api.visitSession.validateVisitSession.useQuery(
+    {
+      offerUuid,
+      visitSessionUuid: getSessionStorageItem(VISIT_SESSION_UUID_STORAGE_KEY),
+    },
+  );
 
   const handleSubmitObservationEvent = (
     blockUuid: string,
-    timeSpent: number,
+    timeStamp: number,
   ) => {
     // Note: Skip tracking if tracking is disabled or the visit session UUID is missing
-    if (!trackingEnabled || !visitSessionUuid) {
+    if (!trackingEnabled || !visitSession) {
+      return;
+    }
+
+    const timeSpent =
+      timeStamp - visibleBlockObservationTimestamp.current.getTime();
+
+    // Note: Skip tracking if the user spent less than 3 seconds in the block
+    if (timeSpent <= 3000) {
       return;
     }
 
@@ -44,19 +46,9 @@ export const useOfferTimeSpentTracker = (
       guestUuid: session?.user?.uuid || null,
       offerUuid,
       timeSpent,
-      visitSessionUuid,
+      visitSessionUuid: visitSession.uuid,
     });
   };
-
-  useEffect(() => {
-    if (!visitSessionUuid) {
-      setVisitSessionUuid(generateUuid());
-      return;
-    }
-
-    validateVisitSession({ visitSessionUuid });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visitSessionUuid]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -66,16 +58,7 @@ export const useOfferTimeSpentTracker = (
           const blockUuid = target.id;
 
           if (isIntersecting && visibleBlockUuid !== blockUuid) {
-            const timeSpent =
-              new Date().getTime() -
-              visibleBlockObservationTimestamp.current.getTime();
-
-            // Note: Skip tracking if the user spent less than 3 seconds in the block
-            if (timeSpent <= 3000) {
-              return;
-            }
-
-            handleSubmitObservationEvent(blockUuid, timeSpent);
+            handleSubmitObservationEvent(blockUuid, new Date().getTime());
             setVisibleBlockUuid(blockUuid);
             visibleBlockObservationTimestamp.current = new Date();
           }
@@ -95,6 +78,26 @@ export const useOfferTimeSpentTracker = (
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Note: Submit observation event when user leaves the page
+  useEffect(() => {
+    const onBeforeUnloadSubmitObservationEvent = () => {
+      if (!visibleBlockUuid) return;
+      handleSubmitObservationEvent(visibleBlockUuid, new Date().getTime());
+    };
+
+    window.addEventListener(
+      "beforeunload",
+      onBeforeUnloadSubmitObservationEvent,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "beforeunload",
+        onBeforeUnloadSubmitObservationEvent,
+      );
+    };
+  });
 
   return { sectionRefs };
 };
