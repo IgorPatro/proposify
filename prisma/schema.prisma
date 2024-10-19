@@ -23,14 +23,36 @@ model User {
   Asset         Asset[]
 }
 
+model VisitSession {
+  id               Int                @id @default(autoincrement())
+  uuid             String             @unique @default(uuid())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  offer            Offer              @relation(fields: [offerId], references: [id])
+  offerId          Int
+  observationEvent ObservationEvent[]
+}
+
+model ObservationEvent {
+  id             Int          @id @default(autoincrement())
+  uuid           String       @unique @default(uuid())
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  timeSpent      Int
+  blockUuid      String
+  visitSession   VisitSession @relation(fields: [visitSessionId], references: [id])
+  visitSessionId Int
+}
+
 model Visit {
-  id        Int      @id @default(autoincrement())
-  uuid      String   @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  tracking  Json?
-  offer     Offer    @relation(fields: [offerId], references: [id])
-  offerId   Int
+  id         Int      @id @default(autoincrement())
+  uuid       String   @unique @default(uuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  timeReport Json
+  totalTime  Int
+  offer      Offer    @relation(fields: [offerId], references: [id])
+  offerId    Int
 }
 
 model Company {
@@ -73,19 +95,20 @@ model Template {
 }
 
 model Offer {
-  id         Int      @id @default(autoincrement())
-  uuid       String   @unique @default(uuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  name       String
-  company    Company  @relation(fields: [companyId], references: [id])
-  companyId  Int
-  theme      String
-  blocks     Json?
-  customer   Customer @relation(fields: [customerId], references: [id])
-  customerId Int
-  logoUrl    String?
-  Visit Visit[]
+  id           Int            @id @default(autoincrement())
+  uuid         String         @unique @default(uuid())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  name         String
+  company      Company        @relation(fields: [companyId], references: [id])
+  companyId    Int
+  theme        String
+  blocks       Json?
+  customer     Customer       @relation(fields: [customerId], references: [id])
+  customerId   Int
+  logoUrl      String?
+  Visit        Visit[]
+  VisitSession VisitSession[]
 }
 
 model Customer {
