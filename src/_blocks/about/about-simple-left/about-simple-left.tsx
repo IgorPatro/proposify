@@ -7,79 +7,32 @@ import { getTheme } from "@/_hooks/use-theme";
 import { type BlockProps } from "../../types";
 
 import { type AboutSimpleLeftFields } from "./config";
+import { BaseBlock } from "@/_blocks/base-block";
+import { PageDetailsWrapper } from "@/_blocks/shared/page-details-wrapper";
 
-export const AboutSimpleLeft = ({
-  fields,
-  resource,
-  themeEnum,
-}: BlockProps) => {
-  const { background, subtitle, title } = fields as AboutSimpleLeftFields;
+import { twUtils } from "@/_blocks/shared/utils";
+import { Heading } from "@/_blocks/shared/heading";
+import { Text } from "@/_blocks/shared/text";
+import { Logo } from "@/_blocks/shared/logo";
+
+export const AboutSimpleLeft = (props: BlockProps) => {
+  const { fields, themeEnum, resource } = props;
+  const { subtitle, title } = fields as AboutSimpleLeftFields;
   const theme = getTheme(themeEnum);
 
   return (
-    <div
-      className={twMerge(
-        "h-9/12 relative min-h-block w-full",
-        `bg-${theme.background}`,
-      )}
-    >
-      <Image
-        fill
-        alt={background?.alt}
-        objectFit="cover"
-        src={background?.url}
-      />
-      <div className="absolute left-0 top-0 flex size-full flex-col justify-between p-12">
-        <div className="flex w-full justify-between">
-          <span className={twMerge(`text-${theme.text.secondary}`)}>
-            Oferta
-          </span>
-          <span className={twMerge(`text-${theme.text.secondary}`)}>
-            24 września 2024
-          </span>
-        </div>
-
+    <BaseBlock {...props}>
+      <PageDetailsWrapper resource={resource}>
         <div className="flex max-w-2xl flex-col gap-4">
-          <h1
-            className={twMerge(
-              "text-5xl font-semibold",
-              `text-${theme.text.primary}`,
-            )}
-          >
-            O nas
-          </h1>
-          <p className={twMerge(`text-${theme.text.secondary}`)}>
-            Naszą misją jest dostarczanie najwyższej jakości saun oraz jacuzzi
-            ogrodowych, które wzbogacają przestrzeń zewnętrzną i zapewniają
-            wyjątkowe korzyści zdrowotne oraz relaksacyjne. Dzięki naszemu
-            wieloletniemu doświadczeniu w branży, tworzymy produkty, które łączą
-            w sobie tradycyjne rzemiosło z nowoczesnym designem, dopasowanym do
-            indywidualnych potrzeb naszych klientów. Każda sauna i jacuzzi
-            powstają z największą starannością i dbałością o każdy detal, co
-            gwarantuje ich niezawodność oraz długowieczność.
-          </p>
+          <Heading size="large" className={twUtils.color(theme.text.primary)}>
+            {title.content}
+          </Heading>
+          <Text>{subtitle.content}</Text>
           <div className="relative h-20 w-44">
-            <Image
-              fill
-              alt="Wellness Solutions logo"
-              objectFit="contain"
-              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-            />
+            <Logo src={resource.logoUrl} />
           </div>
         </div>
-
-        <div className="flex w-full items-end justify-between">
-          <div className="relative h-8 w-24">
-            <Image
-              fill
-              alt="Wellness Solutions logo"
-              objectFit="contain"
-              src="https://wellnesssolutions.pl/_astro/logo.Bmh5gH90.png"
-            />
-          </div>
-          <span className={twMerge(`text-${theme.text.secondary}`)}>6/7</span>
-        </div>
-      </div>
-    </div>
+      </PageDetailsWrapper>
+    </BaseBlock>
   );
 };
