@@ -29,7 +29,7 @@ export const BaseBlock = ({
       {...getBackgroundStyleProps(background)}
     >
       {getBackgroundImage(background)}
-      <div className="absolute left-0 top-0 flex size-full flex-col justify-between p-6">
+      <div className="@2xl:p-10 absolute left-0 top-0 flex size-full flex-col justify-between p-6">
         {children}
       </div>
     </div>

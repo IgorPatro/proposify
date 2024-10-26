@@ -2,7 +2,9 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 import { BaseBlock } from "@/_blocks/base-block";
+import { InfoField } from "@/_blocks/shared/info-field";
 import { Logo } from "@/_blocks/shared/logo";
+import { twUtils } from "@/_blocks/shared/utils";
 import { getTheme } from "@/_hooks/use-theme";
 
 import { type BlockProps } from "../../types";
@@ -20,52 +22,31 @@ export const HeroSimpleLeft = (props: BlockProps) => {
       <div className="flex w-3/4 max-w-2xl flex-col gap-6">
         <h1
           className={twMerge(
-            "@lg:text-6xl text-3xl font-semibold",
-            `text-${theme.text.primary}`,
+            "@2xl:text-4xl text-3xl font-semibold",
+            twUtils.color(theme.text.primary),
           )}
         >
           {title.content}
         </h1>
         <p
           className={twMerge(
-            "text-base md:text-2xl",
-            `text-${theme.text.secondary}`,
+            "@2xl:text-lg text-base",
+            twUtils.color(theme.text.secondary),
           )}
         >
           {subtitle.content}
         </p>
       </div>
-      <div className="flex gap-12">
-        <div className="flex flex-col gap-2">
-          <span className={twMerge(`text-${theme.text.primary}`)}>
-            Stworzono dla:
-          </span>
-          <span
-            className={twMerge("font-semibold", `text-${theme.text.primary}`)}
-          >
-            Kamil Sidel
-          </span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <span className={twMerge(`text-${theme.text.primary}`)}>
-            Przygotował:
-          </span>
-          <span
-            className={twMerge("font-semibold", `text-${theme.text.primary}`)}
-          >
-            Mikołaj Ligęzka
-          </span>
-        </div>
-        <div className="flex flex-col gap-2">
-          <span className={twMerge(`text-${theme.text.primary}`)}>
-            Data wystawienia:
-          </span>
-          <span
-            className={twMerge("font-semibold", `text-${theme.text.primary}`)}
-          >
-            24 września 2024
-          </span>
-        </div>
+      <div className="@2xl:flex-row @2xl:gap-12 flex flex-col gap-4 text-sm">
+        <InfoField label="Stworzono dla:" theme={theme}>
+          Kamil Sidel
+        </InfoField>
+        <InfoField label="Przygotował:" theme={theme}>
+          Igor Patro
+        </InfoField>
+        <InfoField label="Data wystawienia:" theme={theme}>
+          26.10.2024
+        </InfoField>
       </div>
     </BaseBlock>
   );

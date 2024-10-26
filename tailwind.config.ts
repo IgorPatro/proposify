@@ -69,7 +69,7 @@ export default {
         sans: ["var(--font-poppins)", ...fontFamily.sans],
       },
       height: {
-        block: "680px",
+        block: "684px",
       },
       keyframes: {
         "accordion-down": {

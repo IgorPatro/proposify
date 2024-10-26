@@ -1,9 +1,10 @@
+import { type ThemeSchema } from "@/_themes/type";
 import { type ThemeEnum } from "@/server/api/resource/types";
 
 import { DARK_THEME } from "../_themes/dark";
 import { LIGHT_THEME } from "../_themes/light";
 
-export const getTheme = (theme: ThemeEnum) => {
+export const getTheme = (theme: ThemeEnum): ThemeSchema => {
   switch (theme) {
     case "dark":
       return DARK_THEME;

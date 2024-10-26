@@ -38,7 +38,9 @@ const BlockPreviewPage = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className="h-block w-[1216px]">
+    // @container className is used for container queries
+    // more info here: https://github.com/tailwindlabs/tailwindcss-container-queries
+    <div className="@container h-block w-[1216px]">
       {getBlockByName(data.block.name)({
         background: data.block.background,
         fields: data.block.fields,

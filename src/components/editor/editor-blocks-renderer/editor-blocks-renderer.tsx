@@ -28,6 +28,10 @@ export const EditorBlocksRenderer = ({
         isSidebarOpen ? "pl-80" : "pl-14",
       )}
     >
+      {/*
+        @container className is used for container queries
+        more info here: https://github.com/tailwindlabs/tailwindcss-container-queries
+      */}
       <div className="@container flex w-full justify-center overflow-y-scroll p-10 scrollbar-hide">
         <div className="flex w-full max-w-360 flex-col gap-4">
           {blocks.map((block) => {

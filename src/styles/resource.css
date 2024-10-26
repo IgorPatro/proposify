@@ -1,3 +1,10 @@
+/*
+NOTE:
+@2xl => @container (min-width: 42rem  672px)
+@4xl => @container (min-width: 56rem  896px)
+https://github.com/tailwindlabs/tailwindcss-container-queries
+*/
+
 .resource-block {
-  @apply @lg:aspect-video @lg:h-auto @lg:min-h-0 relative h-5/6 min-h-block w-full;
+  @apply @2xl:aspect-[4/3] @4xl:aspect-video @2xl:h-auto @2xl:min-h-0 relative min-h-block w-full;
 }
