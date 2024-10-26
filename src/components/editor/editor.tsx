@@ -6,11 +6,11 @@ import {
 } from "@dnd-kit/core";
 import React from "react";
 
-import { OfferEditorSidebar } from "@/components/sidebar/editor-sidebar/offer-editor-sidebar/offer-editor-sidebar";
-import { TemplateEditorSidebar } from "@/components/sidebar/editor-sidebar/template-editor-sidebar";
 import { type Resource } from "@/server/api/resource/types";
 
-import { useSelectedBlockUuid } from "./atoms";
+import { LeftEditorSidebar } from "../sidebar/editor-sidebar/left-editor-sidebar/left-editor-sidebar";
+import { RightEditorSidebar } from "../sidebar/editor-sidebar/right-editor-sidebar";
+
 import { POINTER_SENSOR_CONSTRAINTS_DISTANCE } from "./constants";
 import { EditorBlocksRenderer } from "./editor-blocks-renderer";
 import { EditorDragOverlay } from "./editor-drag-overlay";
@@ -58,9 +58,10 @@ export const Editor = ({
       onDragStart={handleDragStart}
     >
       <div className="flex w-full">
-        {isOffer ? <OfferEditorSidebar /> : <TemplateEditorSidebar />}
+        <LeftEditorSidebar />
         <EditorBlocksRenderer draggedBlock={draggedBlock} />
         <EditorDragOverlay draggedBlock={draggedBlock} />
+        <RightEditorSidebar />
       </div>
     </DndContext>
   );

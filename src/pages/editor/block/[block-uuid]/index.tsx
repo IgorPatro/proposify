@@ -6,7 +6,10 @@ import React from "react";
 
 import { getBlockByName } from "@/_blocks/utils";
 import { EditorLayout } from "@/layouts/editor-layout";
-import { type BlockData, getBlockDataSsr } from "@/server/api/block/get-block-data";
+import {
+  type BlockData,
+  getBlockDataSsr,
+} from "@/server/api/block/get-block-data";
 import { type ResourceEnum } from "@/server/api/resource/types";
 
 export const getServerSideProps: GetServerSideProps<{
@@ -35,8 +38,11 @@ const BlockPreviewPage = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <div className="h-block w-[1216px]">
+    // @container className is used for container queries
+    // more info here: https://github.com/tailwindlabs/tailwindcss-container-queries
+    <div className="@container h-block w-[1216px]">
       {getBlockByName(data.block.name)({
+        background: data.block.background,
         fields: data.block.fields,
         resource: {
           logoUrl: data.logoUrl,

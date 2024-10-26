@@ -94,9 +94,7 @@ const DndPlayground = () => {
   const renderDraggedOverlay = () => {
     if (draggedElement?.isNew) {
       return (
-        <div className="size-10 bg-black text-white">
-          {draggedElement?.id}
-        </div>
+        <div className="size-10 bg-black text-white">{draggedElement?.id}</div>
       );
     }
 
