@@ -12,7 +12,7 @@ interface OfferEditorSidebarProps {}
 export const OfferEditorSidebar = ({}: OfferEditorSidebarProps) => {
   return (
     <div className="fixed bottom-0 left-0 flex h-[calc(100vh-56px)] w-80 flex-col gap-4 overflow-scroll border-r border-gray-700 bg-background p-4 scrollbar-hide">
-      <Tabs className="w-full" defaultValue="block">
+      <Tabs className="w-full" defaultValue="global">
         <TabsList className="mb-4 w-full">
           <TabsTrigger className="w-full" value="global">
             Ustawienia
