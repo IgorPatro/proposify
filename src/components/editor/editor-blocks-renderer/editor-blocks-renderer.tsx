@@ -1,7 +1,9 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 import { getBlockByName } from "@/_blocks/utils";
 
+import { useIsSidebarLeftOpen } from "../atoms";
 import { EditorBlock } from "../editor-block";
 import { EditorDroppableArea } from "../editor-droppable-area";
 import { useEditorStore } from "../store";
@@ -17,9 +19,15 @@ export const EditorBlocksRenderer = ({
   const blocks = useEditorStore((store) => store.blocks);
   const theme = useEditorStore((store) => store.theme);
   const logoUrl = useEditorStore((store) => store.logoUrl);
+  const [isSidebarOpen] = useIsSidebarLeftOpen();
 
   return (
-    <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden px-80 pt-14">
+    <div
+      className={twMerge(
+        "flex h-screen max-h-screen min-h-screen w-full overflow-hidden pr-80 pt-14",
+        isSidebarOpen ? "pl-80" : "pl-14",
+      )}
+    >
       <div className="@container flex w-full justify-center overflow-y-scroll p-10 scrollbar-hide">
         <div className="flex w-full max-w-360 flex-col gap-4">
           {blocks.map((block) => {
