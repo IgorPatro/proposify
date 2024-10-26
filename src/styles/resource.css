@@ -8,3 +8,15 @@ https://github.com/tailwindlabs/tailwindcss-container-queries
 .resource-block {
   @apply @2xl:aspect-[4/3] @4xl:aspect-video @2xl:h-auto @2xl:min-h-0 relative min-h-block w-full;
 }
+
+ul {
+  @apply ml-3 list-outside list-disc pl-3;
+}
+
+ol {
+  @apply ml-3 list-outside list-decimal pl-3;
+}
+
+li {
+  @apply !m-0;
+}

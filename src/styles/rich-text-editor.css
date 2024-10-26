@@ -1,0 +1,22 @@
+.mdxeditor-toolbar {
+  @apply flex gap-2 px-1 py-2;
+}
+
+.mdxeditor-toolbar div {
+  @apply flex gap-1;
+}
+
+/* Layout fix */
+.mdxeditor-popup-container {
+  @apply hidden;
+}
+
+/* Toolbar toggle */
+.mdxeditor-toolbar button {
+  @apply rounded-md;
+}
+
+/* Toolbar toggle selected */
+.mdxeditor-toolbar [aria-checked="true"] {
+  @apply bg-accent;
+}

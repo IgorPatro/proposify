@@ -1,5 +1,4 @@
 import React from "react";
-import { twMerge } from "tailwind-merge";
 
 import { BaseBlock } from "@/_blocks/base-block";
 import { InfoField } from "@/_blocks/shared/info-field";
@@ -10,6 +9,7 @@ import { getTheme } from "@/_hooks/use-theme";
 import { type BlockProps } from "../../types";
 
 import { type HeroSimpleLeftFields } from "./config";
+import { Heading } from "@/_blocks/shared/heading";
 
 export const HeroSimpleLeft = (props: BlockProps) => {
   const { fields, resource, themeEnum } = props;
@@ -20,22 +20,12 @@ export const HeroSimpleLeft = (props: BlockProps) => {
     <BaseBlock {...props}>
       <Logo alt="Logo" src={resource.logoUrl} />
       <div className="flex w-3/4 max-w-2xl flex-col gap-6">
-        <h1
-          className={twMerge(
-            "@2xl:text-4xl text-3xl font-semibold",
-            twUtils.color(theme.text.primary),
-          )}
-        >
+        <Heading size="large" className={twUtils.color(theme.text.primary)}>
           {title.content}
-        </h1>
-        <p
-          className={twMerge(
-            "@2xl:text-lg text-base",
-            twUtils.color(theme.text.secondary),
-          )}
-        >
+        </Heading>
+        <Heading size="small" className={twUtils.color(theme.text.secondary)}>
           {subtitle.content}
-        </p>
+        </Heading>
       </div>
       <div className="@2xl:flex-row @2xl:gap-12 flex flex-col gap-4 text-sm">
         <InfoField label="Stworzono dla:" theme={theme}>
