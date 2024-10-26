@@ -54,6 +54,12 @@ export const createEmpty = protectedProcedure
 export const DEFAULT_EMPTY_TEMPLATE: Omit<Resource, "uuid"> = {
   blocks: [
     {
+      background: {
+        alt: null,
+        color: null,
+        type: null,
+        url: null,
+      },
       fields: HERO_SIMPLE_LEFT_FIELDS_CONFIG,
       name: BlockNameEnum.Values.hero_simple_left,
       uuid: "dummy-uuid-hero-one",

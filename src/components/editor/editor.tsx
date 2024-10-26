@@ -10,7 +10,8 @@ import { OfferEditorSidebar } from "@/components/sidebar/editor-sidebar/offer-ed
 import { TemplateEditorSidebar } from "@/components/sidebar/editor-sidebar/template-editor-sidebar";
 import { type Resource } from "@/server/api/resource/types";
 
-import { useSelectedBlockUuid } from "./atoms";
+import { SelectedBlockSidebar } from "../sidebar/editor-sidebar/selected-block-sidebar";
+
 import { POINTER_SENSOR_CONSTRAINTS_DISTANCE } from "./constants";
 import { EditorBlocksRenderer } from "./editor-blocks-renderer";
 import { EditorDragOverlay } from "./editor-drag-overlay";
@@ -61,6 +62,7 @@ export const Editor = ({
         {isOffer ? <OfferEditorSidebar /> : <TemplateEditorSidebar />}
         <EditorBlocksRenderer draggedBlock={draggedBlock} />
         <EditorDragOverlay draggedBlock={draggedBlock} />
+        <SelectedBlockSidebar />
       </div>
     </DndContext>
   );

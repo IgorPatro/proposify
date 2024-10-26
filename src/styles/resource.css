@@ -1,0 +1,3 @@
+.resource-block {
+  @apply @lg:aspect-video @lg:h-auto @lg:min-h-0 relative h-5/6 min-h-block w-full;
+}

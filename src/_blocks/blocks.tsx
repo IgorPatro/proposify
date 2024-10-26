@@ -11,7 +11,6 @@ import { HeroSimpleLeft } from "./hero/hero-simple-left";
 import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "./hero/hero-simple-left/config";
 import { type BlockComponent, type BlockFields, type BlockName } from "./types";
 
-
 export const BLOCKS_MAP: {
   [T in BlockName]: BlockComponent;
 } = {

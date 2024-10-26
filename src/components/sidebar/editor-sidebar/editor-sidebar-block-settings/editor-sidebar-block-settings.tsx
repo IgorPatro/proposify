@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { LuMousePointerClick } from "react-icons/lu";
 
+import { BackgroundFieldForm } from "@/_fields/background-field";
 import { ButtonFieldForm } from "@/_fields/button-field";
 import { ImageFieldForm } from "@/_fields/image-field";
 import { TextFieldForm } from "@/_fields/text-field";
@@ -18,8 +19,12 @@ export const EditorSidebarBlockSettings =
   ({}: EditorSidebarBlockSettingsProps) => {
     const [selectedBlockUuid] = useSelectedBlockUuid();
     const blocks = useEditorStore((store) => store.blocks);
+
     const updateBlockProperty = useEditorStore(
       (store) => store.updateBlockProperty,
+    );
+    const updateBlockBackground = useEditorStore(
+      (store) => store.updateBlockBackground,
     );
 
     const block = useMemo(() => {
@@ -39,6 +44,11 @@ export const EditorSidebarBlockSettings =
 
     return (
       <div className="flex flex-col gap-3">
+        <BackgroundFieldForm
+          blockUuid={selectedBlockUuid}
+          config={block.background}
+          updateBackground={updateBlockBackground}
+        />
         {Object.keys(block.fields).map((fieldName) => {
           const fieldConfig = block.fields[fieldName];
 

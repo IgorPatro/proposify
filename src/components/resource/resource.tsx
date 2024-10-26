@@ -66,6 +66,7 @@ export const Resource = ({
                   }}
                 >
                   {getBlockByName(block.name)({
+                    background: block.background,
                     fields: block.fields,
                     resource,
                     themeEnum: resource.theme,

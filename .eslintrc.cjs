@@ -74,7 +74,7 @@ const config = {
     ],
     "sort-destructure-keys/sort-destructure-keys": "error",
     "sort-keys-fix/sort-keys-fix": "error",
-    "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "off",
     "typescript-custom-sort-keys/interface": [
       "error",
       "asc",

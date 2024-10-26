@@ -19,8 +19,8 @@ export const EditorBlocksRenderer = ({
   const logoUrl = useEditorStore((store) => store.logoUrl);
 
   return (
-    <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pl-80 pt-14">
-      <div className="flex w-full justify-center overflow-y-scroll p-10">
+    <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden px-80 pt-14">
+      <div className="@container flex w-full justify-center overflow-y-scroll p-10 scrollbar-hide">
         <div className="flex w-full max-w-360 flex-col gap-4">
           {blocks.map((block) => {
             return (
@@ -29,6 +29,7 @@ export const EditorBlocksRenderer = ({
                 blockUuid={block.uuid}
                 key={block.uuid}
                 renderBlock={getBlockByName(block.name)({
+                  background: block.background,
                   fields: block.fields,
                   resource: {
                     logoUrl,
