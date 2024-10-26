@@ -2,8 +2,8 @@ import React from "react";
 import { HiOutlineMenuAlt2, HiOutlineX } from "react-icons/hi";
 
 import { getBlockByName } from "@/_blocks/utils";
-import { useOfferTimeSpentTracker } from "@/hooks/use-time-spent-tracker";
 import { useToggle } from "@/hooks/use-toggle";
+import { useTracking } from "@/hooks/use-tracking";
 import {
   type ResourceEnum,
   type Resource as ResourceType,
@@ -23,10 +23,7 @@ export const Resource = ({
   type,
 }: ResourceProps) => {
   const [isMobileSidebarOpen, toggleMobileSidebarOpen] = useToggle(false);
-  const { sectionRefs } = useOfferTimeSpentTracker(
-    resource.uuid,
-    trackingEnabled,
-  );
+  const { trackedElementsRefs } = useTracking(resource.uuid, trackingEnabled);
 
   return (
     <main className="max-h-full max-w-full overflow-hidden bg-gray-500">
@@ -62,7 +59,7 @@ export const Resource = ({
                   id={block.uuid}
                   key={block.uuid}
                   ref={(el) => {
-                    sectionRefs.current[block.uuid] = el;
+                    trackedElementsRefs.current[block.uuid] = el;
                   }}
                 >
                   {getBlockByName(block.name)({

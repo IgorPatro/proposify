@@ -1,32 +1,16 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
 
-import { HOUR_QUARTER_IN_MS } from "@/contants/time";
-import { api } from "@/utils/api";
-import { getSessionStorageItem } from "@/utils/session-storage";
-
 import { useSubmitObservationEvent } from "./use-submit-observation-event";
+import { useValidateVisitSession } from "./use-validate-visit-session";
 
-const VISIT_SESSION_UUID_STORAGE_KEY = "visitSessionUuid";
-
-export const useOfferTimeSpentTracker = (
-  offerUuid: string,
-  trackingEnabled = true,
-) => {
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+export const useTracking = (offerUuid: string, trackingEnabled = true) => {
+  const trackedElementsRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const [visibleBlockUuid, setVisibleBlockUuid] = useState("");
   const visibleBlockObservationTimestamp = useRef(new Date());
   const { data: session } = useSession();
   const { submitObservationEvent } = useSubmitObservationEvent();
-  const { data: visitSession } = api.visitSession.validateVisitSession.useQuery(
-    {
-      offerUuid,
-      visitSessionUuid: getSessionStorageItem(VISIT_SESSION_UUID_STORAGE_KEY),
-    },
-    {
-      refetchInterval: HOUR_QUARTER_IN_MS,
-    },
-  );
+  const { data: visitSession } = useValidateVisitSession(offerUuid);
 
   const handleSubmitObservationEvent = (
     blockUuid: string,
@@ -72,7 +56,7 @@ export const useOfferTimeSpentTracker = (
       { threshold: 0.5 },
     );
 
-    Object.values(sectionRefs.current).forEach((section) => {
+    Object.values(trackedElementsRefs.current).forEach((section) => {
       if (section) {
         observer.observe(section);
       }
@@ -104,5 +88,5 @@ export const useOfferTimeSpentTracker = (
     };
   });
 
-  return { sectionRefs };
+  return { trackedElementsRefs };
 };
