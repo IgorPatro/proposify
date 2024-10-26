@@ -5,16 +5,16 @@ export const DARK_THEME: ThemeSchema = {
   background: "gray-900",
   button: {
     primary: {
-      background: "orange-500",
-      border: "orange-500",
+      background: "gray-800",
+      border: "transparent",
       color: "white",
-      hover: "orange-600",
+      hover: "gray-700",
     },
     secondary: {
-      background: "gray-700",
-      border: "gray-700",
-      color: "gray-300",
-      hover: "gray-600",
+      background: "gray-300",
+      border: "gray-800",
+      color: "black",
+      hover: "gray-200",
     },
   },
   error: "red-400",

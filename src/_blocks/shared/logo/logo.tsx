@@ -1,21 +1,23 @@
 import React from "react";
 
 import { Image } from "@/components/base/image";
+import { twMerge } from "tailwind-merge";
 
 interface LogoProps {
   alt?: string;
-  src?: string | null;
+  src: string | undefined | null;
+  className?: string;
+  wrapperClassName?: string;
 }
 
-export const Logo = ({ alt, src }: LogoProps) => {
+export const Logo = ({ alt, src, className, wrapperClassName }: LogoProps) => {
   return (
     <Image
-      alt={alt ?? ""}
-      className="object-contain object-left-top"
-      height={100}
+      fill
+      alt={alt ?? "Logo"}
+      className={twMerge("object-contain object-left-top", className)}
       src={src}
-      width={100}
-      wrapperClassName="h-8 w-52"
+      wrapperClassName={twMerge("h-8 w-52", wrapperClassName)}
     />
   );
 };

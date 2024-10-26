@@ -5,7 +5,6 @@ import { TextFieldConfigSchema } from "@/_fields/text-field/type";
 
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const HeroSimpleCenteredFieldsConfigSchema = z.object({
-  banner: ButtonFieldConfigSchema,
   heading: TextFieldConfigSchema,
   subHeading: TextFieldConfigSchema,
   ctaButtonLeft: ButtonFieldConfigSchema,
@@ -19,16 +18,6 @@ export type HeroSimpleCenteredFields = z.infer<
 
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 export const HERO_SIMPLE_CENTERED_FIELDS_CONFIG: HeroSimpleCenteredFields = {
-  banner: {
-    label: "Baner",
-    type: "button",
-    content: "Announcing your next huge stuff - read more",
-    action: {
-      type: "link",
-      href: "https://example.com",
-      newTab: false,
-    },
-  },
   heading: {
     label: "Header",
     type: "text",

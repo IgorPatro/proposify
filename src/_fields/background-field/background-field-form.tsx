@@ -46,7 +46,7 @@ export const BackgroundFieldForm = ({
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
       <legend className="-ml-1 px-1 text-sm font-medium">Tło</legend>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         <Select
           label="Typ"
           name="type"
@@ -54,7 +54,6 @@ export const BackgroundFieldForm = ({
           value={config.type}
           onChange={onChangeBackgroundType}
         />
-
         <div className="mt-4 flex justify-center">{renderForm()}</div>
       </div>
     </fieldset>
