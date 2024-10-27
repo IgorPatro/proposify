@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
-import { useIsIFrameLoaded } from "@/hooks/use-is-iframe-loaded";
 import { type ResourceEnum } from "@/server/api/resource/types";
 import { getBlockPreviewHref } from "@/utils/hrefs/editor";
 

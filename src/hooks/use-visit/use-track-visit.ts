@@ -3,6 +3,7 @@ import { env } from "@/env";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { UAParser } from "ua-parser-js";
+import { useFirstRender } from "../use-first-render";
 
 interface Geolocation {
   IPv4: string;
@@ -16,9 +17,12 @@ interface Geolocation {
 }
 
 export const useTrackVisit = (offerUuid: string) => {
+  const isFirstRender = useFirstRender();
   const { data: session } = useSession();
 
   useEffect(() => {
+    if (!isFirstRender) return;
+
     (async () => {
       const response = await fetch(
         `https://geolocation-db.com/json/${env.NEXT_PUBLIC_GEOLOCATION_DB_TOKEN}`,
