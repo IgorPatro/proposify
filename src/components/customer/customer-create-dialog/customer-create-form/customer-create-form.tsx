@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 
@@ -10,11 +10,15 @@ import { useCustomerCreateForm } from "./hooks";
 
 interface CustomerCreateFormProps {
   formClassName?: string;
+  footerClassName?: string;
+  footer?: ReactNode;
   onCreateCustomerCallback?: (customer: Customer) => void;
 }
 
 export const CustomerCreateForm = ({
   formClassName,
+  footerClassName,
+  footer,
   onCreateCustomerCallback,
 }: CustomerCreateFormProps) => {
   const { form, onSubmit } = useCustomerCreateForm(onCreateCustomerCallback);
@@ -87,7 +91,7 @@ export const CustomerCreateForm = ({
           />
         )}
       />
-      <div className="flex gap-2">
+      <div className="flex w-full gap-2">
         <Controller
           control={control}
           name="zipCode"
@@ -113,14 +117,12 @@ export const CustomerCreateForm = ({
           )}
         />
       </div>
-      <Button
-        className="self-end"
-        isLoading={isSubmitting}
-        type="button"
-        onClick={onSubmit}
-      >
-        Create
-      </Button>
+      <footer className={twMerge("self-end", footerClassName)}>
+        {footer}
+        <Button isLoading={isSubmitting} type="button" onClick={onSubmit}>
+          Stwórz klienta
+        </Button>
+      </footer>
     </form>
   );
 };

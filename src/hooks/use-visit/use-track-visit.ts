@@ -1,5 +1,6 @@
 import { CREATE_VISIT_API_URL } from "@/constants/tracking";
 import { env } from "@/env";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { UAParser } from "ua-parser-js";
 
@@ -15,6 +16,8 @@ interface Geolocation {
 }
 
 export const useTrackVisit = (offerUuid: string) => {
+  const { data: session } = useSession();
+
   useEffect(() => {
     (async () => {
       const response = await fetch(
@@ -38,6 +41,7 @@ export const useTrackVisit = (offerUuid: string) => {
         postal: data.postal,
         state: data.state,
         offerUuid,
+        guestUuid: session?.user?.uuid || null,
       };
 
       navigator.sendBeacon(CREATE_VISIT_API_URL, JSON.stringify(body));

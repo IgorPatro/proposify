@@ -11,4 +11,4 @@ export const getDashboardSettingsHref = () => "/dashboard/settings";
 
 export const getDashboardUserSettingsHref = () => `/dashboard/settings/user`;
 
-export const getDashboardCustomersHref = () => `/dashboard/customers`;
+export const getDashboardCustomersHref = () => `/dashboard/customer`;

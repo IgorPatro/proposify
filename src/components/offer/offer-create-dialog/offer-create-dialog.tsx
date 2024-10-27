@@ -1,22 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { Controller, FormProvider } from "react-hook-form";
 
 import { Dialog } from "@/components/base/dialog";
 import { Input } from "@/components/base/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { api } from "@/utils/api";
 
 import { useOfferCreateForm } from "./hooks";
 import { OfferCreateDialogCustomerSection } from "./offer-create-dialog-customer-section";
+import { Select } from "@/components/base/select";
 
 interface OfferCreateDialogProps {
   isOpen: boolean;
@@ -35,8 +29,33 @@ export const OfferCreateDialog = ({
 
   const { data: templates } = api.template.getAll.useQuery();
 
+  const TEMPLATE_OPTIONS = useMemo(() => {
+    if (!templates) {
+      return [];
+    }
+
+    return templates.map((template) => ({
+      label: template.name,
+      value: template.uuid,
+    }));
+  }, []);
+
   return (
-    <Dialog header="Create offer" isOpen={isOpen} onClose={onClose}>
+    <Dialog
+      header="Stwórz ofertę"
+      footer={
+        <Button
+          className="self-end"
+          isLoading={isSubmitting}
+          type="button"
+          onClick={onSubmit}
+        >
+          Dodaj
+        </Button>
+      }
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <FormProvider {...form}>
         <div className="flex flex-col gap-4">
           <Controller
@@ -45,8 +64,8 @@ export const OfferCreateDialog = ({
             render={({ field }) => (
               <Input
                 error={errors.name?.message}
-                label="Name"
-                placeholder="My awesome offer"
+                label="Nazwa"
+                placeholder="OFF/5/2024 - Jan Kowalski"
                 {...field}
               />
             )}
@@ -58,30 +77,14 @@ export const OfferCreateDialog = ({
             render={({ field }) => (
               <Select
                 name="templateUuid"
+                label="Szablon"
                 value={field.value}
-                onValueChange={(value) => field.onChange(value)}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select template" />
-                </SelectTrigger>
-                <SelectContent>
-                  {templates?.map((template) => (
-                    <SelectItem key={template.uuid} value={template.uuid}>
-                      {template.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                onChange={field.onChange}
+                placeholder="Wybierz szablon"
+                options={TEMPLATE_OPTIONS}
+              />
             )}
           />
-          <Button
-            className="self-end"
-            isLoading={isSubmitting}
-            type="button"
-            onClick={onSubmit}
-          >
-            Create
-          </Button>
         </div>
       </FormProvider>
     </Dialog>

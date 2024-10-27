@@ -16,6 +16,7 @@ export const CreateVisitBodySchema = z.object({
   postal: z.string().nullish(),
   state: z.string().nullish(),
   offerUuid: z.string().min(1),
+  guestUuid: z.string().nullish(),
 });
 
 export type CreateVisitBody = z.infer<typeof CreateVisitBodySchema>;
@@ -26,7 +27,35 @@ export default async function handler(
 ) {
   try {
     const body = CreateVisitBodySchema.parse(JSON.parse(req.body));
-    const { offerUuid, ...data } = body;
+    const { offerUuid, guestUuid, ...data } = body;
+
+    const offer = await db.offer.findUnique({
+      include: {
+        company: {
+          select: {
+            User: {
+              select: {
+                uuid: true,
+              },
+            },
+          },
+        },
+      },
+      where: {
+        uuid: offerUuid,
+      },
+    });
+
+    if (!offer) {
+      throw new Error("Offer not found");
+    }
+
+    const companyUserUuids = offer.company.User.map((user) => user.uuid);
+
+    // Note: Skip tracking if the guest works for the company that owns the offer
+    if (guestUuid && companyUserUuids?.includes(guestUuid)) {
+      throw new Error("Guest works for the company that owns the offer");
+    }
 
     const newVisit = await db.visit.create({
       data: {

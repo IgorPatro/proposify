@@ -9,6 +9,7 @@ import { type CreateOfferInput } from "@/server/api/offer/create-offer";
 import { api } from "@/utils/api";
 
 import { useOfferCreateFormContext } from "../hooks";
+import { Separator } from "@/components/ui/separator";
 
 interface OfferCreateDialogCustomerSectionProps {
   control?: Control<CreateOfferInput>;
@@ -56,10 +57,10 @@ export const OfferCreateDialogCustomerSection =
               render={({ field }) => (
                 <Select
                   error={errors.customerUuid?.message}
-                  label="Customer"
+                  label="Klient"
                   name="customerUuid"
                   options={customersOptions}
-                  placeholder="Select customer"
+                  placeholder="Wybierz klienta"
                   value={field.value}
                   onChange={field.onChange}
                 />
@@ -70,26 +71,28 @@ export const OfferCreateDialogCustomerSection =
               variant="outline"
               onClick={toggleMode}
             >
-              Add new customer
+              Stwórz nowego klienta
             </Button>
           </>
         );
       }
 
       return (
-        <>
-          <Button
-            className="w-fit self-end"
-            variant="link"
-            onClick={toggleMode}
-          >
-            Back
-          </Button>
+        <div className="rounded-lg border border-primary bg-accent p-4">
           <CustomerCreateForm
-            formClassName="bg-red-200 p-4"
             onCreateCustomerCallback={onCreateNewCustomer}
+            footerClassName="flex gap-2"
+            footer={
+              <Button
+                className="w-fit self-end underline"
+                variant="link"
+                onClick={toggleMode}
+              >
+                Wróć
+              </Button>
+            }
           />
-        </>
+        </div>
       );
     };
 

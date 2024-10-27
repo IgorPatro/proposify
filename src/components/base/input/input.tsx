@@ -15,7 +15,7 @@ interface InputProps
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, label, name, value, ...props }, ref) => {
     return (
-      <div className="relative flex flex-col gap-2">
+      <div className="relative flex w-full flex-col gap-2">
         {label ? <Label htmlFor={name}>{label}</Label> : null}
         <InputPrimitive
           className={twMerge(

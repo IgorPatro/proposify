@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { HiSearch } from "react-icons/hi";
 import { HiBellAlert, HiChevronDown } from "react-icons/hi2";
 
@@ -27,30 +27,30 @@ import {
   getDashboardHref,
   getDashboardUserSettingsHref,
 } from "@/utils/hrefs/dashboard";
+import { generateBreadcrumbItems } from "./utils";
 
 export const DashboardNavigation = () => {
-  const { push } = useRouter();
+  const { push, asPath } = useRouter();
   const { data: session } = useSession();
 
+  const BREADCRUMB_ITEMS = useMemo(() => {
+    return generateBreadcrumbItems(asPath);
+  }, [asPath]);
+
   return (
-    <nav className="flex h-16 items-center justify-between px-10 py-4">
-      <Breadcrumb className="hidden md:flex">
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={getDashboardHref()}>Dashboard</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="#">Products</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>All Products</BreadcrumbPage>
-          </BreadcrumbItem>
+    <header className="flex h-16 items-center justify-between gap-10 px-10 py-4">
+      <Breadcrumb className="hidden max-w-[40%] md:flex">
+        <BreadcrumbList className="flex-nowrap text-nowrap">
+          {BREADCRUMB_ITEMS.map((item, index) => (
+            <>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={item.href}>{item.label}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              {index < BREADCRUMB_ITEMS.length - 1 && <BreadcrumbSeparator />}
+            </>
+          ))}
         </BreadcrumbList>
       </Breadcrumb>
       <div className="flex items-center justify-center gap-4">
@@ -109,6 +109,6 @@ export const DashboardNavigation = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-    </nav>
+    </header>
   );
 };
