@@ -11,3 +11,15 @@ export const getSessionStorageItem = (key: string) => {
     return undefined;
   }
 };
+
+export const setSessionStorageItem = (key: string, value: string) => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.sessionStorage.setItem(key, value);
+  } catch (error) {
+    console.warn(`Error setting sessionStorage key "${key}":`, error);
+  }
+};

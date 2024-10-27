@@ -1,4 +1,6 @@
-import { format, parseISO } from "date-fns";
+import { format, parseISO, setDefaultOptions } from "date-fns";
+import { pl } from "date-fns/locale";
+setDefaultOptions({ locale: pl });
 
 export const formatDate = (date: Date | string, formatStr: string) => {
   if (typeof date === "string") {

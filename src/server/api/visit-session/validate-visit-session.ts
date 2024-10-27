@@ -10,7 +10,21 @@ export const validateVisitSession = publicProcedure
     }),
   )
   .query(async ({ ctx, input }) => {
-    const visitSession = await ctx.db.visitSession.upsert({
+    if (!input.visitSessionUuid) {
+      const newVisitSession = await ctx.db.visitSession.create({
+        data: {
+          offer: {
+            connect: {
+              uuid: input.offerUuid,
+            },
+          },
+        },
+      });
+
+      return newVisitSession;
+    }
+
+    const existingVisitSession = await ctx.db.visitSession.upsert({
       create: {
         offer: {
           connect: {
@@ -24,5 +38,5 @@ export const validateVisitSession = publicProcedure
       where: { uuid: input.visitSessionUuid },
     });
 
-    return visitSession;
+    return existingVisitSession;
   });

@@ -3,6 +3,7 @@ import { getTimeSpentPerBlock } from "@/utils/observation-event";
 
 import type { NextApiRequest, NextApiResponse } from "next";
 
+// NOTE: For now tracking is not enabled, we only have base tracking implemented
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -11,7 +12,8 @@ export default async function handler(
   const observationEventsUuidsToRemove: string[] = [];
 
   try {
-    const THIRTY_MINUTES_AGO_TIMESTAMP = new Date(Date.now() - 30 * 60 * 1000);
+    // const THIRTY_MINUTES_AGO_TIMESTAMP = new Date(Date.now() - 30 * 60 * 1000);
+    const THIRTY_MINUTES_AGO_TIMESTAMP = new Date(Date.now() - 30);
 
     const visitSessionsToCheck = await db.visitSession.findMany({
       where: {
@@ -41,16 +43,11 @@ export default async function handler(
         ...observationEvents.map((o) => o.uuid),
       );
 
-      // NOTE: Skip visits smaller than 10 seconds
-      if (totalTimeSpent < 10) {
-        continue;
-      }
-
       await db.visit.create({
         data: {
           offerId: visitSession.offerId,
-          timeReport: timeSpentPerBlock,
-          totalTime: totalTimeSpent,
+          // timeReport: timeSpentPerBlock,
+          // totalTime: totalTimeSpent,
         },
       });
     }

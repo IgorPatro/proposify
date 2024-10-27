@@ -23,6 +23,7 @@ model User {
   Asset         Asset[]
 }
 
+// NOTE: For now we skip tracking, only base tracking is enabled
 model VisitSession {
   id               Int                @id @default(autoincrement())
   uuid             String             @unique @default(uuid())
@@ -33,6 +34,7 @@ model VisitSession {
   observationEvent ObservationEvent[]
 }
 
+// NOTE: For now we skip tracking, only base tracking is enabled
 model ObservationEvent {
   id             Int          @id @default(autoincrement())
   uuid           String       @unique @default(uuid())
@@ -45,14 +47,22 @@ model ObservationEvent {
 }
 
 model Visit {
-  id         Int      @id @default(autoincrement())
-  uuid       String   @unique @default(uuid())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  timeReport Json
-  totalTime  Int
-  offer      Offer    @relation(fields: [offerId], references: [id])
-  offerId    Int
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  device    String?
+  browser   String?
+  os        String?
+  ip        String?
+  city      String?
+  country   String?
+  latitude  Float?
+  longitude Float?
+  postal    String?
+  state     String?
+  offer     Offer    @relation(fields: [offerId], references: [id])
+  offerId   Int
 }
 
 model Company {

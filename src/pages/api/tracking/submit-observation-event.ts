@@ -19,6 +19,7 @@ export const ObservationEventBodySchema = z.object({
 
 export type ObservationEventBody = z.infer<typeof ObservationEventBodySchema>;
 
+// NOTE: For now tracking is not enabled, we only have base tracking implemented
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>,

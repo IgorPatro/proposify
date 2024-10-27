@@ -10,6 +10,7 @@ import {
 } from "@/server/api/resource/types";
 
 import { ResourceSidebar } from "../sidebar/resource-sidebar";
+import { useTrackVisit } from "@/hooks/use-visit/use-track-visit";
 
 interface ResourceProps {
   resource: ResourceType;
@@ -23,15 +24,15 @@ export const Resource = ({
   type,
 }: ResourceProps) => {
   const [isMobileSidebarOpen, toggleMobileSidebarOpen] = useToggle(false);
-  const { trackedElementsRefs } = useTracking(resource.uuid, trackingEnabled);
+  // Note: For now tracking is disabled and Hotjar is being implemented for every customer
+  // There is only base tracking implemented
+  // const { trackedElementsRefs } = useTracking(resource.uuid, trackingEnabled);
+  useTrackVisit(resource.uuid);
 
   return (
     <main className="max-h-full max-w-full overflow-hidden bg-gray-500">
       <header className="fixed left-0 top-0 flex h-14 w-full items-center justify-between bg-gray-800 p-4 text-white drop-shadow-2xl">
         <div>{resource.name}</div>
-        {/* <button onClick={() => console.log(handleSubmitTime())}>
-          Show times
-        </button> */}
         <button className="lg:hidden" onClick={toggleMobileSidebarOpen}>
           {isMobileSidebarOpen ? (
             <HiOutlineX className="size-7" />
@@ -62,9 +63,9 @@ export const Resource = ({
                   className="scroll-mt-4"
                   id={block.uuid}
                   key={block.uuid}
-                  ref={(el) => {
-                    trackedElementsRefs.current[block.uuid] = el;
-                  }}
+                  // ref={(el) => {
+                  //   trackedElementsRefs.current[block.uuid] = el;
+                  // }}
                 >
                   {getBlockByName(block.name)({
                     background: block.background,

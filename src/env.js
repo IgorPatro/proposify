@@ -2,11 +2,15 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 export const env = createEnv({
-  client: {},
+  client: {
+    NEXT_PUBLIC_GEOLOCATION_DB_TOKEN: z.string().optional(),
+  },
 
   emptyStringAsUndefined: true,
 
   runtimeEnv: {
+    NEXT_PUBLIC_GEOLOCATION_DB_TOKEN:
+      process.env.NEXT_PUBLIC_GEOLOCATION_DB_TOKEN,
     DATABASE_URL: process.env.DATABASE_URL,
     NEXTAUTH_GOOGLE_CLIENT_ID: process.env.NEXTAUTH_GOOGLE_CLIENT_ID,
     NEXTAUTH_GOOGLE_CLIENT_SECRET: process.env.NEXTAUTH_GOOGLE_CLIENT_SECRET,

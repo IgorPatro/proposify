@@ -2,7 +2,9 @@ import React from "react";
 
 import { OfferDetailsCustomer } from "./offer-details-customer";
 import { OfferDetailsHistory } from "./offer-details-history";
-import { OfferDetailsTimeSpent } from "./offer-details-time-spent";
+
+import { OfferDetailsVisits } from "./offer-details-visits/offer-details-visits";
+import { OfferDetailsPreview } from "./offer-details-preview";
 
 interface OfferDetailsProps {
   offerUuid: string;
@@ -10,9 +12,10 @@ interface OfferDetailsProps {
 
 export const OfferDetails = ({ offerUuid }: OfferDetailsProps) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <OfferDetailsTimeSpent offerUuid={offerUuid} />
-      <div className="flex flex-col gap-4">
+    <div className="grid grid-cols-3 gap-4">
+      <OfferDetailsPreview offerUuid={offerUuid} />
+      <div className="col-span-2 flex flex-col gap-4">
+        <OfferDetailsVisits offerUuid={offerUuid} />
         <OfferDetailsHistory />
         <OfferDetailsCustomer />
       </div>

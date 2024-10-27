@@ -5,6 +5,7 @@ import { offerRouter } from "./offer";
 import { templateRouter } from "./template";
 import { createCallerFactory, createTRPCRouter } from "./trpc";
 import { visitSessionRouter } from "./visit-session/visit-session";
+import { visitRouter } from "./visit/visit";
 
 export const appRouter = createTRPCRouter({
   asset: assetRouter,
@@ -13,6 +14,7 @@ export const appRouter = createTRPCRouter({
   offer: offerRouter,
   template: templateRouter,
   visitSession: visitSessionRouter,
+  visit: visitRouter,
 });
 
 export type AppRouter = typeof appRouter;
