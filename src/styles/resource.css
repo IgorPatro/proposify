@@ -9,14 +9,14 @@ https://github.com/tailwindlabs/tailwindcss-container-queries
   @apply @2xl:aspect-[4/3] @4xl:aspect-video @2xl:h-auto @2xl:min-h-0 relative min-h-block w-full;
 }
 
-ul {
+.prose ul {
   @apply ml-3 list-outside list-disc pl-3;
 }
 
-ol {
+.prose ol {
   @apply ml-3 list-outside list-decimal pl-3;
 }
 
-li {
+.prose li {
   @apply !m-0;
 }

@@ -14,8 +14,8 @@ export const Heading = ({
   size = "medium",
 }: HeadingProps) => {
   return (
-    <span className={twMerge(getHeadingClassNames(size), className)}>
+    <div className={twMerge("prose", getHeadingClassNames(size), className)}>
       <Markdown>{children}</Markdown>
-    </span>
+    </div>
   );
 };

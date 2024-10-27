@@ -13,13 +13,13 @@ export const PageDetailsWrapper = ({
 }: PageDetailsWrapperProps) => {
   return (
     <div className="flex h-full w-full flex-col justify-between">
-      <div className="flex w-full justify-between text-xs">
+      <div className="flex w-full items-start justify-between text-xs">
         <span>Oferta</span>
         <span>24 października 2024</span>
       </div>
       {children}
-      <div className="flex w-full justify-between text-xs">
-        <Logo src={resource.logoUrl} wrapperClassName="h-6 w-24" />
+      <div className="flex w-full items-end justify-between text-xs">
+        <Logo src={resource.logoUrl} wrapperClassName="h-5 w-24" />
         <span>6/7</span>
       </div>
     </div>

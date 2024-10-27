@@ -6,8 +6,8 @@ interface TextProps {
 
 export const Text = ({ children }: TextProps) => {
   return (
-    <span className="text-base font-normal">
+    <div className="prose text-base font-normal">
       <Markdown>{children}</Markdown>
-    </span>
+    </div>
   );
 };
