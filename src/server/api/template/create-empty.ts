@@ -2,6 +2,8 @@ import { type z } from "zod";
 
 import { HERO_SIMPLE_LEFT_FIELDS_CONFIG } from "@/_blocks/hero/hero-simple-left/config";
 import { BlockNameEnum } from "@/_blocks/types";
+import { getBlockDefaultBackground } from "@/_blocks/utils";
+import { generateUuid } from "@/utils/uuid";
 
 import { type Resource, ResourceSchema } from "../resource/types";
 import { protectedProcedure } from "../trpc";
@@ -54,9 +56,10 @@ export const createEmpty = protectedProcedure
 export const DEFAULT_EMPTY_TEMPLATE: Omit<Resource, "uuid"> = {
   blocks: [
     {
+      background: getBlockDefaultBackground(),
       fields: HERO_SIMPLE_LEFT_FIELDS_CONFIG,
       name: BlockNameEnum.Values.hero_simple_left,
-      uuid: "dummy-uuid-hero-one",
+      uuid: generateUuid(),
     },
   ],
   name: "dummy-name-to-replace",

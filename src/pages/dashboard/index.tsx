@@ -10,7 +10,7 @@ const DashboardPage = () => {
     <>
       <Seo title="Dashboard | Proposify" />
       <div>
-        <Button>Click me</Button>
+        <Button variant="secondary">Click me</Button>
         <BlockDynamicThumbnail
           blockUuid="0.12388469268397828"
           resourceUuid="ea7f3cf3-a901-4053-a016-8467987ce2b0"

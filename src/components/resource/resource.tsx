@@ -49,7 +49,11 @@ export const Resource = ({
       />
 
       <div className="flex h-screen max-h-screen min-h-screen w-full overflow-hidden pt-14 lg:pl-64">
-        <div className="flex w-full justify-center overflow-y-scroll px-10 py-4">
+        {/*
+          @container className is used for container queries
+          more info here: https://github.com/tailwindlabs/tailwindcss-container-queries
+        */}
+        <div className="@container flex w-full justify-center overflow-y-scroll px-10 py-6">
           <div className="flex w-full max-w-360 flex-col gap-4">
             {resource.blocks.map((block) => {
               return (
@@ -63,6 +67,7 @@ export const Resource = ({
                   }}
                 >
                   {getBlockByName(block.name)({
+                    background: block.background,
                     fields: block.fields,
                     resource,
                     themeEnum: resource.theme,

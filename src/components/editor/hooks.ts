@@ -6,7 +6,10 @@ import {
 import { useCallback, useState } from "react";
 
 import { type Block, type BlockName } from "@/_blocks/types";
-import { getBlockDefaultFieldsByName } from "@/_blocks/utils";
+import {
+  getBlockDefaultFieldsByName,
+  getBlockDefaultBackground,
+} from "@/_blocks/utils";
 import { generateUuid } from "@/utils/uuid";
 
 import { useSelectedBlockUuid } from "./atoms";
@@ -25,6 +28,7 @@ export const useManageBlocks = () => {
     (blockName: BlockName, over: Over) => {
       const newBlockFields = getBlockDefaultFieldsByName(blockName);
       const newBlock: Block = {
+        background: getBlockDefaultBackground(),
         fields: newBlockFields,
         name: blockName,
         uuid: generateUuid(),

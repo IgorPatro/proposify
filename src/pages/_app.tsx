@@ -10,6 +10,8 @@ import { api } from "@/utils/api";
 import type { AppProps } from "next/app";
 
 import "@/styles/globals.css";
+import "@/styles/resource.css";
+import "@/styles/rich-text-editor.css";
 
 type GetLayout = (page: ReactNode) => ReactNode;
 

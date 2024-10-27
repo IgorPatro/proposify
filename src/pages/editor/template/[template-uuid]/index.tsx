@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<{
 const EditorTemplatePage = ({
   templateUuid,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { data: template, isFetching: isFetchingTemplate } =
+  const { data: template, isLoading: isLoadingTemplate } =
     api.template.getOne.useQuery({
       templateUuid,
     });
@@ -60,14 +60,14 @@ const EditorTemplatePage = ({
   return (
     <>
       <EditorNavigation
-        isLoading={isPendingSaveTemplate || isFetchingTemplate}
+        isLoading={isPendingSaveTemplate || isLoadingTemplate}
         resourceName={template?.name}
         resourceUuid={templateUuid}
         onGoBack={onGoBack}
         onSave={onSaveTemplate}
       />
       <div className="flex w-full bg-zinc-500">
-        <Editor isLoading={isFetchingTemplate} resource={template} />
+        <Editor isLoading={isLoadingTemplate} resource={template} />
       </div>
     </>
   );

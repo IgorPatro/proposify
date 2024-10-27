@@ -27,8 +27,9 @@ export const getServerSideProps: GetServerSideProps<{
 const EditorOfferPage = ({
   offerUuid,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { data: offer, isFetching: isFetchingOffer } =
-    api.offer.getOne.useQuery({ offerUuid });
+  const { data: offer, isLoading: isLoadingOffer } = api.offer.getOne.useQuery({
+    offerUuid,
+  });
   const { isPending: isPendingSaveOffer, mutateAsync: saveOffer } =
     api.offer.save.useMutation();
   const blocks = useEditorStore((store) => store.blocks);
@@ -59,14 +60,14 @@ const EditorOfferPage = ({
     <>
       <EditorNavigation
         isOffer
-        isLoading={isPendingSaveOffer || isFetchingOffer}
+        isLoading={isPendingSaveOffer || isLoadingOffer}
         resourceName={offer?.name}
         resourceUuid={offerUuid}
         onGoBack={onGoBack}
         onSave={onSaveOffer}
       />
       <div className="flex w-full bg-zinc-500">
-        <Editor isOffer isLoading={isFetchingOffer} resource={offer} />
+        <Editor isOffer isLoading={isLoadingOffer} resource={offer} />
       </div>
     </>
   );

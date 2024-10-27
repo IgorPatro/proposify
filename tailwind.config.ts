@@ -6,7 +6,11 @@ import { generateTailwindSafelist } from "./src/_themes/utils";
 export default {
   content: ["./src/**/*.tsx"],
   darkMode: ["class"],
-  plugins: [require("tailwind-scrollbar-hide"), require("tailwindcss-animate")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("tailwindcss-animate"),
+    require("@tailwindcss/container-queries"),
+  ],
   safelist: generateTailwindSafelist(),
   theme: {
     extend: {
@@ -65,7 +69,7 @@ export default {
         sans: ["var(--font-poppins)", ...fontFamily.sans],
       },
       height: {
-        block: "680px",
+        block: "684px",
       },
       keyframes: {
         "accordion-down": {

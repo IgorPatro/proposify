@@ -38,15 +38,3 @@ export const generateTailwindSafelist = () => {
     .concat(Object.values(LIGHT_COLORS).map((value) => `border-${value}`))
     .concat(Object.values(DARK_COLORS).map((value) => `border-${value}`));
 };
-
-export const getPrimaryButtonClassNames = (theme: ThemeSchema) => {
-  const { primary } = theme.button;
-
-  return `bg-${primary.background} border-${primary.border} text-${primary.color} hover:bg-${primary.hover} text-xs md:text-sm`;
-};
-
-export const getSecondaryButtonClassNames = (theme: ThemeSchema) => {
-  const { secondary } = theme.button;
-
-  return `bg-${secondary.background} border-${secondary.border} text-${secondary.color} hover:bg-${secondary.hover} text-xs md:text-sm`;
-};
